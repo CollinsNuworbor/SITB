@@ -1,96 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SITB - Solving Is The Best</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITB - Solving Is The Best</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <!-- SITB Navigation -->
-  <nav class="sitb-menu">
+
+<header>
+    <h1>🚀 SITB</h1>
+    <p>Solving Is The Best</p>
+</header>
+
+<nav>
     <button onclick="showRoom('home')">🏠 Home</button>
     <button onclick="showRoom('calculator')">🧮 Calculator</button>
     <button onclick="showRoom('leaderboard')">🏆 Leaderboard</button>
     <button onclick="showRoom('learn')">🎓 Learn</button>
     <button onclick="showRoom('profile')">👤 Profile</button>
     <button onclick="showRoom('settings')">⚙️ Settings</button>
-  </nav>
+</nav>
 
-  <!-- Rooms -->
-  <section id="home" class="room active">
-    <h1>SITB</h1>
-    <p>Solving Is The Best</p>
-  </section>
 
-  <section id="calculator" class="room">
-    <h2>🧮 Calculator</h2>
-    <div class="calculator">
-      <input type="text" id="display" class="display" disabled>
-      <div class="buttons">
-        <button class="clear" onclick="clearDisplay()">C</button>
-        <button class="clear" onclick="backspace()">CE</button>
-        <button class="operator" onclick="insert('%')">%</button>
-        <button class="operator" onclick="insert('/')">÷</button>
+<!-- HOME -->
+<section id="home" class="room active">
+    <h2>Welcome to SITB</h2>
+    <p>The smart way to solve problems.</p>
 
-        <button class="number" onclick="insert('7')">7</button>
-        <button class="number" onclick="insert('8')">8</button>
-        <button class="number" onclick="insert('9')">9</button>
-        <button class="operator" onclick="insert('*')">×</button>
+    <h3>🔥 Today's Challenge</h3>
+    <p>What is 15 × 8?</p>
+    <button class="challenge-btn">Answer</button>
+</section>
 
-        <button class="number" onclick="insert('4')">4</button>
-        <button class="number" onclick="insert('5')">5</button>
-        <button class="number" onclick="insert('6')">6</button>
-        <button class="operator" onclick="insert('-')">−</button>
 
-        <button class="number" onclick="insert('1')">1</button>
-        <button class="number" onclick="insert('2')">2</button>
-        <button class="number" onclick="insert('3')">3</button>
-        <button class="operator" onclick="insert('+')">+</button>
+<!-- CALCULATOR -->
+<section id="calculator" class="room">
 
-        <button class="number" onclick="insert('0')">0</button>
-        <button class="number" onclick="insert('.')">.</button>
-        <button class="equals" onclick="calculate()">=</button>
-        <button class="operator" onclick="insert('**')">^</button>
+<h2>🧮 Calculator</h2>
 
-        <button class="special" onclick="sqrt()">√</button>
-        <button class="special" onclick="sin()">sin</button>
-        <button class="special" onclick="cos()">cos</button>
-        <button class="special" onclick="tan()">tan</button>
+<div class="calculator">
 
-        <button class="special" onclick="log()">log</button>
-        <button class="special" onclick="pi()">π</button>
-        <button class="special" onclick="e()">e</button>
-        <button class="special" onclick="fact()">n!</button>
-      </div>
-      <div class="history">
-        <h3>History</h3>
-        <ul id="history"></ul>
-      </div>
-    </div>
-  </section>
+<input id="display" type="text" readonly class="display">
 
-  <section id="leaderboard" class="room">
-    <h2>🏆 Leaderboard</h2>
-    <p>No scores yet</p>
-  </section>
+<div class="buttons">
 
-  <section id="learn" class="room">
-    <h2>🎓 Learn</h2>
-    <p>Math lessons coming soon</p>
-  </section>
+<button class="number" onclick="insert('7')">7</button>
+<button class="number" onclick="insert('8')">8</button>
+<button class="number" onclick="insert('9')">9</button>
+<button class="operator" onclick="insert('/')">÷</button>
 
-  <section id="profile" class="room">
-    <h2>👤 Profile</h2>
-    <p>User profile</p>
-  </section>
+<button class="number" onclick="insert('4')">4</button>
+<button class="number" onclick="insert('5')">5</button>
+<button class="number" onclick="insert('6')">6</button>
+<button class="operator" onclick="insert('*')">×</button>
 
-  <section id="settings" class="room">
-    <h2>⚙️ Settings</h2>
-    <p>App settings</p>
-  </section>
+<button class="number" onclick="insert('1')">1</button>
+<button class="number" onclick="insert('2')">2</button>
+<button class="number" onclick="insert('3')">3</button>
+<button class="operator" onclick="insert('-')">−</button>
 
-  <script src="script.js"></script>
+<button class="number" onclick="insert('0')">0</button>
+<button class="clear" onclick="clearDisplay()">C</button>
+<button class="equals" onclick="calculate()">=</button>
+<button class="operator" onclick="insert('+')">+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LEADERBOARD -->
+<section id="leaderboard" class="room">
+
+<h2>🏆 Leaderboard</h2>
+
+<ol>
+<li>Player One - 1000 points</li>
+<li>Player Two - 850 points</li>
+<li>Player Three - 700 points</li>
+</ol>
+
+</section>
+
+
+<!-- LEARN -->
+<section id="learn" class="room">
+
+<h2>🎓 Learn Room</h2>
+
+<p>Learn mathematics and improve your skills.</p>
+
+<ul>
+<li>Algebra</li>
+<li>Geometry</li>
+<li>Fractions</li>
+<li>Science formulas</li>
+</ul>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="room">
+
+<h2>👤 Profile</h2>
+
+<p>Username: Guest</p>
+<p>Points: 0</p>
+<p>Achievements: None</p>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section id="settings" class="room">
+
+<h2>⚙️ Settings</h2>
+
+<button class="settings-btn">Dark Mode</button>
+<button class="settings-btn">Language</button>
+
+</section>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
