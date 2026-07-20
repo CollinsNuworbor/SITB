@@ -16,24 +16,26 @@ function showRoom(roomId) {
   }
 }
 
-// Default: Show home room on page load
-window.addEventListener('DOMContentLoaded', () => {
-  showRoom('home');
-});
-
 function insert(value) {
-  display.value += value;
+  if (display) {
+    display.value += value;
+  }
 }
 
 function clearDisplay() {
-  display.value = "";
+  if (display) {
+    display.value = "";
+  }
 }
 
 function backspace() {
-  display.value = display.value.slice(0, -1);
+  if (display) {
+    display.value = display.value.slice(0, -1);
+  }
 }
 
 function calculate() {
+  if (!display) return;
   try {
     let result = eval(display.value);
     addHistory(display.value + " = " + result);
@@ -45,48 +47,82 @@ function calculate() {
 }
 
 function sqrt() {
-  let result = Math.sqrt(eval(display.value));
-  addHistory("√(" + display.value + ") = " + result);
-  display.value = result;
+  if (!display) return;
+  try {
+    let result = Math.sqrt(eval(display.value));
+    addHistory("√(" + display.value + ") = " + result);
+    display.value = result;
+  } catch {
+    alert("Invalid Input");
+  }
 }
 
 function sin() {
-  let result = Math.sin(toRadians(eval(display.value)));
-  addHistory("sin(" + display.value + ") = " + result);
-  display.value = result;
+  if (!display) return;
+  try {
+    let result = Math.sin(toRadians(eval(display.value)));
+    addHistory("sin(" + display.value + ") = " + result);
+    display.value = result;
+  } catch {
+    alert("Invalid Input");
+  }
 }
 
 function cos() {
-  let result = Math.cos(toRadians(eval(display.value)));
-  addHistory("cos(" + display.value + ") = " + result);
-  display.value = result;
+  if (!display) return;
+  try {
+    let result = Math.cos(toRadians(eval(display.value)));
+    addHistory("cos(" + display.value + ") = " + result);
+    display.value = result;
+  } catch {
+    alert("Invalid Input");
+  }
 }
 
 function tan() {
-  let result = Math.tan(toRadians(eval(display.value)));
-  addHistory("tan(" + display.value + ") = " + result);
-  display.value = result;
+  if (!display) return;
+  try {
+    let result = Math.tan(toRadians(eval(display.value)));
+    addHistory("tan(" + display.value + ") = " + result);
+    display.value = result;
+  } catch {
+    alert("Invalid Input");
+  }
 }
 
 function log() {
-  let result = Math.log10(eval(display.value));
-  addHistory("log(" + display.value + ") = " + result);
-  display.value = result;
+  if (!display) return;
+  try {
+    let result = Math.log10(eval(display.value));
+    addHistory("log(" + display.value + ") = " + result);
+    display.value = result;
+  } catch {
+    alert("Invalid Input");
+  }
 }
 
 function pi() {
-  display.value += Math.PI;
+  if (display) {
+    display.value += Math.PI;
+  }
 }
 
 function e() {
-  display.value += Math.E;
+  if (display) {
+    display.value += Math.E;
+  }
 }
 
 function fact() {
-  let n = eval(display.value);
-  let result = factorial(n);
-  addHistory(n + "! = " + result);
-  display.value = result;
+  if (!display) return;
+  try {
+    let n = eval(display.value);
+    let result = factorial(n);
+    addHistory(n + "! = " + result);
+    display.value = result;
+  } catch {
+    alert("Invalid Input");
+  }
 }
 
 function factorial(n) {
@@ -100,7 +136,9 @@ function toRadians(deg) {
 }
 
 function addHistory(entry) {
-  let li = document.createElement("li");
-  li.textContent = entry;
-  historyList.appendChild(li);
+  if (historyList) {
+    let li = document.createElement("li");
+    li.textContent = entry;
+    historyList.appendChild(li);
+  }
 }
