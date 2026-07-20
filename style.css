@@ -33,7 +33,7 @@ body{
     margin-bottom:20px;
 }
 
-button{
+button {
     width:70px;
     height:70px;
     margin:6px;
@@ -43,17 +43,39 @@ button{
     color:white;
     font-size:1.2rem;
     cursor:pointer;
-    transition:.25s;
-    box-shadow:0 5px 12px rgba(0,0,0,.3);
+    transition:0.2s;
+}
+
+/* Color flash when button is tapped */
+button:active {
+    transform:scale(0.9);
+    background:#facc15;
+}
+
+/* Different buttons when pressed */
+.number:active {
+    background:#22c55e;
+}
+
+.operator:active {
+    background:#3b82f6;
+}
+
+.clear:active {
+    background:#ef4444;
+}
+
+.equals:active {
+    background:#a855f7;
+}
+
+.special:active {
+    background:#f97316;
 }
 
 button:hover{
     transform:translateY(-3px);
     background:#475569;
-}
-
-button:active{
-    transform:scale(.95);
 }
 
 .equals{
