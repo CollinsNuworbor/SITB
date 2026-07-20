@@ -1,6 +1,26 @@
 let display = document.getElementById("display");
 let historyList = document.getElementById("history");
 
+// Navigation Room System
+function showRoom(roomId) {
+  // Hide all rooms
+  const rooms = document.querySelectorAll('.room');
+  rooms.forEach(room => {
+    room.classList.remove('active');
+  });
+  
+  // Show selected room
+  const selectedRoom = document.getElementById(roomId);
+  if (selectedRoom) {
+    selectedRoom.classList.add('active');
+  }
+}
+
+// Default: Show home room on page load
+window.addEventListener('DOMContentLoaded', () => {
+  showRoom('home');
+});
+
 function insert(value) {
   display.value += value;
 }
