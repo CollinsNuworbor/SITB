@@ -8,50 +8,89 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="calculator">
+  <!-- SITB Navigation -->
+  <nav class="sitb-menu">
+    <button onclick="showRoom('home')">🏠 Home</button>
+    <button onclick="showRoom('calculator')">🧮 Calculator</button>
+    <button onclick="showRoom('leaderboard')">🏆 Leaderboard</button>
+    <button onclick="showRoom('learn')">🎓 Learn</button>
+    <button onclick="showRoom('profile')">👤 Profile</button>
+    <button onclick="showRoom('settings')">⚙️ Settings</button>
+  </nav>
+
+  <!-- Rooms -->
+  <section id="home" class="room active">
     <h1>SITB</h1>
-    <input type="text" id="display" class="display" disabled>
-    <div class="buttons">
-      <button class="clear" onclick="clearDisplay()">C</button>
-      <button class="clear" onclick="backspace()">CE</button>
-      <button class="operator" onclick="insert('%')">%</button>
-      <button class="operator" onclick="insert('/')">÷</button>
+    <p>Solving Is The Best</p>
+  </section>
 
-      <button class="number" onclick="insert('7')">7</button>
-      <button class="number" onclick="insert('8')">8</button>
-      <button class="number" onclick="insert('9')">9</button>
-      <button class="operator" onclick="insert('*')">×</button>
+  <section id="calculator" class="room">
+    <h2>🧮 Calculator</h2>
+    <div class="calculator">
+      <input type="text" id="display" class="display" disabled>
+      <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="clear" onclick="backspace()">CE</button>
+        <button class="operator" onclick="insert('%')">%</button>
+        <button class="operator" onclick="insert('/')">÷</button>
 
-      <button class="number" onclick="insert('4')">4</button>
-      <button class="number" onclick="insert('5')">5</button>
-      <button class="number" onclick="insert('6')">6</button>
-      <button class="operator" onclick="insert('-')">−</button>
+        <button class="number" onclick="insert('7')">7</button>
+        <button class="number" onclick="insert('8')">8</button>
+        <button class="number" onclick="insert('9')">9</button>
+        <button class="operator" onclick="insert('*')">×</button>
 
-      <button class="number" onclick="insert('1')">1</button>
-      <button class="number" onclick="insert('2')">2</button>
-      <button class="number" onclick="insert('3')">3</button>
-      <button class="operator" onclick="insert('+')">+</button>
+        <button class="number" onclick="insert('4')">4</button>
+        <button class="number" onclick="insert('5')">5</button>
+        <button class="number" onclick="insert('6')">6</button>
+        <button class="operator" onclick="insert('-')">−</button>
 
-      <button class="number" onclick="insert('0')">0</button>
-      <button class="number" onclick="insert('.')">.</button>
-      <button class="equals" onclick="calculate()">=</button>
-      <button class="operator" onclick="insert('**')">^</button>
+        <button class="number" onclick="insert('1')">1</button>
+        <button class="number" onclick="insert('2')">2</button>
+        <button class="number" onclick="insert('3')">3</button>
+        <button class="operator" onclick="insert('+')">+</button>
 
-      <button class="special" onclick="sqrt()">√</button>
-      <button class="special" onclick="sin()">sin</button>
-      <button class="special" onclick="cos()">cos</button>
-      <button class="special" onclick="tan()">tan</button>
+        <button class="number" onclick="insert('0')">0</button>
+        <button class="number" onclick="insert('.')">.</button>
+        <button class="equals" onclick="calculate()">=</button>
+        <button class="operator" onclick="insert('**')">^</button>
 
-      <button class="special" onclick="log()">log</button>
-      <button class="special" onclick="pi()">π</button>
-      <button class="special" onclick="e()">e</button>
-      <button class="special" onclick="fact()">n!</button>
+        <button class="special" onclick="sqrt()">√</button>
+        <button class="special" onclick="sin()">sin</button>
+        <button class="special" onclick="cos()">cos</button>
+        <button class="special" onclick="tan()">tan</button>
+
+        <button class="special" onclick="log()">log</button>
+        <button class="special" onclick="pi()">π</button>
+        <button class="special" onclick="e()">e</button>
+        <button class="special" onclick="fact()">n!</button>
+      </div>
+      <div class="history">
+        <h3>History</h3>
+        <ul id="history"></ul>
+      </div>
     </div>
-    <div class="history">
-      <h2>History</h2>
-      <ul id="history"></ul>
-    </div>
-  </div>
+  </section>
+
+  <section id="leaderboard" class="room">
+    <h2>🏆 Leaderboard</h2>
+    <p>No scores yet</p>
+  </section>
+
+  <section id="learn" class="room">
+    <h2>🎓 Learn</h2>
+    <p>Math lessons coming soon</p>
+  </section>
+
+  <section id="profile" class="room">
+    <h2>👤 Profile</h2>
+    <p>User profile</p>
+  </section>
+
+  <section id="settings" class="room">
+    <h2>⚙️ Settings</h2>
+    <p>App settings</p>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
