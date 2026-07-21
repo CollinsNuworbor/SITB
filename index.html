@@ -141,3 +141,28 @@ function openLanguages(){
         box.style.display = "block";
     }
 }
+<div class="language-box">
+    <button onclick="openLanguages()">🌍 Language</button>
+
+    <div id="languages" class="languages">
+        <p>English</p>
+        <p>French</p>
+        <p>Spanish</p>
+        <p>Arabic</p>
+        <p>Chinese</p>
+        <p>Portuguese</p>
+        <p>German</p>
+        <p>Japanese</p>
+        <p>Hindi</p>
+        <p>Swahili</p>
+        <!-- Add the rest of the 90 languages here -->
+    </div>
+</div>function openLanguages(){
+    let box = document.getElementById("languages");
+
+    if(box.style.display === "block"){
+        box.style.display = "none";
+    } else {
+        box.style.display = "block";
+    }
+}
