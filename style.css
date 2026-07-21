@@ -288,9 +288,4 @@ body {
 }
 
 .top-menu span:hover {
-    color: #2563eb;
-}
-
-.top-menu span:active {
-    transform: scale(0.95);
-}
+    color: #256789
