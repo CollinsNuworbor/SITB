@@ -263,3 +263,34 @@ button:active {
         padding: 12px;
     }
 }
+body {
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Clean top navigation */
+.top-menu {
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    padding: 18px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.top-menu span {
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.top-menu span:hover {
+    color: #2563eb;
+}
+
+.top-menu span:active {
+    transform: scale(0.95);
+}
