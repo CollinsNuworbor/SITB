@@ -46,3 +46,12 @@ function calculate() {
     }, 1000);
   }
 }
+function openLanguages(){
+    let box = document.getElementById("languages");
+
+    if(box.style.display === "block"){
+        box.style.display = "none";
+    } else {
+        box.style.display = "block";
+    }
+}
