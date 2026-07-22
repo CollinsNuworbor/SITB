@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITB - Solving Is The Best</title>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -24,7 +25,6 @@
     <span onclick="showRoom('settings')">Settings</span>
 </nav>
 
-
 <!-- HOME -->
 <section id="home" class="room active">
     <h2>Welcome to SITB</h2>
@@ -35,134 +35,110 @@
     <button class="challenge-btn">Answer</button>
 </section>
 
-
 <!-- CALCULATOR -->
 <section id="calculator" class="room">
 
-<h2>🧮 Calculator</h2>
+    <h2>🧮 Calculator</h2>
 
-<div class="calculator">
+    <div class="calculator">
 
-<input id="display" type="text" readonly class="display">
+        <input id="display" type="text" readonly class="display">
 
-<div class="buttons">
+        <div class="buttons">
 
-<button class="number" onclick="insert('7')">7</button>
-<button class="number" onclick="insert('8')">8</button>
-<button class="number" onclick="insert('9')">9</button>
-<button class="operator" onclick="insert('/')">÷</button>
+            <button class="number" onclick="insert('7')">7</button>
+            <button class="number" onclick="insert('8')">8</button>
+            <button class="number" onclick="insert('9')">9</button>
+            <button class="operator" onclick="insert('/')">÷</button>
 
-<button class="number" onclick="insert('4')">4</button>
-<button class="number" onclick="insert('5')">5</button>
-<button class="number" onclick="insert('6')">6</button>
-<button class="operator" onclick="insert('*')">×</button>
+            <button class="number" onclick="insert('4')">4</button>
+            <button class="number" onclick="insert('5')">5</button>
+            <button class="number" onclick="insert('6')">6</button>
+            <button class="operator" onclick="insert('*')">×</button>
 
-<button class="number" onclick="insert('1')">1</button>
-<button class="number" onclick="insert('2')">2</button>
-<button class="number" onclick="insert('3')">3</button>
-<button class="operator" onclick="insert('-')">−</button>
+            <button class="number" onclick="insert('1')">1</button>
+            <button class="number" onclick="insert('2')">2</button>
+            <button class="number" onclick="insert('3')">3</button>
+            <button class="operator" onclick="insert('-')">−</button>
 
-<button class="number" onclick="insert('0')">0</button>
-<button class="clear" onclick="clearDisplay()">C</button>
-<button class="equals" onclick="calculate()">=</button>
-<button class="operator" onclick="insert('+')">+</button>
+            <button class="number" onclick="insert('0')">0</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="equals" onclick="calculate()">=</button>
+            <button class="operator" onclick="insert('+')">+</button>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </section>
-
 
 <!-- LEADERBOARD -->
 <section id="leaderboard" class="room">
 
-<h2>🏆 Leaderboard</h2>
+    <h2>🏆 Leaderboard</h2>
 
-<ol>
-<li>Player One - 1000 points</li>
-<li>Player Two - 850 points</li>
-<li>Player Three - 700 points</li>
-</ol>
+    <ol>
+        <li>Player One - 1000 points</li>
+        <li>Player Two - 850 points</li>
+        <li>Player Three - 700 points</li>
+    </ol>
 
 </section>
-
 
 <!-- LEARN -->
 <section id="learn" class="room">
 
-<h2>🎓 Learn Room</h2>
+    <h2>🎓 Learn Room</h2>
 
-<p>Learn mathematics and improve your skills.</p>
+    <p>Learn mathematics and improve your skills.</p>
 
-<ul>
-<li>Algebra</li>
-<li>Geometry</li>
-<li>Fractions</li>
-<li>Science formulas</li>
-</ul>
+    <ul>
+        <li>Algebra</li>
+        <li>Geometry</li>
+        <li>Fractions</li>
+        <li>Science formulas</li>
+    </ul>
 
 </section>
-
 
 <!-- PROFILE -->
 <section id="profile" class="room">
 
-<h2>👤 Profile</h2>
+    <h2>👤 Profile</h2>
 
-<p>Username: Guest</p>
-<p>Points: 0</p>
-<p>Achievements: None</p>
+    <p>Username: Guest</p>
+    <p>Points: 0</p>
+    <p>Achievements: None</p>
 
 </section>
-
 
 <!-- SETTINGS -->
 <section id="settings" class="room">
 
-<h2>⚙️ Settings</h2>
+    <h2>⚙️ Settings</h2>
 
-<button class="settings-btn">Dark Mode</button>
-<button class="settings-btn">Language</button>
+    <button class="settings-btn">Dark Mode</button>
+
+    <div class="language-box">
+        <button onclick="openLanguages()">🌍 Language</button>
+
+        <div id="languages" class="languages" style="display:none;">
+            <p>English</p>
+            <p>French</p>
+            <p>Spanish</p>
+            <p>Arabic</p>
+            <p>Chinese</p>
+            <p>Portuguese</p>
+            <p>German</p>
+            <p>Japanese</p>
+            <p>Hindi</p>
+            <p>Swahili</p>
+        </div>
+    </div>
 
 </section>
-
 
 <script src="script.js"></script>
 
 </body>
 </html>
-function openLanguages(){
-    let box = document.getElementById("languages");
-
-    if(box.style.display === "block"){
-        box.style.display = "none";
-    } else {
-        box.style.display = "block";
-    }
-}
-<div class="language-box">
-    <button onclick="openLanguages()">🌍 Language</button>
-
-    <div id="languages" class="languages">
-        <p>English</p>
-        <p>French</p>
-        <p>Spanish</p>
-        <p>Arabic</p>
-        <p>Chinese</p>
-        <p>Portuguese</p>
-        <p>German</p>
-        <p>Japanese</p>
-        <p>Hindi</p>
-        <p>Swahili</p>
-        <!-- Add the rest of the 90 languages here -->
-    </div>
-</div>function openLanguages(){
-    let box = document.getElementById("languages");
-
-    if(box.style.display === "block"){
-        box.style.display = "none";
-    } else {
-        box.style.display = "block";
-    }
-}
