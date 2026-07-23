@@ -1,46 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SITB Language</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITB Calculator</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="app">
+    <!-- App -->
+    <div class="app">
 
-    <h1>SITB</h1>
+        <!-- Top Bar -->
+        <header class="top-bar">
 
-    <button class="language-btn">
-        🌐 Language
-    </button>
+            <div class="logo">
+                <h1>SITB</h1>
+            </div>
 
-    <h2 id="selected">
-        Selected: English
-    </h2>
+            <div class="top-buttons">
 
-</div>
+                <button id="languageBtn" title="Language">
+                    🌍
+                </button>
 
+                <button id="shareBtn" title="Share">
+                    📤
+                </button>
 
-<div class="language-menu">
+                <button id="settingsBtn" title="Settings">
+                    ⚙️
+                </button>
 
-    <div class="top">
-        <h2>Select Language</h2>
-        <button class="close">✖</button>
+            </div>
+
+        </header>
+
+        <!-- Calculator Display -->
+        <section class="display">
+
+            <div id="history"></div>
+
+            <input
+                type="text"
+                id="screen"
+                value="0"
+                readonly>
+
+        </section>
+
+        <!-- Calculator Buttons -->
+        <section class="buttons">
+
+            <button class="operator">AC</button>
+            <button class="operator">⌫</button>
+            <button class="operator">%</button>
+            <button class="operator">÷</button>
+
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">×</button>
+
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">−</button>
+
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="operator">+</button>
+
+            <button class="number zero">0</button>
+            <button class="number">.</button>
+            <button class="equals">=</button>
+
+        </section>
+
     </div>
 
-    <input 
-    type="text" 
-    class="language-search" 
-    placeholder="Search language..."
-    >
+    <!-- Language Menu -->
+    <div id="languageMenu" class="popup">
 
-    <div class="languages"></div>
+        <div class="popup-header">
 
-</div>
+            <h2>Languages</h2>
 
+            <button id="closeLanguage">✖</button>
 
-<script src="script.js"></script>
+        </div>
+
+        <input
+            type="text"
+            id="languageSearch"
+            placeholder="Search language...">
+
+        <div id="languageList">
+
+            <!-- JavaScript will add 100+ languages here -->
+
+        </div>
+
+    </div>
+
+    <!-- Settings Menu -->
+    <div id="settingsMenu" class="popup">
+
+        <div class="popup-header">
+
+            <h2>Settings</h2>
+
+            <button id="closeSettings">✖</button>
+
+        </div>
+
+        <button>🌙 Dark Mode</button>
+        <button>🎨 Themes</button>
+        <button>🔊 Sounds</button>
+        <button>📳 Vibration</button>
+        <button>ℹ️ About SITB</button>
+
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
