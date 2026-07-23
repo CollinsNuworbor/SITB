@@ -1,3 +1,4 @@
+alert("JavaScript loaded!");
 // =========================
 // SITB Calculator
 // =========================
