@@ -1,420 +1,266 @@
-// ======================================
-// SITB Calculator - Part 1
-// ======================================
+let display = document.getElementById("display");
+let historyList = document.getElementById("historyList");
 
-// Display
-const screen = document.getElementById("screen");
-const history = document.getElementById("history");
+let memory = 0;
+let history = [];
 
-// Buttons
-const buttons = document.querySelectorAll(".buttons button");
 
-let expression = "";
+function insert(value){
+    display.value += value;
+}
 
-// =======================
-// Calculator
-// =======================
 
-buttons.forEach(button => {
+function clearDisplay(){
+    display.value = "";
+}
 
-    button.addEventListener("click", () => {
 
-        const value = button.textContent;
+function deleteLast(){
+    display.value = display.value.slice(0,-1);
+}
 
-        // Ripple
-        createRipple(button);
 
-        // Ignore menu buttons
-        if (
-            button.id === "languageBtn" ||
-            button.id === "shareBtn" ||
-            button.id === "settingsBtn"
-        ) return;
+function calculate(){
 
-        switch (value) {
+    try{
 
-            case "AC":
-                expression = "";
-                history.textContent = "";
-                screen.value = "0";
-                return;
+        let expression = display.value;
 
-            case "⌫":
-                expression = expression.slice(0, -1);
-                screen.value = expression || "0";
-                return;
+        expression = expression.replaceAll("π", Math.PI);
+        expression = expression.replaceAll("e", Math.E);
+        expression = expression.replaceAll("^","**");
 
-            case "=":
+        let result = eval(expression);
 
-                try {
+        display.value = result;
 
-                    history.textContent = expression;
+        addHistory(expression + " = " + result);
 
-                    const answer = expression
-                        .replace(/×/g, "*")
-                        .replace(/÷/g, "/")
-                        .replace(/−/g, "-");
-
-                    expression = eval(answer).toString();
-
-                    screen.value = expression;
-
-                } catch {
-
-                    screen.value = "Error";
-                    expression = "";
-
-                }
-
-                return;
-
-        }
-
-        expression += value;
-        screen.value = expression;
-
-    });
-
-});
-
-// =======================
-// Ripple
-// =======================
-
-function createRipple(button){
-
-    const ripple=document.createElement("span");
-
-    ripple.className="ripple";
-
-    button.appendChild(ripple);
-
-    setTimeout(()=>{
-
-        ripple.remove();
-
-    },400);
+    }
+    catch{
+        display.value = "Error";
+    }
 
 }
 
-// =======================
-// Settings Window
-// =======================
 
-const settingsMenu=document.getElementById("settingsMenu");
 
-document.getElementById("settingsBtn").onclick=()=>{
+function addHistory(item){
 
-    settingsMenu.style.display="block";
+    history.unshift(item);
 
-};
+    if(history.length > 10){
+        history.pop();
+    }
 
-document.getElementById("closeSettings").onclick=()=>{
+    historyList.innerHTML="";
 
-    settingsMenu.style.display="none";
+    history.forEach(x=>{
 
-};
+        let li=document.createElement("li");
+        li.textContent=x;
+        historyList.appendChild(li);
 
-// =======================
-// Language Window
-// =======================
+    });
 
-const languageMenu=document.getElementById("languageMenu");
+}
 
-document.getElementById("languageBtn").onclick=()=>{
 
-    languageMenu.style.display="block";
 
-};
 
-document.getElementById("closeLanguage").onclick=()=>{
+function scientific(type){
 
-    languageMenu.style.display="none";
+    let value = Number(display.value);
 
-};
+    if(type==="sin"){
+        display.value=Math.sin(value);
+    }
 
-// =======================
-// Dark Mode
-// =======================
+    if(type==="cos"){
+        display.value=Math.cos(value);
+    }
 
-let dark=false;
+    if(type==="tan"){
+        display.value=Math.tan(value);
+    }
 
-document.getElementById("darkModeBtn").onclick=()=>{
+    if(type==="sqrt"){
+        display.value=Math.sqrt(value);
+    }
 
-    dark=!dark;
+    if(type==="cbrt"){
+        display.value=Math.cbrt(value);
+    }
+
+}
+
+
+
+
+function power(number){
+
+    let value=Number(display.value);
+
+    display.value=Math.pow(value,number);
+
+}
+
+
+
+
+function factorial(){
+
+    let num=Number(display.value);
+
+    if(num<0){
+        display.value="Error";
+        return;
+    }
+
+    let answer=1;
+
+    for(let i=1;i<=num;i++){
+        answer*=i;
+    }
+
+    display.value=answer;
+
+}
+
+
+
+
+function memoryClear(){
+
+    memory=0;
+
+}
+
+
+function memoryRecall(){
+
+    display.value=memory;
+
+}
+
+
+function memoryAdd(){
+
+    memory+=Number(display.value);
+
+}
+
+
+function memorySubtract(){
+
+    memory-=Number(display.value);
+
+}
+
+
+
+
+// DARK MODE
+
+let themeBtn=document.getElementById("themeBtn");
+
+themeBtn.onclick=function(){
 
     document.body.classList.toggle("dark");
 
-};
-
-// =======================
-// Share
-// =======================
-
-document.getElementById("shareBtn").onclick=async()=>{
-
-    if(navigator.share){
-
-        try{
-
-            await navigator.share({
-
-                title:"SITB Calculator",
-
-                text:"Check out my SITB Calculator!",
-
-                url:location.href
-
-            });
-
-        }catch(e){}
-
-    }else{
-
-        alert("Sharing isn't supported on this device.");
-
+    if(document.body.classList.contains("dark")){
+        themeBtn.textContent="☀️";
+    }
+    else{
+        themeBtn.textContent="🌙";
     }
 
 };
 
-// =======================
-// Sounds
-// =======================
 
-let soundOn=true;
 
-document.getElementById("soundBtn").onclick=()=>{
 
-    soundOn=!soundOn;
+// LANGUAGES
 
-    alert("Sounds " + (soundOn ? "ON" : "OFF"));
+let languages=[
 
-};
-
-// =======================
-// Vibration
-// =======================
-
-let vibrationOn=true;
-
-document.getElementById("vibrationBtn").onclick=()=>{
-
-    vibrationOn=!vibrationOn;
-
-    if(vibrationOn && navigator.vibrate){
-
-        navigator.vibrate(200);
-
-    }
-
-    alert("Vibration " + (vibrationOn ? "ON" : "OFF"));
-
-};
-
-// =======================
-// About
-// =======================
-
-document.getElementById("aboutBtn").onclick=()=>{
-
-    alert("SITB Calculator\nVersion 2.0");
-
-};
-// ======================================
-// SITB Calculator - Part 2
-// Languages, Themes & History
-// ======================================
-
-// ---------- Languages ----------
-
-const languages = [
-
-"English","Spanish","French","German","Italian","Portuguese","Chinese","Japanese","Korean","Arabic",
-"Hindi","Bengali","Russian","Turkish","Greek","Dutch","Swedish","Norwegian","Danish","Finnish",
-"Polish","Czech","Slovak","Romanian","Hungarian","Hebrew","Thai","Vietnamese","Malay","Indonesian",
-"Filipino","Swahili","Zulu","Afrikaans","Amharic","Yoruba","Igbo","Hausa","Somali","Persian",
-"Urdu","Punjabi","Tamil","Telugu","Gujarati","Kannada","Malayalam","Marathi","Nepali","Sinhala",
-"Khmer","Lao","Mongolian","Kazakh","Uzbek","Turkmen","Kyrgyz","Tajik","Ukrainian","Belarusian",
-"Croatian","Serbian","Bosnian","Slovenian","Bulgarian","Estonian","Latvian","Lithuanian","Irish",
-"Welsh","Scottish Gaelic","Basque","Catalan","Galician","Esperanto","Latin","Maltese","Icelandic",
-"Luxembourgish","Albanian","Macedonian","Armenian","Georgian","Azerbaijani","Pashto","Kurdish",
-"Javanese","Sundanese","Maori","Samoan","Tongan","Fijian","Hawaiian","Quechua","Guarani","Xhosa",
-"Sesotho","Tswana","Shona","Malagasy","Chichewa","Oromo","Tigrinya","Breton","Corsican","Frisian"
+"English",
+"Spanish",
+"French",
+"German",
+"Italian",
+"Portuguese",
+"Chinese",
+"Japanese",
+"Korean",
+"Arabic",
+"Russian",
+"Hindi",
+"Swahili",
+"Turkish",
+"Dutch",
+"Greek",
+"Hebrew"
 
 ];
 
-const languageList = document.getElementById("languageList");
-const languageSearch = document.getElementById("languageSearch");
 
-function showLanguages(list){
+let languageList=document.getElementById("languageList");
+let languageSearch=document.getElementById("languageSearch");
+
+
+function showLanguages(){
 
     languageList.innerHTML="";
 
-    list.forEach(language=>{
+    languages.forEach(lang=>{
 
-        const btn=document.createElement("button");
+        let item=document.createElement("p");
 
-        btn.textContent="🌐 "+language;
+        item.textContent=lang;
 
-        btn.onclick=()=>{
-
-            localStorage.setItem("sitbLanguage",language);
-
-            alert("Language changed to " + language);
-
-            languageMenu.style.display="none";
-
-        };
-
-        languageList.appendChild(btn);
+        languageList.appendChild(item);
 
     });
 
 }
 
-showLanguages(languages);
 
-languageSearch.addEventListener("input",()=>{
+showLanguages();
 
-    const value=languageSearch.value.toLowerCase();
 
-    showLanguages(
 
-        languages.filter(language=>
+languageSearch.oninput=function(){
 
-            language.toLowerCase().includes(value)
+    let text=this.value.toLowerCase();
 
-        )
+    languageList.innerHTML="";
 
-    );
+    languages
+    .filter(x=>x.toLowerCase().includes(text))
+    .forEach(lang=>{
 
-});
+        let item=document.createElement("p");
 
-// ---------- Themes ----------
+        item.textContent=lang;
 
-const themes=[
+        languageList.appendChild(item);
 
-"#2563eb",
-"#9333ea",
-"#16a34a",
-"#dc2626",
-"#f59e0b",
-"#0891b2"
-
-];
-
-let themeIndex=0;
-
-document.getElementById("themeBtn").onclick=()=>{
-
-    themeIndex++;
-
-    if(themeIndex>=themes.length){
-
-        themeIndex=0;
-
-    }
-
-    document.documentElement.style.setProperty(
-        "--theme",
-        themes[themeIndex]
-    );
-
-    localStorage.setItem("sitbTheme",themeIndex);
+    });
 
 };
 
-// ---------- Restore Theme ----------
 
-const savedTheme=localStorage.getItem("sitbTheme");
 
-if(savedTheme!==null){
 
-    themeIndex=parseInt(savedTheme);
+// EXPLANATION
 
-    document.documentElement.style.setProperty(
-        "--theme",
-        themes[themeIndex]
-    );
-
-}
-
-// ---------- Save Dark Mode ----------
-
-const savedDark=localStorage.getItem("sitbDark");
-
-if(savedDark==="true"){
-
-    dark=true;
-
-    document.body.classList.add("dark");
-
-}
-
-document.getElementById("darkModeBtn").onclick=()=>{
-
-    dark=!dark;
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem("sitbDark",dark);
-
-};
-
-// ---------- Calculator History ----------
-
-let calculations=[];
-
-const oldEquals=document.querySelector(".equals");
-
-oldEquals.addEventListener("click",()=>{
-
-    if(screen.value!=="Error"){
-
-        calculations.unshift(history.textContent+" = "+screen.value);
-
-        if(calculations.length>20){
-
-            calculations.pop();
-
-        }
-
-        localStorage.setItem(
-
-            "sitbHistory",
-
-            JSON.stringify(calculations)
-
-        );
-
-    }
-
-});
-
-document.getElementById("aboutBtn").onclick=()=>{
-
-    const savedLanguage=localStorage.getItem("sitbLanguage") || "English";
+function showExplanation(){
 
     alert(
-
-"SITB Calculator\n\n"+
-"Version 2.0\n\n"+
-"Language: "+savedLanguage+"\n"+
-"History Saved: "+calculations.length+"\n\n"+
-"Created by You ❤️"
-
+    "SITB Explanation:\n\n"+
+    "The calculator solves your expression step by step.\n"+
+    "Advanced AI explanations will come in Premium Version 5.0."
     );
 
-};
-
-// ---------- Startup ----------
-
-const savedHistory=localStorage.getItem("sitbHistory");
-
-if(savedHistory){
-
-    calculations=JSON.parse(savedHistory);
-
 }
-
-console.log("SITB v2 Loaded Successfully");
