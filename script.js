@@ -1,3 +1,4 @@
+console.log("SITB JS OK");
 let display = document.getElementById("display");
 let historyList = document.getElementById("historyList");
 
