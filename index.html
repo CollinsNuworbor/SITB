@@ -9,122 +9,89 @@
 </head>
 <body>
 
-    <!-- App -->
-    <div class="app">
+<div class="app">
 
-        <!-- Top Bar -->
-        <header class="top-bar">
+    <header class="top-bar">
+        <h1>SITB</h1>
 
-            <div class="logo">
-                <h1>SITB</h1>
-            </div>
+        <div class="top-icons">
+            <button id="languageBtn">🌍</button>
+            <button id="shareBtn">📤</button>
+            <button id="settingsBtn">⚙️</button>
+        </div>
+    </header>
 
-            <div class="top-buttons">
+    <div class="display">
+        <div id="history"></div>
+        <input id="screen" type="text" value="0" readonly>
+    </div>
 
-                <button id="languageBtn" title="Language">
-                    🌍
-                </button>
+    <div class="buttons">
 
-                <button id="shareBtn" title="Share">
-                    📤
-                </button>
+        <button class="operator">AC</button>
+        <button class="operator">⌫</button>
+        <button class="operator">%</button>
+        <button class="operator">÷</button>
 
-                <button id="settingsBtn" title="Settings">
-                    ⚙️
-                </button>
+        <button class="number">7</button>
+        <button class="number">8</button>
+        <button class="number">9</button>
+        <button class="operator">×</button>
 
-            </div>
+        <button class="number">4</button>
+        <button class="number">5</button>
+        <button class="number">6</button>
+        <button class="operator">−</button>
 
-        </header>
+        <button class="number">1</button>
+        <button class="number">2</button>
+        <button class="number">3</button>
+        <button class="operator">+</button>
 
-        <!-- Calculator Display -->
-        <section class="display">
-
-            <div id="history"></div>
-
-            <input
-                type="text"
-                id="screen"
-                value="0"
-                readonly>
-
-        </section>
-
-        <!-- Calculator Buttons -->
-        <section class="buttons">
-
-            <button class="operator">AC</button>
-            <button class="operator">⌫</button>
-            <button class="operator">%</button>
-            <button class="operator">÷</button>
-
-            <button class="number">7</button>
-            <button class="number">8</button>
-            <button class="number">9</button>
-            <button class="operator">×</button>
-
-            <button class="number">4</button>
-            <button class="number">5</button>
-            <button class="number">6</button>
-            <button class="operator">−</button>
-
-            <button class="number">1</button>
-            <button class="number">2</button>
-            <button class="number">3</button>
-            <button class="operator">+</button>
-
-            <button class="number zero">0</button>
-            <button class="number">.</button>
-            <button class="equals">=</button>
-
-        </section>
+        <button class="number zero">0</button>
+        <button class="number">.</button>
+        <button class="equals">=</button>
 
     </div>
 
-    <!-- Language Menu -->
-    <div id="languageMenu" class="popup">
+</div>
 
-        <div class="popup-header">
+<!-- SETTINGS -->
 
-            <h2>Languages</h2>
+<div id="settingsMenu" class="popup">
 
-            <button id="closeLanguage">✖</button>
-
-        </div>
-
-        <input
-            type="text"
-            id="languageSearch"
-            placeholder="Search language...">
-
-        <div id="languageList">
-
-            <!-- JavaScript will add 100+ languages here -->
-
-        </div>
-
+    <div class="popupHeader">
+        <h2>Settings</h2>
+        <button id="closeSettings">✕</button>
     </div>
 
-    <!-- Settings Menu -->
-    <div id="settingsMenu" class="popup">
+    <button id="darkModeBtn">🌙 Dark Mode</button>
+    <button id="themeBtn">🎨 Themes</button>
+    <button id="soundBtn">🔊 Sounds</button>
+    <button id="vibrationBtn">📳 Vibration</button>
+    <button id="aboutBtn">ℹ️ About SITB</button>
 
-        <div class="popup-header">
+</div>
 
-            <h2>Settings</h2>
+<!-- LANGUAGES -->
 
-            <button id="closeSettings">✖</button>
+<div id="languageMenu" class="popup">
 
-        </div>
-
-        <button>🌙 Dark Mode</button>
-        <button>🎨 Themes</button>
-        <button>🔊 Sounds</button>
-        <button>📳 Vibration</button>
-        <button>ℹ️ About SITB</button>
-
+    <div class="popupHeader">
+        <h2>Languages</h2>
+        <button id="closeLanguage">✕</button>
     </div>
 
-    <script src="script.js"></script>
+    <input
+        id="languageSearch"
+        type="text"
+        placeholder="Search language...">
+
+    <div id="languageList"></div>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
