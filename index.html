@@ -1,95 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SITB Calculator</title>
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SITB Calculator</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="app">
 
-    <header class="top-bar">
-        <h1>SITB</h1>
-
-        <div class="top-icons">
-            <button id="languageBtn">🌍</button>
-            <button id="shareBtn">📤</button>
-            <button id="settingsBtn">⚙️</button>
-        </div>
+    <header>
+        <h1>🧮 SITB</h1>
+        <button id="themeBtn">🌙</button>
     </header>
 
     <div class="display">
-        <div id="history"></div>
-        <input id="screen" type="text" value="0" readonly>
+        <div id="historyDisplay"></div>
+        <input id="display" type="text" readonly>
     </div>
 
-    <div class="buttons">
+    <div class="calculator">
 
-        <button class="operator">AC</button>
-        <button class="operator">⌫</button>
-        <button class="operator">%</button>
-        <button class="operator">÷</button>
+        <div class="scientific">
 
-        <button class="number">7</button>
-        <button class="number">8</button>
-        <button class="number">9</button>
-        <button class="operator">×</button>
+            <button onclick="clearDisplay()">AC</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="memoryClear()">MC</button>
+            <button onclick="memoryRecall()">MR</button>
 
-        <button class="number">4</button>
-        <button class="number">5</button>
-        <button class="number">6</button>
-        <button class="operator">−</button>
+            <button onclick="memoryAdd()">M+</button>
+            <button onclick="memorySubtract()">M-</button>
+            <button onclick="insert('π')">π</button>
+            <button onclick="insert('e')">e</button>
 
-        <button class="number">1</button>
-        <button class="number">2</button>
-        <button class="number">3</button>
-        <button class="operator">+</button>
+            <button onclick="scientific('sin')">sin</button>
+            <button onclick="scientific('cos')">cos</button>
+            <button onclick="scientific('tan')">tan</button>
+            <button onclick="scientific('sqrt')">√</button>
 
-        <button class="number zero">0</button>
-        <button class="number">.</button>
-        <button class="equals">=</button>
+            <button onclick="scientific('cbrt')">∛</button>
+            <button onclick="power(2)">x²</button>
+            <button onclick="power(3)">x³</button>
+            <button onclick="insert('^')">xʸ</button>
+
+            <button onclick="factorial()">n!</button>
+            <button onclick="showExplanation()">Explain</button>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button onclick="insert('7')">7</button>
+            <button onclick="insert('8')">8</button>
+            <button onclick="insert('9')">9</button>
+            <button class="operator" onclick="insert('/')">÷</button>
+
+            <button onclick="insert('4')">4</button>
+            <button onclick="insert('5')">5</button>
+            <button onclick="insert('6')">6</button>
+            <button class="operator" onclick="insert('*')">×</button>
+
+            <button onclick="insert('1')">1</button>
+            <button onclick="insert('2')">2</button>
+            <button onclick="insert('3')">3</button>
+            <button class="operator" onclick="insert('-')">−</button>
+
+            <button onclick="insert('0')">0</button>
+            <button onclick="insert('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button class="operator" onclick="insert('+')">+</button>
+
+        </div>
 
     </div>
 
-</div>
 
-<!-- SETTINGS -->
+    <section class="history">
 
-<div id="settingsMenu" class="popup">
+        <h2>History</h2>
+        <ul id="historyList"></ul>
 
-    <div class="popupHeader">
-        <h2>Settings</h2>
-        <button id="closeSettings">✕</button>
-    </div>
+    </section>
 
-    <button id="darkModeBtn">🌙 Dark Mode</button>
-    <button id="themeBtn">🎨 Themes</button>
-    <button id="soundBtn">🔊 Sounds</button>
-    <button id="vibrationBtn">📳 Vibration</button>
-    <button id="aboutBtn">ℹ️ About SITB</button>
 
-</div>
+    <section class="languages">
 
-<!-- LANGUAGES -->
+        <button id="languageBtn">
+            🌍 Languages
+        </button>
 
-<div id="languageMenu" class="popup">
-
-    <div class="popupHeader">
-        <h2>Languages</h2>
-        <button id="closeLanguage">✕</button>
-    </div>
-
-    <input
+        <input 
         id="languageSearch"
-        type="text"
-        placeholder="Search language...">
+        placeholder="Search language..."
+        >
 
-    <div id="languageList"></div>
+        <div id="languageList"></div>
+
+    </section>
+
+
+    <section class="premium">
+
+        <h2>💎 SITB Premium</h2>
+
+        <p>
+        AI Tutor • Camera Math • Voice Calculator
+        </p>
+
+        <button>
+            Upgrade $10/month
+        </button>
+
+        <button>
+            Upgrade $120/year
+        </button>
+
+    </section>
+
 
 </div>
+
 
 <script src="script.js"></script>
 
