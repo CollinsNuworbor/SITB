@@ -1,10 +1,11 @@
-console.log("SITB JS OK");
 let display = document.getElementById("display");
 let historyList = document.getElementById("historyList");
 
 let memory = 0;
 let history = [];
 
+
+// BASIC CALCULATOR
 
 function insert(value){
     display.value += value;
@@ -27,28 +28,31 @@ function calculate(){
 
         let expression = display.value;
 
-        expression = expression.replaceAll("π", Math.PI);
-        expression = expression.replaceAll("e", Math.E);
-        expression = expression.replaceAll("^","**");
+        expression = expression.replace(/π/g, Math.PI);
+        expression = expression.replace(/e/g, Math.E);
+        expression = expression.replace(/\^/g,"**");
 
-        let result = eval(expression);
+        let answer = eval(expression);
 
-        display.value = result;
+        addHistory(expression + " = " + answer);
 
-        addHistory(expression + " = " + result);
+        display.value = answer;
 
     }
-    catch{
+    catch(error){
+
         display.value = "Error";
+
     }
 
 }
 
 
+// HISTORY
 
-function addHistory(item){
+function addHistory(text){
 
-    history.unshift(item);
+    history.unshift(text);
 
     if(history.length > 10){
         history.pop();
@@ -56,10 +60,10 @@ function addHistory(item){
 
     historyList.innerHTML="";
 
-    history.forEach(x=>{
+    history.forEach(item=>{
 
         let li=document.createElement("li");
-        li.textContent=x;
+        li.textContent=item;
         historyList.appendChild(li);
 
     });
@@ -67,69 +71,65 @@ function addHistory(item){
 }
 
 
-
+// SCIENTIFIC
 
 function scientific(type){
 
-    let value = Number(display.value);
+    let num = Number(display.value);
 
-    if(type==="sin"){
-        display.value=Math.sin(value);
-    }
+    switch(type){
 
-    if(type==="cos"){
-        display.value=Math.cos(value);
-    }
+        case "sin":
+            display.value=Math.sin(num);
+            break;
 
-    if(type==="tan"){
-        display.value=Math.tan(value);
-    }
+        case "cos":
+            display.value=Math.cos(num);
+            break;
 
-    if(type==="sqrt"){
-        display.value=Math.sqrt(value);
-    }
+        case "tan":
+            display.value=Math.tan(num);
+            break;
 
-    if(type==="cbrt"){
-        display.value=Math.cbrt(value);
+        case "sqrt":
+            display.value=Math.sqrt(num);
+            break;
+
+        case "cbrt":
+            display.value=Math.cbrt(num);
+            break;
+
     }
 
 }
-
 
 
 
 function power(number){
 
-    let value=Number(display.value);
-
-    display.value=Math.pow(value,number);
+    display.value=Math.pow(Number(display.value),number);
 
 }
-
 
 
 
 function factorial(){
 
     let num=Number(display.value);
-
-    if(num<0){
-        display.value="Error";
-        return;
-    }
-
-    let answer=1;
+    let result=1;
 
     for(let i=1;i<=num;i++){
-        answer*=i;
+
+        result*=i;
+
     }
 
-    display.value=answer;
+    display.value=result;
 
 }
 
 
-
+// MEMORY
 
 function memoryClear(){
 
@@ -147,62 +147,51 @@ function memoryRecall(){
 
 function memoryAdd(){
 
-    memory+=Number(display.value);
+    memory += Number(display.value);
 
 }
 
 
 function memorySubtract(){
 
-    memory-=Number(display.value);
+    memory -= Number(display.value);
 
 }
-
-
 
 
 // DARK MODE
 
 let themeBtn=document.getElementById("themeBtn");
 
+if(themeBtn){
+
 themeBtn.onclick=function(){
 
     document.body.classList.toggle("dark");
 
-    if(document.body.classList.contains("dark")){
-        themeBtn.textContent="☀️";
-    }
-    else{
-        themeBtn.textContent="🌙";
-    }
-
 };
 
+}
 
 
-
-// LANGUAGES
+// LANGUAGE SEARCH
 
 let languages=[
-
 "English",
-"Spanish",
 "French",
+"Spanish",
 "German",
-"Italian",
-"Portuguese",
 "Chinese",
 "Japanese",
 "Korean",
 "Arabic",
-"Russian",
 "Hindi",
+"Portuguese",
+"Russian",
 "Swahili",
-"Turkish",
-"Dutch",
+"Italian",
 "Greek",
-"Hebrew"
-
+"Turkish"
 ];
 
 
@@ -210,47 +199,49 @@ let languageList=document.getElementById("languageList");
 let languageSearch=document.getElementById("languageSearch");
 
 
-function showLanguages(){
+function loadLanguages(){
+
+    if(!languageList) return;
 
     languageList.innerHTML="";
 
     languages.forEach(lang=>{
 
-        let item=document.createElement("p");
+        let p=document.createElement("p");
+        p.textContent=lang;
 
-        item.textContent=lang;
-
-        languageList.appendChild(item);
+        languageList.appendChild(p);
 
     });
 
 }
 
 
-showLanguages();
-
-
+if(languageSearch){
 
 languageSearch.oninput=function(){
 
-    let text=this.value.toLowerCase();
+    let search=this.value.toLowerCase();
 
     languageList.innerHTML="";
 
     languages
-    .filter(x=>x.toLowerCase().includes(text))
+    .filter(lang=>lang.toLowerCase().includes(search))
     .forEach(lang=>{
 
-        let item=document.createElement("p");
+        let p=document.createElement("p");
+        p.textContent=lang;
 
-        item.textContent=lang;
-
-        languageList.appendChild(item);
+        languageList.appendChild(p);
 
     });
 
 };
 
+}
+
+
+loadLanguages();
 
 
 
@@ -258,10 +249,28 @@ languageSearch.oninput=function(){
 
 function showExplanation(){
 
-    alert(
-    "SITB Explanation:\n\n"+
-    "The calculator solves your expression step by step.\n"+
-    "Advanced AI explanations will come in Premium Version 5.0."
-    );
+alert(
+"SITB Explanation:\n\n"+
+"Your calculation was processed using mathematical rules."
+);
 
 }
+
+
+// SHARE
+
+function shareApp(){
+
+if(navigator.share){
+
+navigator.share({
+title:"SITB Calculator",
+text:"Try SITB Calculator"
+});
+
+}
+
+}
+
+
+console.log("SITB JavaScript Loaded");
