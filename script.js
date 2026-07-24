@@ -1,65 +1,73 @@
-alert("NEW SCRIPT LOADED");
-alert("JavaScript loaded!");
-// =========================
-// SITB Calculator
-// =========================
+// ======================================
+// SITB Calculator - Part 1
+// ======================================
 
+// Display
 const screen = document.getElementById("screen");
 const history = document.getElementById("history");
 
+// Buttons
 const buttons = document.querySelectorAll(".buttons button");
 
 let expression = "";
 
+// =======================
 // Calculator
+// =======================
+
 buttons.forEach(button => {
 
     button.addEventListener("click", () => {
 
         const value = button.textContent;
 
-        // Ripple effect
-        ripple(button);
+        // Ripple
+        createRipple(button);
 
-        // Vibrate on phones
-        if (navigator.vibrate) navigator.vibrate(15);
+        // Ignore menu buttons
+        if (
+            button.id === "languageBtn" ||
+            button.id === "shareBtn" ||
+            button.id === "settingsBtn"
+        ) return;
 
-        if (value === "AC") {
-            expression = "";
-            screen.value = "0";
-            history.textContent = "";
-            return;
-        }
+        switch (value) {
 
-        if (value === "⌫") {
-            expression = expression.slice(0, -1);
-            screen.value = expression || "0";
-            return;
-        }
-
-        if (value === "=") {
-
-            try {
-
-                history.textContent = expression;
-
-                let answer = expression
-                    .replace(/×/g, "*")
-                    .replace(/÷/g, "/")
-                    .replace(/−/g, "-");
-
-                expression = eval(answer).toString();
-
-                screen.value = expression;
-
-            } catch {
-
-                screen.value = "Error";
+            case "AC":
                 expression = "";
+                history.textContent = "";
+                screen.value = "0";
+                return;
 
-            }
+            case "⌫":
+                expression = expression.slice(0, -1);
+                screen.value = expression || "0";
+                return;
 
-            return;
+            case "=":
+
+                try {
+
+                    history.textContent = expression;
+
+                    const answer = expression
+                        .replace(/×/g, "*")
+                        .replace(/÷/g, "/")
+                        .replace(/−/g, "-");
+
+                    expression = eval(answer).toString();
+
+                    screen.value = expression;
+
+                } catch {
+
+                    screen.value = "Error";
+                    expression = "";
+
+                }
+
+                return;
+
         }
 
         expression += value;
@@ -69,172 +77,146 @@ buttons.forEach(button => {
 
 });
 
+// =======================
+// Ripple
+// =======================
 
-// =========================
-// Ripple Animation
-// =========================
+function createRipple(button){
 
-function ripple(button){
+    const ripple=document.createElement("span");
 
-    const circle = document.createElement("span");
+    ripple.className="ripple";
 
-    circle.className = "ripple";
-
-    const size = Math.max(button.clientWidth, button.clientHeight);
-
-    circle.style.width = size + "px";
-    circle.style.height = size + "px";
-
-    button.appendChild(circle);
+    button.appendChild(ripple);
 
     setTimeout(()=>{
-        circle.remove();
-    },500);
+
+        ripple.remove();
+
+    },400);
 
 }
 
+// =======================
+// Settings Window
+// =======================
 
-// =========================
-// Share Button
-// =========================
+const settingsMenu=document.getElementById("settingsMenu");
 
-document.getElementById("shareBtn").onclick = async ()=>{
+document.getElementById("settingsBtn").onclick=()=>{
 
-    const data = {
-        title:"SITB Calculator",
-        text:"Try my calculator app, SITB!",
-        url:location.href
-    };
+    settingsMenu.style.display="block";
+
+};
+
+document.getElementById("closeSettings").onclick=()=>{
+
+    settingsMenu.style.display="none";
+
+};
+
+// =======================
+// Language Window
+// =======================
+
+const languageMenu=document.getElementById("languageMenu");
+
+document.getElementById("languageBtn").onclick=()=>{
+
+    languageMenu.style.display="block";
+
+};
+
+document.getElementById("closeLanguage").onclick=()=>{
+
+    languageMenu.style.display="none";
+
+};
+
+// =======================
+// Dark Mode
+// =======================
+
+let dark=false;
+
+document.getElementById("darkModeBtn").onclick=()=>{
+
+    dark=!dark;
+
+    document.body.classList.toggle("dark");
+
+};
+
+// =======================
+// Share
+// =======================
+
+document.getElementById("shareBtn").onclick=async()=>{
 
     if(navigator.share){
 
         try{
 
-            await navigator.share(data);
+            await navigator.share({
+
+                title:"SITB Calculator",
+
+                text:"Check out my SITB Calculator!",
+
+                url:location.href
+
+            });
 
         }catch(e){}
 
     }else{
 
-        navigator.clipboard.writeText(location.href);
-
-        alert("Link copied to clipboard!");
+        alert("Sharing isn't supported on this device.");
 
     }
 
 };
 
+// =======================
+// Sounds
+// =======================
 
-// =========================
-// Popups
-// =========================
+let soundOn=true;
 
-const languageMenu = document.getElementById("languageMenu");
-const settingsMenu = document.getElementById("settingsMenu");
+document.getElementById("soundBtn").onclick=()=>{
 
-document.getElementById("languageBtn").onclick=()=>{
-    languageMenu.style.display="block";
-}
+    soundOn=!soundOn;
 
-document.getElementById("settingsBtn").onclick=()=>{
-    settingsMenu.style.display="block";
-}
-
-document.getElementById("closeLanguage").onclick=()=>{
-    languageMenu.style.display="none";
-}
-
-document.getElementById("closeSettings").onclick=()=>{
-    settingsMenu.style.display="none";
-}
-
-
-// =========================
-// Dark Mode
-// =========================
-
-const darkButton=document.querySelector("#settingsMenu button");
-
-let dark=false;
-
-darkButton.onclick=()=>{
-
-    dark=!dark;
-
-    if(dark){
-
-        document.body.style.background="#111";
-
-    }else{
-
-        document.body.style.background="linear-gradient(135deg,#1d4ed8,#0f172a)";
-
-    }
+    alert("Sounds " + (soundOn ? "ON" : "OFF"));
 
 };
 
+// =======================
+// Vibration
+// =======================
 
-// =========================
-// 100+ Languages
-// =========================
+let vibrationOn=true;
 
-const languages=[
+document.getElementById("vibrationBtn").onclick=()=>{
 
-"English","Spanish","French","German","Italian","Portuguese","Chinese","Japanese","Korean","Arabic",
-"Hindi","Bengali","Russian","Turkish","Greek","Dutch","Swedish","Norwegian","Danish","Finnish",
-"Polish","Czech","Slovak","Romanian","Hungarian","Hebrew","Thai","Vietnamese","Malay","Indonesian",
-"Filipino","Swahili","Zulu","Afrikaans","Amharic","Yoruba","Igbo","Hausa","Somali","Persian",
-"Urdu","Punjabi","Tamil","Telugu","Gujarati","Kannada","Malayalam","Marathi","Nepali","Sinhala",
-"Khmer","Lao","Mongolian","Kazakh","Uzbek","Turkmen","Kyrgyz","Tajik","Ukrainian","Belarusian",
-"Croatian","Serbian","Bosnian","Slovenian","Bulgarian","Estonian","Latvian","Lithuanian","Irish",
-"Welsh","Scottish Gaelic","Basque","Catalan","Galician","Esperanto","Latin","Maltese","Icelandic",
-"Luxembourgish","Albanian","Macedonian","Armenian","Georgian","Azerbaijani","Pashto","Kurdish",
-"Javanese","Sundanese","Maori","Samoan","Tongan","Fijian","Hawaiian","Quechua","Guarani","Xhosa",
-"Sesotho","Tswana","Shona","Malagasy","Chichewa","Oromo","Tigrinya","Breton","Corsican","Frisian"
+    vibrationOn=!vibrationOn;
 
-];
+    if(vibrationOn && navigator.vibrate){
 
-const languageList=document.getElementById("languageList");
-const search=document.getElementById("languageSearch");
+        navigator.vibrate(200);
 
-function loadLanguages(list){
+    }
 
-    languageList.innerHTML="";
+    alert("Vibration " + (vibrationOn ? "ON" : "OFF"));
 
-    list.forEach(language=>{
+};
 
-        const button=document.createElement("button");
+// =======================
+// About
+// =======================
 
-        button.textContent="🌐 "+language;
+document.getElementById("aboutBtn").onclick=()=>{
 
-        button.onclick=()=>{
+    alert("SITB Calculator\nVersion 2.0");
 
-            alert("Language changed to "+language);
-
-            languageMenu.style.display="none";
-
-        };
-
-        languageList.appendChild(button);
-
-    });
-
-}
-
-loadLanguages(languages);
-
-search.addEventListener("input",()=>{
-
-    const value=search.value.toLowerCase();
-
-    loadLanguages(
-
-        languages.filter(language=>
-
-            language.toLowerCase().includes(value)
-
-        )
-
-    );
-
-});
+};
