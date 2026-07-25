@@ -40,7 +40,7 @@ function calculate(){
     }
     catch{
 
-        display.value = "Error";
+        display.value="Error";
 
     }
 
@@ -66,7 +66,6 @@ function addHistory(text){
     showHistory();
 
 }
-
 
 
 function showHistory(){
@@ -109,41 +108,25 @@ function scientific(type){
 
     let num=Number(display.value);
 
-
-    if(type==="sin")
-        display.value=Math.sin(num);
-
-    if(type==="cos")
-        display.value=Math.cos(num);
-
-    if(type==="tan")
-        display.value=Math.tan(num);
-
-    if(type==="sqrt")
-        display.value=Math.sqrt(num);
-
-    if(type==="cbrt")
-        display.value=Math.cbrt(num);
+    if(type==="sin") display.value=Math.sin(num);
+    if(type==="cos") display.value=Math.cos(num);
+    if(type==="tan") display.value=Math.tan(num);
+    if(type==="sqrt") display.value=Math.sqrt(num);
+    if(type==="cbrt") display.value=Math.cbrt(num);
 
 }
 
 
+function power(num){
 
-function power(number){
-
-    display.value=Math.pow(
-        Number(display.value),
-        number
-    );
+    display.value=Math.pow(Number(display.value),num);
 
 }
-
 
 
 function factorial(){
 
     let num=Number(display.value);
-
     let result=1;
 
     for(let i=1;i<=num;i++){
@@ -162,16 +145,13 @@ function memoryClear(){
     memory=0;
 }
 
-
 function memoryRecall(){
     display.value=memory;
 }
 
-
 function memoryAdd(){
     memory+=Number(display.value);
 }
-
 
 function memorySubtract(){
     memory-=Number(display.value);
@@ -183,50 +163,47 @@ function memorySubtract(){
 
 function showExplanation(){
 
-let problem=display.value;
+    let problem=display.value;
+
+    if(problem===""){
+        alert("Enter a calculation first.");
+        return;
+    }
 
 
-if(problem===""){
-alert("Enter a calculation.");
-return;
-}
+    try{
+
+        let answer=eval(problem.replace(/\^/g,"**"));
 
 
-try{
-
-let answer=eval(problem.replace(/\^/g,"**"));
-
-
-alert(
+        alert(
 `SITB Explanation
 
 Problem:
 ${problem}
 
 Step 1:
-Read the values.
+Identify the numbers and operations.
 
 Step 2:
-Apply mathematical rules.
+Follow mathematical order.
 
 Step 3:
-Solve.
+Calculate the answer.
 
 Answer:
 ${answer}
 
-Premium AI Tutor coming in Version 5.0`
-);
+💎 Premium Version 5.0:
+AI Tutor will give advanced learning explanations.`
+        );
 
+    }
+    catch{
 
-}
+        alert("Cannot explain this.");
 
-catch{
-
-alert("Cannot explain.");
-
-}
-
+    }
 
 }
 
@@ -236,9 +213,7 @@ alert("Cannot explain.");
 
 function convertUnit(){
 
-let value=Number(
-document.getElementById("unitValue").value
-);
+let value=Number(document.getElementById("unitValue").value);
 
 let from=document.getElementById("unitFrom").value;
 
@@ -247,25 +222,14 @@ let to=document.getElementById("unitTo").value;
 let result=value;
 
 
+if(from==="km"&&to==="m") result=value*1000;
+if(from==="m"&&to==="km") result=value/1000;
 
-if(from==="km" && to==="m")
-result=value*1000;
+if(from==="m"&&to==="cm") result=value*100;
+if(from==="cm"&&to==="m") result=value/100;
 
-if(from==="m" && to==="km")
-result=value/1000;
-
-if(from==="m" && to==="cm")
-result=value*100;
-
-if(from==="cm" && to==="m")
-result=value/100;
-
-if(from==="kg" && to==="g")
-result=value*1000;
-
-if(from==="g" && to==="kg")
-result=value/1000;
-
+if(from==="kg"&&to==="g") result=value*1000;
+if(from==="g"&&to==="kg") result=value/1000;
 
 
 document.getElementById("unitResult").innerHTML=
@@ -275,8 +239,7 @@ document.getElementById("unitResult").innerHTML=
 
 
 
-
-// ================= EQUATION SOLVER =================
+// ================= BETTER EQUATION SOLVER =================
 
 function solveEquation(){
 
@@ -285,24 +248,87 @@ let eq=document.getElementById("equationInput").value;
 let result=document.getElementById("equationResult");
 
 
+eq=eq.replace(/\s/g,"");
+
+
 try{
 
-let parts=eq.split("=");
 
-let right=Number(parts[1]);
-
-let left=parts[0];
-
-let number=Number(
-left.replace("x","")
-);
+let leftRight=eq.split("=");
 
 
-let answer=right-number;
+if(leftRight.length!==2){
+
+result.innerHTML="Use format: x+5=10";
+
+return;
+
+}
 
 
-result.innerHTML=
-"x = "+answer;
+let left=leftRight[0];
+let right=Number(leftRight[1]);
+
+
+let answer;
+
+
+if(left.includes("x+")){
+
+let num=Number(left.replace("x+",""));
+
+answer=right-num;
+
+}
+
+
+else if(left.includes("x-")){
+
+let num=Number(left.replace("x-",""));
+
+answer=right+num;
+
+}
+
+
+else if(left.includes("x*")){
+
+let num=Number(left.replace("x*",""));
+
+answer=right/num;
+
+}
+
+
+else if(left.includes("x/")){
+
+let num=Number(left.replace("x/",""));
+
+answer=right*num;
+
+}
+
+
+else if(left.includes("x")){
+
+let num=Number(left.replace("x","")) || 1;
+
+answer=right/num;
+
+}
+
+
+else{
+
+result.innerHTML="Example: 2x=10";
+
+return;
+
+}
+
+
+
+result.innerHTML="x = "+answer;
 
 
 }
@@ -322,27 +348,18 @@ result.innerHTML="Cannot solve";
 
 function addMatrix(){
 
-let a=document.getElementById("matrixA").value
-.split(",")
-.map(Number);
+let a=document.getElementById("matrixA").value.split(",").map(Number);
+
+let b=document.getElementById("matrixB").value.split(",").map(Number);
 
 
-let b=document.getElementById("matrixB").value
-.split(",")
-.map(Number);
+let answer=a.map((x,i)=>x+b[i]);
 
 
-let result=a.map(
-(x,i)=>x+b[i]
-);
-
-
-document.getElementById("matrixResult")
-.innerHTML=result.join(",");
+document.getElementById("matrixResult").innerHTML=
+answer.join(",");
 
 }
-
-
 
 
 
@@ -355,12 +372,7 @@ let canvas=document.getElementById("graphCanvas");
 let ctx=canvas.getContext("2d");
 
 
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
 ctx.beginPath();
@@ -368,10 +380,7 @@ ctx.beginPath();
 
 for(let x=0;x<canvas.width;x++){
 
-let value=x-175;
-
-let y=125-(value*value/500);
-
+let y=125-((x-175)*(x-175))/500;
 
 ctx.lineTo(x,y);
 
@@ -420,4 +429,4 @@ text:"Try SITB Calculator"
 }
 
 
-console.log("SITB v4 Loaded 🚀");
+console.log("SITB v4 Fixed Loaded");
