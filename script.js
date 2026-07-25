@@ -231,17 +231,53 @@ languageSearch.oninput = function(){
 }
 
 
-showLanguages();
-
-
-
 // EXPLANATION
 
 function showExplanation(){
 
+    let expression = display.value;
+
+    if(expression === ""){
+        alert("Enter a calculation first.");
+        return;
+    }
+
+    let answer;
+
+    try{
+
+        let clean = expression.replace(/\^/g,"**");
+        answer = eval(clean);
+
+    }
+    catch{
+
+        alert("Cannot explain this calculation.");
+        return;
+
+    }
+
+
     alert(
-    "SITB Explanation\n\n"+
-    "The calculator follows mathematical order and processes your answer."
+`SITB Explanation:
+
+Expression:
+${expression}
+
+Step 1:
+Read the numbers and operations.
+
+Step 2:
+Follow BODMAS mathematical order.
+
+Step 3:
+Solve the calculation.
+
+Answer:
+${answer}
+
+💎 SITB Premium Version 5.0:
+AI Tutor will give advanced step-by-step explanations.`
     );
 
 }
