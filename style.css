@@ -1,181 +1,355 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    color: #222;
-    transition: 0.3s;
-}
-
-body.dark {
-    background: #111;
-    color: white;
-}
-
-.app {
-    max-width: 500px;
-    margin: auto;
-    padding: 15px;
+*{
+box-sizing:border-box;
 }
 
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
+body{
 
-.dark header {
-    background: #222;
-}
+margin:0;
 
-header h1 {
-    margin: 0;
+font-family:Arial,sans-serif;
+
+background:#f2f2f2;
+
+color:#222;
+
+transition:.3s;
+
 }
 
 
-button {
-    border: none;
-    border-radius: 12px;
-    padding: 15px;
-    font-size: 18px;
-    cursor: pointer;
-    background: white;
-    transition: 0.2s;
-}
 
-button:hover {
-    transform: scale(1.05);
+body.dark{
+
+background:#111;
+
+color:white;
+
 }
 
 
-.dark button {
-    background: #333;
-    color: white;
+
+.app{
+
+max-width:600px;
+
+margin:auto;
+
+padding:15px;
+
 }
 
 
-#themeBtn {
-    font-size: 22px;
+
+
+
+header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:white;
+
+padding:15px;
+
+border-radius:20px;
+
+margin-bottom:15px;
+
 }
 
 
-.display {
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
+.dark header{
 
-.dark .display {
-    background: #222;
+background:#222;
+
 }
 
 
-#historyDisplay {
-    height: 30px;
-    color: gray;
+
+
+
+button{
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:16px;
+
+cursor:pointer;
+
+background:#fff;
+
+transition:.2s;
+
 }
 
 
-#display {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 35px;
-    text-align: right;
-    background: transparent;
+button:hover{
+
+transform:scale(1.05);
+
 }
 
 
-.calculator {
-    background: white;
-    padding: 15px;
-    border-radius: 20px;
+
+.dark button{
+
+background:#333;
+
+color:white;
+
 }
 
-.dark .calculator {
-    background: #222;
+
+
+
+
+.display{
+
+background:white;
+
+padding:15px;
+
+border-radius:20px;
+
+margin-bottom:15px;
+
 }
+
+
+
+.dark .display{
+
+background:#222;
+
+}
+
+
+
+
+
+#display{
+
+width:100%;
+
+height:60px;
+
+font-size:35px;
+
+text-align:right;
+
+border:none;
+
+outline:none;
+
+background:transparent;
+
+}
+
+
+
+
+
+.calculator{
+
+background:white;
+
+padding:15px;
+
+border-radius:20px;
+
+}
+
+
+
+.dark .calculator{
+
+background:#222;
+
+}
+
+
+
 
 
 .scientific,
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 10px;
-    margin-bottom: 15px;
+.buttons{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:10px;
+
+margin-bottom:15px;
+
 }
 
 
-.operator {
-    background: #ff9500;
-    color: white;
+
+
+
+.buttons button:last-child{
+
+background:#ff9500;
+
+color:white;
+
 }
 
 
-.scientific button {
-    font-size: 15px;
-}
+
 
 
 .history,
 .languages,
-.premium {
-    margin-top: 20px;
-    padding: 15px;
-    background: white;
-    border-radius: 15px;
+.v4,
+.premium{
+
+background:white;
+
+padding:15px;
+
+border-radius:20px;
+
+margin-top:20px;
+
 }
+
 
 
 .dark .history,
 .dark .languages,
-.dark .premium {
-    background: #222;
+.dark .v4,
+.dark .premium{
+
+background:#222;
+
 }
 
 
-#languageSearch {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid gray;
-    margin: 10px 0;
+
+
+
+#languageSearch,
+.tool input,
+select{
+
+width:100%;
+
+padding:12px;
+
+margin:5px 0;
+
+border-radius:10px;
+
+border:1px solid #aaa;
+
+font-size:16px;
+
 }
 
 
-#languageList {
-    max-height: 200px;
-    overflow-y: auto;
+
+
+
+.tool{
+
+padding:15px;
+
+margin-top:15px;
+
+border-radius:15px;
+
+background:#eee;
+
 }
 
 
-.premium button {
-    width: 100%;
-    margin-top: 10px;
-    background: gold;
-    color: black;
+
+.dark .tool{
+
+background:#333;
+
 }
+
+
+
+
+
+.tool button{
+
+width:100%;
+
+margin-top:10px;
+
+background:#007bff;
+
+color:white;
+
+}
+
+
+
+
+
+canvas{
+
+width:100%;
+
+margin-top:15px;
+
+background:white;
+
+border-radius:10px;
+
+}
+
+
+
+
+
+.premium button{
+
+width:100%;
+
+margin-top:10px;
+
+background:gold;
+
+color:black;
+
+}
+
+
+
 
 
 @media(max-width:500px){
 
-    button {
-        padding: 12px;
-        font-size: 16px;
-    }
 
-    #display {
-        font-size: 28px;
-    }
+button{
+
+font-size:14px;
+
+padding:10px;
+
+}
+
+
+
+#display{
+
+font-size:28px;
+
+}
+
 
 }
