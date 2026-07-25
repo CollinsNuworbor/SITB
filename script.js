@@ -5,41 +5,39 @@ let memory = 0;
 let calcHistory = [];
 
 
-// INSERT BUTTON VALUES
-function insert(value) {
+// ================= BASIC =================
+
+function insert(value){
     display.value += value;
 }
 
 
-// CLEAR
-function clearDisplay() {
+function clearDisplay(){
     display.value = "";
 }
 
 
-// DELETE LAST
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
+function deleteLast(){
+    display.value = display.value.slice(0,-1);
 }
 
 
-// CALCULATE
-function calculate() {
+function calculate(){
 
-    try {
+    try{
 
         let expression = display.value;
 
-        expression = expression.replace(/π/g, Math.PI);
-        expression = expression.replace(/\^/g, "**");
+        let answer = eval(
+            expression.replace(/\^/g,"**")
+        );
 
-        let result = eval(expression);
+        addHistory(expression + " = " + answer);
 
-        addHistory(expression + " = " + result);
+        display.value = answer;
 
-        display.value = result;
-
-    } catch {
+    }
+    catch{
 
         display.value = "Error";
 
@@ -48,23 +46,28 @@ function calculate() {
 }
 
 
-// HISTORY
-function addHistory(text) {
+
+// ================= HISTORY =================
+
+function addHistory(text){
 
     calcHistory.unshift(text);
 
-    if (calcHistory.length > 10) {
+    if(calcHistory.length > 10){
         calcHistory.pop();
     }
 
+
     if(historyList){
 
-        historyList.innerHTML = "";
+        historyList.innerHTML="";
 
-        calcHistory.forEach(item => {
+        calcHistory.forEach(item=>{
 
-            let li = document.createElement("li");
-            li.textContent = item;
+            let li=document.createElement("li");
+
+            li.textContent=item;
+
             historyList.appendChild(li);
 
         });
@@ -75,26 +78,43 @@ function addHistory(text) {
 
 
 
-// SCIENTIFIC FUNCTIONS
+// ================= SCIENTIFIC =================
 
-function scientific(type) {
+function scientific(type){
 
     let num = Number(display.value);
 
-    if(type === "sin") display.value = Math.sin(num);
-    if(type === "cos") display.value = Math.cos(num);
-    if(type === "tan") display.value = Math.tan(num);
 
-    if(type === "sqrt") display.value = Math.sqrt(num);
-    if(type === "cbrt") display.value = Math.cbrt(num);
+    if(type=="sin"){
+        display.value=Math.sin(num);
+    }
+
+    if(type=="cos"){
+        display.value=Math.cos(num);
+    }
+
+    if(type=="tan"){
+        display.value=Math.tan(num);
+    }
+
+    if(type=="sqrt"){
+        display.value=Math.sqrt(num);
+    }
+
+    if(type=="cbrt"){
+        display.value=Math.cbrt(num);
+    }
 
 }
 
 
 
-function power(num){
+function power(number){
 
-    display.value = Math.pow(Number(display.value), num);
+    display.value=Math.pow(
+        Number(display.value),
+        number
+    );
 
 }
 
@@ -102,59 +122,121 @@ function power(num){
 
 function factorial(){
 
-    let number = Number(display.value);
-    let answer = 1;
+    let num=Number(display.value);
 
-    for(let i = 1; i <= number; i++){
+    let result=1;
 
-        answer *= i;
+
+    for(let i=1;i<=num;i++){
+
+        result*=i;
 
     }
 
-    display.value = answer;
+
+    display.value=result;
 
 }
 
 
 
-// MEMORY
+// ================= MEMORY =================
 
 function memoryClear(){
-
-    memory = 0;
-
+    memory=0;
 }
 
 
 function memoryRecall(){
-
-    display.value = memory;
-
+    display.value=memory;
 }
 
 
 function memoryAdd(){
-
-    memory += Number(display.value);
-
+    memory+=Number(display.value);
 }
 
 
 function memorySubtract(){
+    memory-=Number(display.value);
+}
 
-    memory -= Number(display.value);
+
+
+// ================= REAL EXPLAIN =================
+
+function showExplanation(){
+
+    let problem = display.value;
+
+
+    if(problem===""){
+
+        alert("Type a calculation first.");
+
+        return;
+
+    }
+
+
+    let answer;
+
+
+    try{
+
+        answer = eval(
+            problem.replace(/\^/g,"**")
+        );
+
+    }
+
+    catch{
+
+        alert("This calculation cannot be explained.");
+
+        return;
+
+    }
+
+
+
+    let message = 
+`SITB Learning Explanation
+
+Problem:
+${problem}
+
+Step 1:
+Identify the numbers and operations.
+
+Step 2:
+Apply mathematical rules.
+
+Step 3:
+Calculate the final result.
+
+Final Answer:
+${answer}
+
+
+SITB Premium 5.0 AI Tutor:
+Advanced explanations, different methods, and personalized learning will be available there.`;
+
+
+    alert(message);
 
 }
 
 
 
-// DARK MODE
+// ================= DARK MODE =================
 
-let themeBtn = document.getElementById("themeBtn");
+let themeBtn=document.getElementById("themeBtn");
+
 
 if(themeBtn){
 
-themeBtn.onclick = function(){
+themeBtn.onclick=function(){
 
     document.body.classList.toggle("dark");
 
@@ -164,127 +246,7 @@ themeBtn.onclick = function(){
 
 
 
-// LANGUAGE SEARCH
-
-let languages = [
-"English",
-"French",
-"Spanish",
-"German",
-"Chinese",
-"Japanese",
-"Korean",
-"Arabic",
-"Hindi",
-"Portuguese",
-"Russian",
-"Swahili",
-"Italian",
-"Greek",
-"Turkish"
-];
-
-
-let languageSearch = document.getElementById("languageSearch");
-let languageList = document.getElementById("languageList");
-
-
-function showLanguages(){
-
-    if(!languageList) return;
-
-    languageList.innerHTML = "";
-
-    languages.forEach(lang => {
-
-        let p = document.createElement("p");
-        p.textContent = lang;
-
-        languageList.appendChild(p);
-
-    });
-
-}
-
-
-if(languageSearch){
-
-languageSearch.oninput = function(){
-
-    let search = this.value.toLowerCase();
-
-    languageList.innerHTML = "";
-
-    languages
-    .filter(lang => lang.toLowerCase().includes(search))
-    .forEach(lang => {
-
-        let p = document.createElement("p");
-        p.textContent = lang;
-
-        languageList.appendChild(p);
-
-    });
-
-};
-
-}
-
-
-// EXPLANATION
-
-function showExplanation(){
-
-    let expression = display.value;
-
-    if(expression === ""){
-        alert("Enter a calculation first.");
-        return;
-    }
-
-    let answer;
-
-    try{
-
-        let clean = expression.replace(/\^/g,"**");
-        answer = eval(clean);
-
-    }
-    catch{
-
-        alert("Cannot explain this calculation.");
-        return;
-
-    }
-
-
-    alert(
-`SITB Explanation:
-
-Expression:
-${expression}
-
-Step 1:
-Read the numbers and operations.
-
-Step 2:
-Follow BODMAS mathematical order.
-
-Step 3:
-Solve the calculation.
-
-Answer:
-${answer}
-
-💎 SITB Premium Version 5.0:
-AI Tutor will give advanced step-by-step explanations.`
-    );
-
-}
-
-
-
-// SHARE
+// ================= SHARE =================
 
 function shareApp(){
 
@@ -293,6 +255,7 @@ function shareApp(){
         navigator.share({
 
             title:"SITB Calculator",
+
             text:"Try SITB Calculator"
 
         });
@@ -302,4 +265,5 @@ function shareApp(){
 }
 
 
-console.log("SITB v3 Loaded");
+
+console.log("SITB v3 Running");
