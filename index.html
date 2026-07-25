@@ -1,131 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SITB Calculator</title>
+
+<title>SITB Calculator v4</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
 <div class="app">
 
-    <header>
-        <h1>🧮 SITB</h1>
-        <button id="themeBtn">🌙</button>
-    </header>
 
-    <div class="display">
-        <div id="historyDisplay"></div>
-        <input id="display" type="text" readonly>
-    </div>
+<header>
 
-    <div class="calculator">
+<h1>🧮 SITB v4</h1>
 
-        <div class="scientific">
+<button id="themeBtn">
+🌙
+</button>
 
-            <button onclick="clearDisplay()">AC</button>
-            <button onclick="deleteLast()">DEL</button>
-            <button onclick="memoryClear()">MC</button>
-            <button onclick="memoryRecall()">MR</button>
-
-            <button onclick="memoryAdd()">M+</button>
-            <button onclick="memorySubtract()">M-</button>
-            <button onclick="insert('π')">π</button>
-            <button onclick="insert('e')">e</button>
-
-            <button onclick="scientific('sin')">sin</button>
-            <button onclick="scientific('cos')">cos</button>
-            <button onclick="scientific('tan')">tan</button>
-            <button onclick="scientific('sqrt')">√</button>
-
-            <button onclick="scientific('cbrt')">∛</button>
-            <button onclick="power(2)">x²</button>
-            <button onclick="power(3)">x³</button>
-            <button onclick="insert('^')">xʸ</button>
-
-            <button onclick="factorial()">n!</button>
-            <button onclick="showExplanation()">Explain</button>
-
-        </div>
+</header>
 
 
-        <div class="buttons">
 
-            <button onclick="insert('7')">7</button>
-            <button onclick="insert('8')">8</button>
-            <button onclick="insert('9')">9</button>
-            <button class="operator" onclick="insert('/')">÷</button>
+<!-- DISPLAY -->
 
-            <button onclick="insert('4')">4</button>
-            <button onclick="insert('5')">5</button>
-            <button onclick="insert('6')">6</button>
-            <button class="operator" onclick="insert('*')">×</button>
+<div class="display">
 
-            <button onclick="insert('1')">1</button>
-            <button onclick="insert('2')">2</button>
-            <button onclick="insert('3')">3</button>
-            <button class="operator" onclick="insert('-')">−</button>
+<div id="historyDisplay"></div>
 
-            <button onclick="insert('0')">0</button>
-            <button onclick="insert('.')">.</button>
-            <button onclick="calculate()">=</button>
-            <button class="operator" onclick="insert('+')">+</button>
+<input id="display" readonly>
 
-        </div>
-
-    </div>
+</div>
 
 
-    <section class="history">
-
-        <h2>History</h2>
-        <ul id="historyList"></ul>
-
-    </section>
 
 
-    <section class="languages">
 
-        <button id="languageBtn">
-            🌍 Languages
-        </button>
+<!-- SCIENTIFIC BUTTONS -->
 
-        <input 
-        id="languageSearch"
-        placeholder="Search language..."
-        >
-
-        <div id="languageList"></div>
-
-    </section>
+<div class="calculator">
 
 
-    <section class="premium">
+<div class="scientific">
 
-        <h2>💎 SITB Premium</h2>
+<button onclick="clearDisplay()">AC</button>
 
-        <p>
-        AI Tutor • Camera Math • Voice Calculator
-        </p>
+<button onclick="deleteLast()">DEL</button>
 
-        <button>
-            Upgrade $10/month
-        </button>
+<button onclick="memoryClear()">MC</button>
 
-        <button>
-            Upgrade $120/year
-        </button>
+<button onclick="memoryRecall()">MR</button>
 
-    </section>
+
+<button onclick="memoryAdd()">M+</button>
+
+<button onclick="memorySubtract()">M-</button>
+
+<button onclick="insert('π')">π</button>
+
+<button onclick="insert('e')">e</button>
+
+
+<button onclick="scientific('sin')">sin</button>
+
+<button onclick="scientific('cos')">cos</button>
+
+<button onclick="scientific('tan')">tan</button>
+
+<button onclick="scientific('sqrt')">√</button>
+
+
+<button onclick="scientific('cbrt')">∛</button>
+
+<button onclick="power(2)">x²</button>
+
+<button onclick="power(3)">x³</button>
+
+<button onclick="insert('^')">xʸ</button>
+
+
+<button onclick="factorial()">n!</button>
+
+<button onclick="showExplanation()">Explain</button>
 
 
 </div>
 
 
+
+
+<!-- BASIC BUTTONS -->
+
+
+<div class="buttons">
+
+
+<button onclick="insert('7')">7</button>
+
+<button onclick="insert('8')">8</button>
+
+<button onclick="insert('9')">9</button>
+
+<button onclick="insert('/')">÷</button>
+
+
+
+<button onclick="insert('4')">4</button>
+
+<button onclick="insert('5')">5</button>
+
+<button onclick="insert('6')">6</button>
+
+<button onclick="insert('*')">×</button>
+
+
+
+<button onclick="insert('1')">1</button>
+
+<button onclick="insert('2')">2</button>
+
+<button onclick="insert('3')">3</button>
+
+<button onclick="insert('-')">−</button>
+
+
+
+<button onclick="insert('0')">0</button>
+
+<button onclick="insert('.')">.</button>
+
+<button onclick="calculate()">=</button>
+
+<button onclick="insert('+')">+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- HISTORY -->
+
+<section class="history">
+
+<h2>📜 History</h2>
+
+<button onclick="clearHistory()">
+Clear History
+</button>
+
+<ul id="historyList"></ul>
+
+</section>
+
+
+
+
+
+
+
+<!-- LANGUAGES -->
+
+<section class="languages">
+
+<h2>🌍 Languages</h2>
+
+
+<input id="languageSearch"
+placeholder="Search language">
+
+
+<div id="languageList"></div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- SITB v4 TOOLS -->
+
+
+<section class="v4">
+
+
+<h2>🚀 SITB v4 Tools</h2>
+
+
+
+
+
+<div class="tool">
+
+
+<h3>📏 Unit Converter</h3>
+
+
+<input id="unitValue"
+placeholder="Value">
+
+
+<select id="unitFrom">
+
+<option value="km">Kilometers</option>
+
+<option value="m">Meters</option>
+
+<option value="cm">Centimeters</option>
+
+<option value="kg">Kilograms</option>
+
+<option value="g">Grams</option>
+
+</select>
+
+
+
+<select id="unitTo">
+
+<option value="m">Meters</option>
+
+<option value="km">Kilometers</option>
+
+<option value="cm">Centimeters</option>
+
+<option value="g">Grams</option>
+
+<option value="kg">Kilograms</option>
+
+</select>
+
+
+
+<button onclick="convertUnit()">
+Convert
+</button>
+
+
+<p id="unitResult"></p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="tool">
+
+
+<h3>🧮 Equation Solver</h3>
+
+
+<input id="equationInput"
+placeholder="Example: x+5=10">
+
+
+<button onclick="solveEquation()">
+Solve
+</button>
+
+
+<p id="equationResult"></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="tool">
+
+
+<h3>🔢 Matrix Calculator</h3>
+
+
+<input id="matrixA"
+placeholder="1,2,3,4">
+
+
+<input id="matrixB"
+placeholder="5,6,7,8">
+
+
+<button onclick="addMatrix()">
+Add
+</button>
+
+
+<p id="matrixResult"></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="tool">
+
+
+<h3>📈 Graph Calculator</h3>
+
+
+<input id="graphInput"
+placeholder="Example: x*x">
+
+
+<button onclick="drawGraph()">
+Graph
+</button>
+
+
+<canvas id="graphCanvas"
+width="350"
+height="250">
+
+</canvas>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- PREMIUM -->
+
+<section class="premium">
+
+
+<h2>💎 SITB Premium</h2>
+
+
+<p>
+AI Tutor • Camera Math • Voice Calculator
+</p>
+
+
+<button>
+$10 Monthly
+</button>
+
+
+<button>
+$120 Yearly
+</button>
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
-<script defer src="script.js"></script>
