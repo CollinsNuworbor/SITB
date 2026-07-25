@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SITB Calculator v4</title>
+<title>SITB Calculator</title>
 
 <link rel="stylesheet" href="style.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
@@ -16,59 +14,68 @@
 <body>
 
 
-<div class="app">
-
-
 <header>
 
-<h1>🧮 SITB v4</h1>
+<h1>🧮 SITB Calculator</h1>
 
 <button id="themeBtn">
-🌙
+🌙 Theme
 </button>
 
 </header>
 
 
 
-<!-- DISPLAY -->
+<!-- BASIC CALCULATOR -->
 
-<div class="display">
-
-<div id="historyDisplay"></div>
+<section class="calculator">
 
 <input id="display" readonly>
+
+
+<div class="buttons">
+
+<button onclick="insert('7')">7</button>
+<button onclick="insert('8')">8</button>
+<button onclick="insert('9')">9</button>
+<button onclick="insert('/')">÷</button>
+
+
+<button onclick="insert('4')">4</button>
+<button onclick="insert('5')">5</button>
+<button onclick="insert('6')">6</button>
+<button onclick="insert('*')">×</button>
+
+
+<button onclick="insert('1')">1</button>
+<button onclick="insert('2')">2</button>
+<button onclick="insert('3')">3</button>
+<button onclick="insert('-')">-</button>
+
+
+<button onclick="insert('0')">0</button>
+<button onclick="insert('.')">.</button>
+<button onclick="calculate()">=</button>
+<button onclick="insert('+')">+</button>
+
+
+<button onclick="clearDisplay()">C</button>
+
+<button onclick="deleteLast()">⌫</button>
 
 </div>
 
 
+</section>
 
 
 
-<!-- SCIENTIFIC BUTTONS -->
 
-<div class="calculator">
+<!-- SCIENTIFIC -->
 
+<section>
 
-<div class="scientific">
-
-<button onclick="clearDisplay()">AC</button>
-
-<button onclick="deleteLast()">DEL</button>
-
-<button onclick="memoryClear()">MC</button>
-
-<button onclick="memoryRecall()">MR</button>
-
-
-<button onclick="memoryAdd()">M+</button>
-
-<button onclick="memorySubtract()">M-</button>
-
-<button onclick="insert('π')">π</button>
-
-<button onclick="insert('e')">e</button>
-
+<h2>🔬 Scientific</h2>
 
 <button onclick="scientific('sin')">sin</button>
 
@@ -78,75 +85,24 @@
 
 <button onclick="scientific('sqrt')">√</button>
 
+<button onclick="factorial()">x!</button>
 
-<button onclick="scientific('cbrt')">∛</button>
-
-<button onclick="power(2)">x²</button>
-
-<button onclick="power(3)">x³</button>
-
-<button onclick="insert('^')">xʸ</button>
-
-
-<button onclick="factorial()">n!</button>
-
-<button onclick="showExplanation()">Explain</button>
-
-
-</div>
+</section>
 
 
 
 
-<!-- BASIC BUTTONS -->
+<!-- EXPLAIN -->
 
+<section>
 
-<div class="buttons">
+<button onclick="showExplanation()">
 
+🧠 Explain
 
-<button onclick="insert('7')">7</button>
+</button>
 
-<button onclick="insert('8')">8</button>
-
-<button onclick="insert('9')">9</button>
-
-<button onclick="insert('/')">÷</button>
-
-
-
-<button onclick="insert('4')">4</button>
-
-<button onclick="insert('5')">5</button>
-
-<button onclick="insert('6')">6</button>
-
-<button onclick="insert('*')">×</button>
-
-
-
-<button onclick="insert('1')">1</button>
-
-<button onclick="insert('2')">2</button>
-
-<button onclick="insert('3')">3</button>
-
-<button onclick="insert('-')">−</button>
-
-
-
-<button onclick="insert('0')">0</button>
-
-<button onclick="insert('.')">.</button>
-
-<button onclick="calculate()">=</button>
-
-<button onclick="insert('+')">+</button>
-
-
-</div>
-
-</div>
-
+</section>
 
 
 
@@ -154,36 +110,17 @@
 
 <!-- HISTORY -->
 
-<section class="history">
+<section>
 
 <h2>📜 History</h2>
 
-<button onclick="clearHistory()">
-Clear History
-</button>
-
 <ul id="historyList"></ul>
 
-</section>
+<button onclick="clearHistory()">
 
+Clear History
 
-
-
-
-
-
-<!-- LANGUAGES -->
-
-<section class="languages">
-
-<h2>🌍 Languages</h2>
-
-
-<input id="languageSearch"
-placeholder="Search language">
-
-
-<div id="languageList"></div>
+</button>
 
 
 </section>
@@ -192,11 +129,7 @@ placeholder="Search language">
 
 
 
-
-
-
-<!-- SITB v4 TOOLS -->
-
+<!-- V4 CHAMBERS -->
 
 <section class="v4">
 
@@ -205,29 +138,32 @@ placeholder="Search language">
 
 
 
+<button onclick="toggleTool('unit')">
+
+📏 Unit Converter +
+
+</button>
 
 
-<div class="tool">
+<div id="unit" class="toolBox">
 
 
-<h3>📏 Unit Converter</h3>
-
-
-<input id="unitValue"
-placeholder="Value">
+<input id="unitValue" placeholder="Value">
 
 
 <select id="unitFrom">
 
-<option value="km">Kilometers</option>
+<option value="km">
+Kilometers
+</option>
 
-<option value="m">Meters</option>
+<option value="m">
+Meters
+</option>
 
-<option value="cm">Centimeters</option>
-
-<option value="kg">Kilograms</option>
-
-<option value="g">Grams</option>
+<option value="cm">
+Centimeters
+</option>
 
 </select>
 
@@ -235,18 +171,20 @@ placeholder="Value">
 
 <select id="unitTo">
 
-<option value="m">Meters</option>
+<option value="m">
+Meters
+</option>
 
-<option value="km">Kilometers</option>
+<option value="km">
+Kilometers
+</option>
 
-<option value="cm">Centimeters</option>
+<option value="cm">
+Centimeters
+</option>
 
-<option value="g">Grams</option>
-
-<option value="kg">Kilograms</option>
 
 </select>
-
 
 
 <button onclick="convertUnit()">
@@ -263,20 +201,24 @@ Convert
 
 
 
+<button onclick="toggleTool('equation')">
+
+🧮 Equation Solver +
+
+</button>
 
 
-<div class="tool">
-
-
-<h3>🧮 Equation Solver</h3>
+<div id="equation" class="toolBox">
 
 
 <input id="equationInput"
-placeholder="Example: x+5=10">
+placeholder="x+5=10">
 
 
 <button onclick="solveEquation()">
+
 Solve
+
 </button>
 
 
@@ -291,11 +233,14 @@ Solve
 
 
 
+<button onclick="toggleTool('matrix')">
 
-<div class="tool">
+🔢 Matrix Calculator +
+
+</button>
 
 
-<h3>🔢 Matrix Calculator</h3>
+<div id="matrix" class="toolBox">
 
 
 <input id="matrixA"
@@ -307,7 +252,9 @@ placeholder="5,6,7,8">
 
 
 <button onclick="addMatrix()">
+
 Add
+
 </button>
 
 
@@ -323,19 +270,20 @@ Add
 
 
 
+<button onclick="toggleTool('graph')">
 
-<div class="tool">
+📈 Graph Calculator +
+
+</button>
 
 
-<h3>📈 Graph Calculator</h3>
-
-
-<input id="graphInput"
-placeholder="Example: x*x">
+<div id="graph" class="toolBox">
 
 
 <button onclick="drawGraph()">
-Graph
+
+Draw Graph
+
 </button>
 
 
@@ -358,7 +306,6 @@ height="250">
 
 
 
-
 <!-- PREMIUM -->
 
 <section class="premium">
@@ -367,19 +314,90 @@ height="250">
 <h2>💎 SITB Premium</h2>
 
 
-<p>
-AI Tutor • Camera Math • Voice Calculator
-</p>
+
+<button onclick="togglePremium('ai')">
+
+🤖 AI Tutor +
+
+</button>
+
+
+<div id="ai" class="premium-content">
+
+AI-powered explanations and learning help.
+
+</div>
+
+
+
+
+<button onclick="togglePremium('camera')">
+
+📷 Camera Math +
+
+</button>
+
+
+<div id="camera" class="premium-content">
+
+Scan math problems.
+
+</div>
+
+
+
+
+
+<button onclick="togglePremium('voice')">
+
+🎤 Voice Calculator +
+
+</button>
+
+
+<div id="voice" class="premium-content">
+
+Speak calculations.
+
+</div>
+
+
+
+
+
+<button onclick="togglePremium('cloud')">
+
+☁️ Cloud Sync +
+
+</button>
+
+
+<div id="cloud" class="premium-content">
+
+Save your settings anywhere.
+
+</div>
+
+
+
+
+
+<h3>💰 Plans</h3>
 
 
 <button>
-$10 Monthly
+
+$10 / Month
+
 </button>
 
 
 <button>
-$120 Yearly
+
+$120 / Year
+
 </button>
+
 
 
 </section>
@@ -389,7 +407,11 @@ $120 Yearly
 
 
 
-</div>
+<button onclick="shareApp()">
+
+📤 Share SITB
+
+</button>
 
 
 
