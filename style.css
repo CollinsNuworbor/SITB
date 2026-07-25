@@ -353,3 +353,29 @@ font-size:28px;
 
 
 }
+.v4 button{
+width:100%;
+margin-top:10px;
+}
+
+
+.toolBox{
+
+display:none;
+
+background:#eee;
+
+padding:15px;
+
+border-radius:15px;
+
+margin-top:5px;
+
+}
+
+
+.dark .toolBox{
+
+background:#333;
+
+}
