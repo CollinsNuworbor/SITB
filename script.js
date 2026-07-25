@@ -430,3 +430,18 @@ text:"Try SITB Calculator"
 
 
 console.log("SITB v4 Fixed Loaded");
+function toggleTool(id){
+
+let box=document.getElementById(id);
+
+if(box.style.display==="block"){
+
+box.style.display="none";
+
+}else{
+
+box.style.display="block";
+
+}
+
+}
