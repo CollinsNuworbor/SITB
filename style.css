@@ -1,70 +1,134 @@
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 
 body{
 
-margin:0;
-
-font-family:Arial,sans-serif;
-
-background:#f2f2f2;
-
-color:#222;
-
-transition:.3s;
-
-}
-
-
-
-body.dark{
-
-background:#111;
-
-color:white;
-
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f7f8fc;
+    color:#111;
 }
 
 
 
 .app{
 
-max-width:600px;
-
-margin:auto;
-
-padding:15px;
+    display:flex;
+    height:100vh;
 
 }
 
 
+
+/* ================= SIDEBAR ================= */
+
+
+.sidebar{
+
+    width:300px;
+    background:white;
+    border-right:1px solid #ddd;
+    padding:20px;
+    overflow-y:auto;
+
+}
+
+
+.sidebar h1{
+
+    margin:0;
+    font-size:30px;
+
+}
+
+
+.sidebar p{
+
+    color:#666;
+    margin-top:0;
+
+}
+
+
+.sidebar h3{
+
+    font-size:14px;
+    color:#777;
+    margin-top:25px;
+
+}
+
+
+
+.sidebar button{
+
+    width:100%;
+    border:none;
+    background:none;
+    padding:14px;
+    text-align:left;
+    font-size:17px;
+    border-radius:12px;
+    cursor:pointer;
+    margin:3px 0;
+
+}
+
+
+
+.sidebar button:hover{
+
+    background:#e9f0ff;
+    color:#0057ff;
+
+}
+
+
+
+hr{
+
+    border:none;
+    border-top:1px solid #ddd;
+    margin:20px 0;
+
+}
+
+
+
+
+
+/* ================= MAIN ================= */
+
+
+main{
+
+    flex:1;
+    padding:25px;
+    overflow:auto;
+
+}
 
 
 
 header{
 
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:white;
-
-padding:15px;
-
-border-radius:20px;
-
-margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
 }
 
 
-.dark header{
 
-background:#222;
+header button{
+
+    border:none;
+    background:#eee;
+    padding:12px;
+    border-radius:50%;
+    cursor:pointer;
 
 }
 
@@ -72,38 +136,23 @@ background:#222;
 
 
 
-button{
-
-padding:12px;
-
-border:none;
-
-border-radius:12px;
-
-font-size:16px;
-
-cursor:pointer;
-
-background:#fff;
-
-transition:.2s;
-
-}
+/* ================= CHAMBERS ================= */
 
 
-button:hover{
+.chamber{
 
-transform:scale(1.05);
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
 
 }
 
 
 
-.dark button{
+.hidden{
 
-background:#333;
-
-color:white;
+    display:none;
 
 }
 
@@ -111,45 +160,20 @@ color:white;
 
 
 
-.display{
-
-background:white;
-
-padding:15px;
-
-border-radius:20px;
-
-margin-bottom:15px;
-
-}
-
-
-
-.dark .display{
-
-background:#222;
-
-}
-
-
-
+/* ================= DISPLAY ================= */
 
 
 #display{
 
-width:100%;
-
-height:60px;
-
-font-size:35px;
-
-text-align:right;
-
-border:none;
-
-outline:none;
-
-background:transparent;
+    width:100%;
+    height:130px;
+    border:none;
+    background:#f1f3fa;
+    border-radius:20px;
+    font-size:65px;
+    text-align:right;
+    padding:20px;
+    margin-bottom:20px;
 
 }
 
@@ -157,80 +181,68 @@ background:transparent;
 
 
 
-.calculator{
-
-background:white;
-
-padding:15px;
-
-border-radius:20px;
-
-}
+/* ================= KEYS ================= */
 
 
+.keys{
 
-.dark .calculator{
-
-background:#222;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
 
 }
 
 
 
+.keys button{
 
-
-.scientific,
-.buttons{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:10px;
-
-margin-bottom:15px;
+    height:75px;
+    border-radius:15px;
+    border:1px solid #ddd;
+    background:white;
+    font-size:25px;
+    cursor:pointer;
 
 }
 
 
 
+.keys button:hover{
 
-
-.buttons button:last-child{
-
-background:#ff9500;
-
-color:white;
+    background:#eaf1ff;
 
 }
 
 
 
 
+/* ================= OTHER BUTTONS ================= */
 
-.history,
-.languages,
-.v4,
-.premium{
 
-background:white;
+button{
 
-padding:15px;
+    transition:.2s;
 
-border-radius:20px;
+}
 
-margin-top:20px;
+
+.chamber button{
+
+    padding:12px 20px;
+    border-radius:12px;
+    border:none;
+    background:#eaf1ff;
+    cursor:pointer;
+    margin:5px;
 
 }
 
 
 
-.dark .history,
-.dark .languages,
-.dark .v4,
-.dark .premium{
+.chamber button:hover{
 
-background:#222;
+    background:#0066ff;
+    color:white;
 
 }
 
@@ -238,21 +250,17 @@ background:#222;
 
 
 
-#languageSearch,
-.tool input,
+/* ================= INPUTS ================= */
+
+
+input,
 select{
 
-width:100%;
-
-padding:12px;
-
-margin:5px 0;
-
-border-radius:10px;
-
-border:1px solid #aaa;
-
-font-size:16px;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    margin:5px;
+    font-size:16px;
 
 }
 
@@ -260,71 +268,114 @@ font-size:16px;
 
 
 
-.tool{
-
-padding:15px;
-
-margin-top:15px;
-
-border-radius:15px;
-
-background:#eee;
-
-}
+/* ================= PREMIUM ================= */
 
 
+#premium button{
 
-.dark .tool{
-
-background:#333;
+    width:100%;
+    background:#ffd700;
+    color:black;
+    font-weight:bold;
 
 }
 
 
 
+#premium div{
 
-
-.tool button{
-
-width:100%;
-
-margin-top:10px;
-
-background:#007bff;
-
-color:white;
-
+    padding:15px;
+    background:#fff6c7;
+    border-radius:10px;
+    margin:5px;
 }
 
 
 
 
+/* ================= SHARE ================= */
 
-canvas{
 
-width:100%;
+.share{
 
-margin-top:15px;
+    position:fixed;
+    bottom:20px;
+    right:20px;
 
-background:white;
+    background:#0066ff;
+    color:white;
 
-border-radius:10px;
+    border:none;
+    padding:15px 25px;
+
+    border-radius:30px;
+
+    font-size:16px;
 
 }
 
 
 
 
+/* ================= DARK MODE ================= */
 
-.premium button{
 
-width:100%;
+.dark{
 
-margin-top:10px;
+    background:#111;
+    color:white;
 
-background:gold;
+}
 
-color:black;
+
+
+.dark .sidebar{
+
+    background:#1d1d1d;
+    color:white;
+
+}
+
+
+
+.dark .chamber{
+
+    background:#222;
+
+}
+
+
+
+.dark #display{
+
+    background:#333;
+    color:white;
+
+}
+
+
+
+.dark .keys button{
+
+    background:#333;
+    color:white;
+    border-color:#555;
+
+}
+
+
+
+.dark .sidebar button{
+
+    color:white;
+
+}
+
+
+
+.dark .sidebar button:hover{
+
+    background:#333;
 
 }
 
@@ -332,14 +383,39 @@ color:black;
 
 
 
-@media(max-width:500px){
+/* ================= MOBILE ================= */
 
 
-button{
+@media(max-width:800px){
 
-font-size:14px;
 
-padding:10px;
+.sidebar{
+
+    width:90px;
+
+}
+
+
+.sidebar h1,
+.sidebar p,
+.sidebar h3{
+
+    display:none;
+
+}
+
+
+.sidebar button{
+
+    font-size:0;
+    text-align:center;
+
+}
+
+
+main{
+
+    padding:10px;
 
 }
 
@@ -347,35 +423,9 @@ padding:10px;
 
 #display{
 
-font-size:28px;
+    font-size:40px;
 
 }
 
-
-}
-.v4 button{
-width:100%;
-margin-top:10px;
-}
-
-
-.toolBox{
-
-display:none;
-
-background:#eee;
-
-padding:15px;
-
-border-radius:15px;
-
-margin-top:5px;
-
-}
-
-
-.dark .toolBox{
-
-background:#333;
 
 }
