@@ -11,25 +11,16 @@ JSON.parse(localStorage.getItem("SITB_HISTORY")) || [];
 
 // ================= CHAMBERS =================
 
-
 function openChamber(id){
 
     document.querySelectorAll(".chamber")
     .forEach(section=>{
-
         section.classList.add("hidden");
-
     });
 
 
-    let page=document.getElementById(id);
-
-
-    if(page){
-
-        page.classList.remove("hidden");
-
-    }
+    document.getElementById(id)
+    .classList.remove("hidden");
 
 
     document.getElementById("title").innerHTML =
@@ -41,13 +32,13 @@ function openChamber(id){
 
 
 
-// ================= CALCULATOR =================
+// ================= STANDARD CALCULATOR =================
 
 
 function insert(value){
 
     if(display.value==="0")
-        display.value="";
+    display.value="";
 
     display.value += value;
 
@@ -79,9 +70,11 @@ function calculate(){
         let answer =
         eval(display.value);
 
+
         addHistory(
         display.value+" = "+answer
         );
+
 
         display.value=answer;
 
@@ -94,8 +87,6 @@ function calculate(){
     }
 
 }
-
-
 
 
 
@@ -147,7 +138,6 @@ function showHistory(){
 
     });
 
-
 }
 
 
@@ -158,30 +148,25 @@ showHistory();
 
 
 
-// ================= SCIENTIFIC =================
+
+// ================= SCIENTIFIC CALCULATOR =================
 
 
-function scientific(type){
+let scientificDisplay =
+document.getElementById("scientificDisplay");
 
 
-let num=Number(display.value);
+
+function sInsert(value){
+
+    if(scientificDisplay.value==="0"){
+
+        scientificDisplay.value="";
+
+    }
 
 
-if(type==="sin")
-display.value=Math.sin(num);
-
-
-if(type==="cos")
-display.value=Math.cos(num);
-
-
-if(type==="tan")
-display.value=Math.tan(num);
-
-
-if(type==="sqrt")
-display.value=Math.sqrt(num);
-
+    scientificDisplay.value += value;
 
 }
 
@@ -189,10 +174,124 @@ display.value=Math.sqrt(num);
 
 
 
-function factorial(){
+function sClear(){
+
+    scientificDisplay.value="0";
+
+}
 
 
-let num=Number(display.value);
+
+
+function sDelete(){
+
+    scientificDisplay.value =
+    scientificDisplay.value.slice(0,-1);
+
+}
+
+
+
+
+
+function sCalculate(){
+
+    try{
+
+
+        scientificDisplay.value =
+        eval(scientificDisplay.value);
+
+
+    }
+
+    catch{
+
+
+        scientificDisplay.value="Error";
+
+    }
+
+}
+
+
+
+
+
+
+function sFunction(type){
+
+
+let num =
+Number(scientificDisplay.value);
+
+
+
+if(type==="sin"){
+
+scientificDisplay.value=Math.sin(num);
+
+}
+
+
+if(type==="cos"){
+
+scientificDisplay.value=Math.cos(num);
+
+}
+
+
+
+if(type==="tan"){
+
+scientificDisplay.value=Math.tan(num);
+
+}
+
+
+
+if(type==="sqrt"){
+
+scientificDisplay.value=Math.sqrt(num);
+
+}
+
+
+
+if(type==="log"){
+
+scientificDisplay.value=Math.log10(num);
+
+}
+
+
+
+if(type==="ln"){
+
+scientificDisplay.value=Math.log(num);
+
+}
+
+
+
+if(type==="square"){
+
+scientificDisplay.value=Math.pow(num,2);
+
+}
+
+
+
+if(type==="cube"){
+
+scientificDisplay.value=Math.pow(num,3);
+
+}
+
+
+
+if(type==="factorial"){
+
 
 let result=1;
 
@@ -204,10 +303,14 @@ result*=i;
 }
 
 
-display.value=result;
+scientificDisplay.value=result;
 
 
 }
+
+
+}
+
 
 
 
@@ -220,23 +323,62 @@ display.value=result;
 
 function showExplanation(){
 
-
-let problem=display.value;
-
-
 alert(
-
 "SITB Explanation\n\n"+
-
-"Problem: "+problem+
-
-"\n\nStep 1: Identify numbers and operations."+
-
-"\nStep 2: Follow mathematical order."+
-
-"\nStep 3: Calculate the answer."
-
+"Step 1: Identify numbers and operations.\n\n"+
+"Step 2: Follow mathematical rules.\n\n"+
+"Step 3: Calculate the answer."
 );
+
+}
+
+
+
+
+
+
+
+// ================= GRAPH =================
+
+
+function drawGraph(){
+
+
+let canvas =
+document.getElementById("graphCanvas");
+
+
+if(!canvas)return;
+
+
+let ctx =
+canvas.getContext("2d");
+
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+
+ctx.beginPath();
+
+
+
+for(let x=0;x<canvas.width;x++){
+
+let y=
+125-Math.sin(x/20)*50;
+
+ctx.lineTo(x,y);
+
+}
+
+
+ctx.stroke();
 
 
 }
@@ -247,12 +389,61 @@ alert(
 
 
 
-// ================= DARK MODE =================
+
+// ================= PROGRAMMER =================
 
 
-function toggleDark(){
+function convertBinary(){
 
-document.body.classList.toggle("dark");
+
+let num =
+Number(
+document.getElementById("programmerInput").value
+);
+
+
+document.getElementById("binaryResult").innerHTML =
+num.toString(2);
+
+
+}
+
+
+
+
+
+
+
+
+// ================= DATE =================
+
+
+function calculateDate(){
+
+
+let first =
+new Date(
+document.getElementById("dateOne").value
+);
+
+
+let second =
+new Date(
+document.getElementById("dateTwo").value
+);
+
+
+
+let result =
+Math.abs(second-first)
+/
+86400000;
+
+
+
+document.getElementById("dateResult").innerHTML =
+result+" days";
+
 
 }
 
@@ -268,7 +459,8 @@ document.body.classList.toggle("dark");
 function togglePremium(id){
 
 
-let box=document.getElementById(id);
+let box =
+document.getElementById(id);
 
 
 if(box.style.display==="block"){
@@ -292,212 +484,12 @@ box.style.display="block";
 
 
 
+// ================= DARK MODE =================
 
-// ================= GRAPH =================
 
+function toggleDark(){
 
-function drawGraph(){
-
-
-let canvas=document.getElementById("graphCanvas");
-
-
-if(!canvas)return;
-
-
-let ctx=canvas.getContext("2d");
-
-
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-
-
-ctx.beginPath();
-
-
-
-for(let x=0;x<canvas.width;x++){
-
-
-let y=
-125-Math.sin(x/20)*50;
-
-
-ctx.lineTo(x,y);
-
-
-}
-
-
-
-ctx.stroke();
-
-
-
-}
-
-
-
-
-
-
-
-// ================= PROGRAMMER =================
-
-
-function convertBinary(){
-
-
-let num=
-Number(
-document.getElementById("programmerInput").value
-);
-
-
-document.getElementById("binaryResult")
-.innerHTML =
-num.toString(2);
-
-
-}
-
-
-
-
-
-
-
-
-// ================= DATE =================
-
-
-function calculateDate(){
-
-
-let a=
-new Date(
-document.getElementById("dateOne").value
-);
-
-
-let b=
-new Date(
-document.getElementById("dateTwo").value
-);
-
-
-
-let days=
-Math.abs(
-b-a
-)
-/
-86400000;
-
-
-
-document.getElementById("dateResult")
-.innerHTML =
-days+" days";
-
-
-}
-
-
-
-
-
-
-
-// ================= CONVERTERS =================
-
-
-function convertLength(){
-
-let value=
-Number(
-document.getElementById("lengthValue").value
-);
-
-
-alert(value+" meters");
-
-}
-
-
-
-function convertWeight(){
-
-let value=
-Number(
-document.getElementById("weightValue").value
-);
-
-
-alert(value+" kg");
-
-}
-
-
-
-function convertTemperature(){
-
-let value=
-Number(
-document.getElementById("temperatureValue").value
-);
-
-
-alert(
-(value*9/5+32)+" °F"
-);
-
-}
-
-
-
-function convertVolume(){
-
-let value=
-Number(
-document.getElementById("volumeValue").value
-);
-
-
-alert(value+" liters");
-
-}
-
-
-
-function convertEnergy(){
-
-let value=
-Number(
-document.getElementById("energyValue").value
-);
-
-
-alert(value+" joules");
-
-}
-
-
-
-function convertCurrency(){
-
-let value=
-Number(
-document.getElementById("currencyValue").value
-);
-
-
-alert("$"+value);
+document.body.classList.toggle("dark");
 
 }
 
@@ -529,11 +521,7 @@ text:"Try SITB Calculator"
 
 else{
 
-
-alert(
-"Share not supported"
-);
-
+alert("Sharing not supported");
 
 }
 
@@ -542,6 +530,4 @@ alert(
 
 
 
-
-
-console.log("SITB v4.5 Loaded 🚀");
+console.log("SITB Scientific Calculator Loaded 🚀");
