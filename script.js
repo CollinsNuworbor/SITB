@@ -1,4 +1,7 @@
-// ================= DISPLAY =================
+// ================= SITB SMART CALCULATOR JS =================
+
+
+// ================= VARIABLES =================
 
 let display = document.getElementById("display");
 
@@ -7,26 +10,55 @@ let historyList = document.getElementById("historyList");
 let calcHistory =
 JSON.parse(localStorage.getItem("SITB_HISTORY")) || [];
 
+let scientificDisplay = null;
 
 
-// ================= CHAMBERS =================
+
+
+
+// ================= CHAMBER SYSTEM =================
+
 
 function openChamber(id){
 
     document.querySelectorAll(".chamber")
     .forEach(section=>{
+
         section.classList.add("hidden");
+
     });
 
 
-    document.getElementById(id)
-    .classList.remove("hidden");
+    let page=document.getElementById(id);
 
 
-    document.getElementById("title").innerHTML =
-    id.charAt(0).toUpperCase()+id.slice(1);
+    if(page){
+
+        page.classList.remove("hidden");
+
+    }
+
+
+    let title=document.getElementById("title");
+
+
+    if(title){
+
+        title.innerHTML =
+        id.charAt(0).toUpperCase()+id.slice(1);
+
+    }
+
+
+    if(id==="scientific"){
+
+        scientificDisplay =
+        document.getElementById("scientificDisplay");
+
+    }
 
 }
+
 
 
 
@@ -35,14 +67,21 @@ function openChamber(id){
 // ================= STANDARD CALCULATOR =================
 
 
+
 function insert(value){
 
-    if(display.value==="0")
-    display.value="";
+    if(display.value==="0"){
+
+        display.value="";
+
+    }
+
 
     display.value += value;
 
 }
+
+
 
 
 
@@ -51,6 +90,8 @@ function clearDisplay(){
     display.value="0";
 
 }
+
+
 
 
 
@@ -63,26 +104,37 @@ function deleteLast(){
 
 
 
+
+
 function calculate(){
 
     try{
 
+
+        let expression =
+        display.value;
+
+
         let answer =
-        eval(display.value);
+        eval(expression);
+
 
 
         addHistory(
-        display.value+" = "+answer
+        expression+" = "+answer
         );
 
 
         display.value=answer;
 
+
     }
 
     catch{
 
+
         display.value="Error";
+
 
     }
 
@@ -91,12 +143,18 @@ function calculate(){
 
 
 
+
+
+
 // ================= HISTORY =================
+
 
 
 function addHistory(text){
 
+
     calcHistory.unshift(text);
+
 
 
     if(calcHistory.length>20){
@@ -104,6 +162,7 @@ function addHistory(text){
         calcHistory.pop();
 
     }
+
 
 
     localStorage.setItem(
@@ -114,11 +173,16 @@ function addHistory(text){
 
     showHistory();
 
+
 }
 
 
 
+
+
+
 function showHistory(){
+
 
     if(!historyList)return;
 
@@ -126,19 +190,24 @@ function showHistory(){
     historyList.innerHTML="";
 
 
+
     calcHistory.forEach(item=>{
 
 
         let li=document.createElement("li");
 
+
         li.textContent=item;
+
 
         historyList.appendChild(li);
 
 
     });
 
+
 }
+
 
 
 showHistory();
@@ -152,23 +221,53 @@ showHistory();
 // ================= SCIENTIFIC CALCULATOR =================
 
 
-let scientificDisplay =
-document.getElementById("scientificDisplay");
+
+function getScientificDisplay(){
+
+
+    if(!scientificDisplay){
+
+        scientificDisplay =
+        document.getElementById("scientificDisplay");
+
+    }
+
+
+    return scientificDisplay;
+
+}
+
+
+
+
 
 
 
 function sInsert(value){
 
-    if(scientificDisplay.value==="0"){
 
-        scientificDisplay.value="";
+    let box=getScientificDisplay();
+
+
+
+    if(!box)return;
+
+
+
+    if(box.value==="0"){
+
+        box.value="";
 
     }
 
 
-    scientificDisplay.value += value;
+
+    box.value += value;
+
 
 }
+
+
 
 
 
@@ -176,19 +275,42 @@ function sInsert(value){
 
 function sClear(){
 
-    scientificDisplay.value="0";
+
+    let box=getScientificDisplay();
+
+
+    if(box){
+
+        box.value="0";
+
+    }
+
 
 }
+
+
+
 
 
 
 
 function sDelete(){
 
-    scientificDisplay.value =
-    scientificDisplay.value.slice(0,-1);
+
+    let box=getScientificDisplay();
+
+
+    if(box){
+
+        box.value =
+        box.value.slice(0,-1);
+
+    }
+
 
 }
+
+
 
 
 
@@ -196,23 +318,32 @@ function sDelete(){
 
 function sCalculate(){
 
+
+    let box=getScientificDisplay();
+
+
     try{
 
 
-        scientificDisplay.value =
-        eval(scientificDisplay.value);
+        box.value =
+        eval(box.value);
+
 
 
     }
+
 
     catch{
 
 
-        scientificDisplay.value="Error";
+        box.value="Error";
+
 
     }
 
+
 }
+
 
 
 
@@ -222,91 +353,73 @@ function sCalculate(){
 function sFunction(type){
 
 
-let num =
-Number(scientificDisplay.value);
+    let box=getScientificDisplay();
+
+
+    let num =
+    Number(box.value);
 
 
 
-if(type==="sin"){
 
-scientificDisplay.value=Math.sin(num);
-
-}
-
-
-if(type==="cos"){
-
-scientificDisplay.value=Math.cos(num);
-
-}
+    if(type==="sin")
+    box.value=Math.sin(num);
 
 
 
-if(type==="tan"){
-
-scientificDisplay.value=Math.tan(num);
-
-}
+    if(type==="cos")
+    box.value=Math.cos(num);
 
 
 
-if(type==="sqrt"){
-
-scientificDisplay.value=Math.sqrt(num);
-
-}
+    if(type==="tan")
+    box.value=Math.tan(num);
 
 
 
-if(type==="log"){
-
-scientificDisplay.value=Math.log10(num);
-
-}
+    if(type==="sqrt")
+    box.value=Math.sqrt(num);
 
 
 
-if(type==="ln"){
-
-scientificDisplay.value=Math.log(num);
-
-}
+    if(type==="log")
+    box.value=Math.log10(num);
 
 
 
-if(type==="square"){
-
-scientificDisplay.value=Math.pow(num,2);
-
-}
+    if(type==="ln")
+    box.value=Math.log(num);
 
 
 
-if(type==="cube"){
-
-scientificDisplay.value=Math.pow(num,3);
-
-}
+    if(type==="square")
+    box.value=Math.pow(num,2);
 
 
 
-if(type==="factorial"){
+    if(type==="cube")
+    box.value=Math.pow(num,3);
 
 
-let result=1;
 
 
-for(let i=1;i<=num;i++){
-
-result*=i;
-
-}
+    if(type==="factorial"){
 
 
-scientificDisplay.value=result;
+        let answer=1;
 
 
-}
+        for(let i=1;i<=num;i++){
+
+            answer*=i;
+
+        }
+
+
+        box.value=answer;
+
+
+    }
 
 
 }
@@ -321,14 +434,19 @@ scientificDisplay.value=result;
 // ================= EXPLAIN =================
 
 
+
 function showExplanation(){
 
-alert(
-"SITB Explanation\n\n"+
-"Step 1: Identify numbers and operations.\n\n"+
-"Step 2: Follow mathematical rules.\n\n"+
-"Step 3: Calculate the answer."
-);
+
+    alert(
+
+    "SITB Explanation\n\n"+
+    "Step 1: Identify numbers.\n"+
+    "Step 2: Follow operation rules.\n"+
+    "Step 3: Solve the answer."
+
+    );
+
 
 }
 
@@ -341,6 +459,7 @@ alert(
 // ================= GRAPH =================
 
 
+
 function drawGraph(){
 
 
@@ -351,8 +470,10 @@ document.getElementById("graphCanvas");
 if(!canvas)return;
 
 
+
 let ctx =
 canvas.getContext("2d");
+
 
 
 ctx.clearRect(
@@ -370,19 +491,23 @@ ctx.beginPath();
 
 for(let x=0;x<canvas.width;x++){
 
+
 let y=
 125-Math.sin(x/20)*50;
 
+
 ctx.lineTo(x,y);
 
+
 }
+
 
 
 ctx.stroke();
 
 
-}
 
+}
 
 
 
@@ -393,17 +518,27 @@ ctx.stroke();
 // ================= PROGRAMMER =================
 
 
+
 function convertBinary(){
 
 
-let num =
-Number(
-document.getElementById("programmerInput").value
-);
+let input =
+document.getElementById("programmerInput");
 
 
-document.getElementById("binaryResult").innerHTML =
-num.toString(2);
+let result =
+document.getElementById("binaryResult");
+
+
+
+if(input && result){
+
+
+result.innerHTML =
+Number(input.value).toString(2);
+
+
+}
 
 
 }
@@ -414,35 +549,37 @@ num.toString(2);
 
 
 
-
 // ================= DATE =================
+
 
 
 function calculateDate(){
 
 
-let first =
+let one =
 new Date(
 document.getElementById("dateOne").value
 );
 
 
-let second =
+
+let two =
 new Date(
 document.getElementById("dateTwo").value
 );
 
 
 
-let result =
-Math.abs(second-first)
+let days =
+Math.abs(two-one)
 /
 86400000;
 
 
 
-document.getElementById("dateResult").innerHTML =
-result+" days";
+document.getElementById("dateResult")
+.innerHTML =
+days+" days";
 
 
 }
@@ -456,11 +593,13 @@ result+" days";
 // ================= PREMIUM =================
 
 
+
 function togglePremium(id){
 
 
 let box =
 document.getElementById(id);
+
 
 
 if(box.style.display==="block"){
@@ -484,12 +623,67 @@ box.style.display="block";
 
 
 
+
 // ================= DARK MODE =================
+
 
 
 function toggleDark(){
 
+
 document.body.classList.toggle("dark");
+
+
+}
+
+
+
+
+
+
+
+// ================= CONVERTERS =================
+
+
+
+function convertLength(){
+
+alert("Length converter coming soon");
+
+}
+
+
+function convertWeight(){
+
+alert("Weight converter coming soon");
+
+}
+
+
+function convertVolume(){
+
+alert("Volume converter coming soon");
+
+}
+
+
+function convertTemperature(){
+
+alert("Temperature converter coming soon");
+
+}
+
+
+function convertEnergy(){
+
+alert("Energy converter coming soon");
+
+}
+
+
+function convertCurrency(){
+
+alert("Currency converter coming soon");
 
 }
 
@@ -500,6 +694,7 @@ document.body.classList.toggle("dark");
 
 
 // ================= SHARE =================
+
 
 
 function shareApp(){
@@ -521,7 +716,8 @@ text:"Try SITB Calculator"
 
 else{
 
-alert("Sharing not supported");
+
+alert("Share is not supported");
 
 }
 
@@ -530,4 +726,5 @@ alert("Sharing not supported");
 
 
 
-console.log("SITB Scientific Calculator Loaded 🚀");
+
+console.log("SITB Full JS Loaded 🚀");
