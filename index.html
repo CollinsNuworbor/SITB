@@ -293,41 +293,101 @@ C
 
 <!-- ================= SCIENTIFIC ================= -->
 
-
 <section id="scientific" class="chamber hidden">
 
+<h2>⚗ Scientific Calculator</h2>
 
-<h2>Scientific Calculator</h2>
+
+<input id="scientificDisplay" value="0" readonly>
 
 
-<button onclick="scientific('sin')">
+
+<div class="keys">
+
+
+<button onclick="sClear()">C</button>
+<button onclick="sDelete()">⌫</button>
+<button onclick="sInsert('%')">%</button>
+<button onclick="sInsert('/')">÷</button>
+
+
+<button onclick="sInsert('7')">7</button>
+<button onclick="sInsert('8')">8</button>
+<button onclick="sInsert('9')">9</button>
+<button onclick="sInsert('*')">×</button>
+
+
+<button onclick="sInsert('4')">4</button>
+<button onclick="sInsert('5')">5</button>
+<button onclick="sInsert('6')">6</button>
+<button onclick="sInsert('-')">−</button>
+
+
+<button onclick="sInsert('1')">1</button>
+<button onclick="sInsert('2')">2</button>
+<button onclick="sInsert('3')">3</button>
+<button onclick="sInsert('+')">+</button>
+
+
+<button onclick="sInsert('0')">0</button>
+<button onclick="sInsert('.')">.</button>
+<button onclick="sCalculate()">=</button>
+<button onclick="sInsert('Math.PI')">π</button>
+
+
+
+<!-- Scientific buttons -->
+
+
+<button onclick="sFunction('sin')">
 sin
 </button>
 
 
-<button onclick="scientific('cos')">
+<button onclick="sFunction('cos')">
 cos
 </button>
 
 
-<button onclick="scientific('tan')">
+<button onclick="sFunction('tan')">
 tan
 </button>
 
 
-<button onclick="scientific('sqrt')">
+<button onclick="sFunction('sqrt')">
 √
 </button>
 
 
-<button onclick="factorial()">
+<button onclick="sFunction('log')">
+log
+</button>
+
+
+<button onclick="sFunction('ln')">
+ln
+</button>
+
+
+<button onclick="sFunction('square')">
+x²
+</button>
+
+
+<button onclick="sFunction('cube')">
+x³
+</button>
+
+
+<button onclick="sFunction('factorial')">
 x!
 </button>
 
 
+</div>
+
 
 </section>
-
 
 
 
