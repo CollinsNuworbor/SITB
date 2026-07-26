@@ -14,51 +14,37 @@ let scientificDisplay = null;
 
 
 
-
-
-// ================= CHAMBER SYSTEM =================
-
+// ================= CHAMBERS =================
 
 function openChamber(id){
 
     document.querySelectorAll(".chamber")
     .forEach(section=>{
-
         section.classList.add("hidden");
-
     });
 
 
     let page=document.getElementById(id);
 
-
     if(page){
-
         page.classList.remove("hidden");
-
     }
 
 
     let title=document.getElementById("title");
 
-
     if(title){
-
         title.innerHTML =
         id.charAt(0).toUpperCase()+id.slice(1);
-
     }
 
 
     if(id==="scientific"){
-
         scientificDisplay =
         document.getElementById("scientificDisplay");
-
     }
 
 }
-
 
 
 
@@ -67,21 +53,15 @@ function openChamber(id){
 // ================= STANDARD CALCULATOR =================
 
 
-
 function insert(value){
 
     if(display.value==="0"){
-
         display.value="";
-
     }
-
 
     display.value += value;
 
 }
-
-
 
 
 
@@ -90,8 +70,6 @@ function clearDisplay(){
     display.value="0";
 
 }
-
-
 
 
 
@@ -104,20 +82,13 @@ function deleteLast(){
 
 
 
-
-
 function calculate(){
 
     try{
 
+        let expression=display.value;
 
-        let expression =
-        display.value;
-
-
-        let answer =
-        eval(expression);
-
+        let answer=eval(expression);
 
 
         addHistory(
@@ -127,14 +98,11 @@ function calculate(){
 
         display.value=answer;
 
-
     }
 
     catch{
 
-
         display.value="Error";
-
 
     }
 
@@ -145,24 +113,17 @@ function calculate(){
 
 
 
-
 // ================= HISTORY =================
-
 
 
 function addHistory(text){
 
-
     calcHistory.unshift(text);
 
 
-
     if(calcHistory.length>20){
-
         calcHistory.pop();
-
     }
-
 
 
     localStorage.setItem(
@@ -173,16 +134,11 @@ function addHistory(text){
 
     showHistory();
 
-
 }
 
 
 
-
-
-
 function showHistory(){
-
 
     if(!historyList)return;
 
@@ -190,24 +146,17 @@ function showHistory(){
     historyList.innerHTML="";
 
 
-
     calcHistory.forEach(item=>{
-
 
         let li=document.createElement("li");
 
-
         li.textContent=item;
-
 
         historyList.appendChild(li);
 
-
     });
 
-
 }
-
 
 
 showHistory();
@@ -218,12 +167,11 @@ showHistory();
 
 
 
-// ================= SCIENTIFIC CALCULATOR =================
 
+// ================= SCIENTIFIC =================
 
 
 function getScientificDisplay(){
-
 
     if(!scientificDisplay){
 
@@ -232,7 +180,6 @@ function getScientificDisplay(){
 
     }
 
-
     return scientificDisplay;
 
 }
@@ -240,65 +187,41 @@ function getScientificDisplay(){
 
 
 
-
-
-
 function sInsert(value){
 
-
     let box=getScientificDisplay();
-
-
 
     if(!box)return;
 
 
-
     if(box.value==="0"){
-
         box.value="";
-
     }
-
 
 
     box.value += value;
 
-
 }
-
-
-
 
 
 
 
 function sClear(){
 
-
     let box=getScientificDisplay();
 
-
     if(box){
-
         box.value="0";
-
     }
-
 
 }
 
 
 
 
-
-
-
 function sDelete(){
 
-
     let box=getScientificDisplay();
-
 
     if(box){
 
@@ -307,10 +230,7 @@ function sDelete(){
 
     }
 
-
 }
-
-
 
 
 
@@ -318,29 +238,20 @@ function sDelete(){
 
 function sCalculate(){
 
-
     let box=getScientificDisplay();
 
 
     try{
 
-
-        box.value =
-        eval(box.value);
-
-
+        box.value=eval(box.value);
 
     }
-
 
     catch{
 
-
         box.value="Error";
 
-
     }
-
 
 }
 
@@ -348,79 +259,58 @@ function sCalculate(){
 
 
 
-
-
 function sFunction(type){
-
 
     let box=getScientificDisplay();
 
-
-    let num =
-    Number(box.value);
-
+    let num=Number(box.value);
 
 
 
     if(type==="sin")
-    box.value=Math.sin(num);
-
+        box.value=Math.sin(num);
 
 
     if(type==="cos")
-    box.value=Math.cos(num);
-
+        box.value=Math.cos(num);
 
 
     if(type==="tan")
-    box.value=Math.tan(num);
-
+        box.value=Math.tan(num);
 
 
     if(type==="sqrt")
-    box.value=Math.sqrt(num);
-
+        box.value=Math.sqrt(num);
 
 
     if(type==="log")
-    box.value=Math.log10(num);
-
+        box.value=Math.log10(num);
 
 
     if(type==="ln")
-    box.value=Math.log(num);
-
+        box.value=Math.log(num);
 
 
     if(type==="square")
-    box.value=Math.pow(num,2);
-
+        box.value=Math.pow(num,2);
 
 
     if(type==="cube")
-    box.value=Math.pow(num,3);
-
+        box.value=Math.pow(num,3);
 
 
 
     if(type==="factorial"){
 
-
-        let answer=1;
-
+        let result=1;
 
         for(let i=1;i<=num;i++){
-
-            answer*=i;
-
+            result*=i;
         }
 
-
-        box.value=answer;
-
+        box.value=result;
 
     }
-
 
 }
 
@@ -434,19 +324,14 @@ function sFunction(type){
 // ================= EXPLAIN =================
 
 
-
 function showExplanation(){
 
-
-    alert(
-
-    "SITB Explanation\n\n"+
-    "Step 1: Identify numbers.\n"+
-    "Step 2: Follow operation rules.\n"+
-    "Step 3: Solve the answer."
-
-    );
-
+alert(
+"SITB Explanation\n\n"+
+"Step 1: Identify numbers.\n"+
+"Step 2: Follow operation rules.\n"+
+"Step 3: Solve the answer."
+);
 
 }
 
@@ -456,23 +341,26 @@ function showExplanation(){
 
 
 
-// ================= GRAPH =================
-
+// ================= GRAPH CALCULATOR =================
 
 
 function drawGraph(){
 
+let canvas=document.getElementById("graphCanvas");
 
-let canvas =
-document.getElementById("graphCanvas");
-
-
-if(!canvas)return;
+let input=document.getElementById("graphInput");
 
 
+if(!canvas || !input){
+    return;
+}
 
-let ctx =
-canvas.getContext("2d");
+
+
+let equation=input.value;
+
+
+let ctx=canvas.getContext("2d");
 
 
 
@@ -485,26 +373,66 @@ canvas.height
 
 
 
+// AXES
+
+ctx.beginPath();
+
+ctx.moveTo(200,0);
+ctx.lineTo(200,250);
+
+
+ctx.moveTo(0,125);
+ctx.lineTo(400,125);
+
+
+ctx.stroke();
+
+
+
+
+// GRAPH
+
 ctx.beginPath();
 
 
-
-for(let x=0;x<canvas.width;x++){
-
-
-let y=
-125-Math.sin(x/20)*50;
+for(let x=0;x<400;x++){
 
 
-ctx.lineTo(x,y);
+    let realX=(x-200)/20;
+
+
+    try{
+
+
+        let y =
+        eval(
+        equation.replace(/x/g,"("+realX+")")
+        );
+
+
+        let screenY=
+        125-y*20;
+
+
+        ctx.lineTo(
+        x,
+        screenY
+        );
+
+
+    }
+
+    catch{
+
+        break;
+
+    }
 
 
 }
 
 
-
 ctx.stroke();
-
 
 
 }
@@ -518,28 +446,22 @@ ctx.stroke();
 // ================= PROGRAMMER =================
 
 
-
 function convertBinary(){
 
-
-let input =
+let input=
 document.getElementById("programmerInput");
 
 
-let result =
+let result=
 document.getElementById("binaryResult");
-
 
 
 if(input && result){
 
-
 result.innerHTML =
 Number(input.value).toString(2);
 
-
 }
-
 
 }
 
@@ -552,33 +474,28 @@ Number(input.value).toString(2);
 // ================= DATE =================
 
 
-
 function calculateDate(){
 
-
-let one =
+let one=
 new Date(
 document.getElementById("dateOne").value
 );
 
 
-
-let two =
+let two=
 new Date(
 document.getElementById("dateTwo").value
 );
 
 
 
-let days =
-Math.abs(two-one)
-/
-86400000;
+let days=
+Math.abs(two-one)/86400000;
 
 
 
 document.getElementById("dateResult")
-.innerHTML =
+.innerHTML=
 days+" days";
 
 
@@ -593,13 +510,9 @@ days+" days";
 // ================= PREMIUM =================
 
 
-
 function togglePremium(id){
 
-
-let box =
-document.getElementById(id);
-
+let box=document.getElementById(id);
 
 
 if(box.style.display==="block"){
@@ -614,7 +527,6 @@ box.style.display="block";
 
 }
 
-
 }
 
 
@@ -627,12 +539,9 @@ box.style.display="block";
 // ================= DARK MODE =================
 
 
-
 function toggleDark(){
 
-
 document.body.classList.toggle("dark");
-
 
 }
 
@@ -645,46 +554,33 @@ document.body.classList.toggle("dark");
 // ================= CONVERTERS =================
 
 
-
 function convertLength(){
-
 alert("Length converter coming soon");
-
 }
 
 
 function convertWeight(){
-
 alert("Weight converter coming soon");
-
 }
 
 
 function convertVolume(){
-
 alert("Volume converter coming soon");
-
 }
 
 
 function convertTemperature(){
-
 alert("Temperature converter coming soon");
-
 }
 
 
 function convertEnergy(){
-
 alert("Energy converter coming soon");
-
 }
 
 
 function convertCurrency(){
-
 alert("Currency converter coming soon");
-
 }
 
 
@@ -696,12 +592,9 @@ alert("Currency converter coming soon");
 // ================= SHARE =================
 
 
-
 function shareApp(){
 
-
 if(navigator.share){
-
 
 navigator.share({
 
@@ -711,20 +604,16 @@ text:"Try SITB Calculator"
 
 });
 
-
 }
 
 else{
 
+alert("Share not supported");
 
-alert("Share is not supported");
+}
 
 }
 
 
-}
 
-
-
-
-console.log("SITB Full JS Loaded 🚀");
+console.log("SITB Full Updated JS Loaded 🚀");
