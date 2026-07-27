@@ -1,20 +1,8 @@
 // ================= SITB SMART CALCULATOR JS =================
 
 
-// ================= VARIABLES =================
-
-let display = document.getElementById("display");
-
-let historyList = document.getElementById("historyList");
-
-let calcHistory =
-JSON.parse(localStorage.getItem("SITB_HISTORY")) || [];
-
-let scientificDisplay = null;
-
-
-
 // ================= CHAMBERS =================
+
 
 function openChamber(id){
 
@@ -24,24 +12,22 @@ function openChamber(id){
     });
 
 
-    let page=document.getElementById(id);
+    let chamber=document.getElementById(id);
 
-    if(page){
-        page.classList.remove("hidden");
+    if(chamber){
+
+        chamber.classList.remove("hidden");
+
     }
 
 
     let title=document.getElementById("title");
 
     if(title){
+
         title.innerHTML =
         id.charAt(0).toUpperCase()+id.slice(1);
-    }
 
-
-    if(id==="scientific"){
-        scientificDisplay =
-        document.getElementById("scientificDisplay");
     }
 
 }
@@ -53,15 +39,30 @@ function openChamber(id){
 // ================= STANDARD CALCULATOR =================
 
 
+let display=document.getElementById("display");
+
+let historyList=document.getElementById("historyList");
+
+
+let history =
+JSON.parse(localStorage.getItem("SITB_HISTORY")) || [];
+
+
+
+
 function insert(value){
 
     if(display.value==="0"){
+
         display.value="";
+
     }
 
-    display.value += value;
+    display.value+=value;
 
 }
+
+
 
 
 
@@ -70,6 +71,8 @@ function clearDisplay(){
     display.value="0";
 
 }
+
+
 
 
 
@@ -82,21 +85,24 @@ function deleteLast(){
 
 
 
+
+
 function calculate(){
 
     try{
 
-        let expression=display.value;
+        let question=display.value;
 
-        let answer=eval(expression);
+        let answer=eval(question);
 
 
-        addHistory(
-        expression+" = "+answer
+        saveHistory(
+        question+" = "+answer
         );
 
 
         display.value=answer;
+
 
     }
 
@@ -116,25 +122,30 @@ function calculate(){
 // ================= HISTORY =================
 
 
-function addHistory(text){
 
-    calcHistory.unshift(text);
+function saveHistory(text){
+
+    history.unshift(text);
 
 
-    if(calcHistory.length>20){
-        calcHistory.pop();
+    if(history.length>20){
+
+        history.pop();
+
     }
 
 
     localStorage.setItem(
     "SITB_HISTORY",
-    JSON.stringify(calcHistory)
+    JSON.stringify(history)
     );
 
 
     showHistory();
 
 }
+
+
 
 
 
@@ -146,13 +157,15 @@ function showHistory(){
     historyList.innerHTML="";
 
 
-    calcHistory.forEach(item=>{
+    history.forEach(item=>{
+
 
         let li=document.createElement("li");
 
         li.textContent=item;
 
         historyList.appendChild(li);
+
 
     });
 
@@ -167,68 +180,49 @@ showHistory();
 
 
 
+// ================= SCIENTIFIC CALCULATOR =================
 
-// ================= SCIENTIFIC =================
 
 
-function getScientificDisplay(){
-
-    if(!scientificDisplay){
-
-        scientificDisplay =
-        document.getElementById("scientificDisplay");
-
-    }
-
-    return scientificDisplay;
-
-}
+let scientificDisplay =
+document.getElementById("scientificDisplay");
 
 
 
 
 function sInsert(value){
 
-    let box=getScientificDisplay();
 
-    if(!box)return;
+    if(scientificDisplay.value==="0"){
 
+        scientificDisplay.value="";
 
-    if(box.value==="0"){
-        box.value="";
     }
 
 
-    box.value += value;
+    scientificDisplay.value += value;
+
 
 }
+
 
 
 
 
 function sClear(){
 
-    let box=getScientificDisplay();
-
-    if(box){
-        box.value="0";
-    }
+    scientificDisplay.value="0";
 
 }
 
 
 
 
+
 function sDelete(){
 
-    let box=getScientificDisplay();
-
-    if(box){
-
-        box.value =
-        box.value.slice(0,-1);
-
-    }
+    scientificDisplay.value =
+    scientificDisplay.value.slice(0,-1);
 
 }
 
@@ -238,22 +232,22 @@ function sDelete(){
 
 function sCalculate(){
 
-    let box=getScientificDisplay();
-
-
     try{
 
-        box.value=eval(box.value);
+        scientificDisplay.value =
+        eval(scientificDisplay.value);
 
     }
 
     catch{
 
-        box.value="Error";
+        scientificDisplay.value="Error";
 
     }
 
 }
+
+
 
 
 
@@ -261,56 +255,100 @@ function sCalculate(){
 
 function sFunction(type){
 
-    let box=getScientificDisplay();
 
-    let num=Number(box.value);
-
-
-
-    if(type==="sin")
-        box.value=Math.sin(num);
-
-
-    if(type==="cos")
-        box.value=Math.cos(num);
-
-
-    if(type==="tan")
-        box.value=Math.tan(num);
-
-
-    if(type==="sqrt")
-        box.value=Math.sqrt(num);
-
-
-    if(type==="log")
-        box.value=Math.log10(num);
-
-
-    if(type==="ln")
-        box.value=Math.log(num);
-
-
-    if(type==="square")
-        box.value=Math.pow(num,2);
-
-
-    if(type==="cube")
-        box.value=Math.pow(num,3);
+let num =
+Number(scientificDisplay.value);
 
 
 
-    if(type==="factorial"){
+switch(type){
 
-        let result=1;
 
-        for(let i=1;i<=num;i++){
-            result*=i;
-        }
+case "sin":
 
-        box.value=result;
+scientificDisplay.value=Math.sin(num);
 
-    }
+break;
+
+
+
+case "cos":
+
+scientificDisplay.value=Math.cos(num);
+
+break;
+
+
+
+case "tan":
+
+scientificDisplay.value=Math.tan(num);
+
+break;
+
+
+
+case "sqrt":
+
+scientificDisplay.value=Math.sqrt(num);
+
+break;
+
+
+
+case "log":
+
+scientificDisplay.value=Math.log10(num);
+
+break;
+
+
+
+case "ln":
+
+scientificDisplay.value=Math.log(num);
+
+break;
+
+
+
+case "square":
+
+scientificDisplay.value=Math.pow(num,2);
+
+break;
+
+
+
+case "cube":
+
+scientificDisplay.value=Math.pow(num,3);
+
+break;
+
+
+
+case "factorial":
+
+
+let result=1;
+
+
+for(let i=1;i<=num;i++){
+
+result*=i;
+
+}
+
+
+scientificDisplay.value=result;
+
+
+break;
+
+
+}
+
 
 }
 
@@ -320,40 +358,20 @@ function sFunction(type){
 
 
 
+// ================= GRAPH =================
 
-// ================= EXPLAIN =================
-
-
-function showExplanation(){
-
-alert(
-"SITB Explanation\n\n"+
-"Step 1: Identify numbers.\n"+
-"Step 2: Follow operation rules.\n"+
-"Step 3: Solve the answer."
-);
-
-}
-
-
-
-
-
-
-
-// ================= GRAPH CALCULATOR =================
 
 
 function drawGraph(){
+
 
 let canvas=document.getElementById("graphCanvas");
 
 let input=document.getElementById("graphInput");
 
 
-if(!canvas || !input){
-    return;
-}
+
+if(!canvas || !input)return;
 
 
 
@@ -373,60 +391,64 @@ canvas.height
 
 
 
-// AXES
+// axes
 
 ctx.beginPath();
 
 ctx.moveTo(200,0);
+
 ctx.lineTo(200,250);
 
 
 ctx.moveTo(0,125);
-ctx.lineTo(400,125);
 
+ctx.lineTo(400,125);
 
 ctx.stroke();
 
 
 
 
-// GRAPH
+// graph
 
 ctx.beginPath();
+
 
 
 for(let x=0;x<400;x++){
 
 
-    let realX=(x-200)/20;
+let realX=(x-200)/20;
 
 
-    try{
+try{
 
 
-        let y =
-        eval(
-        equation.replace(/x/g,"("+realX+")")
-        );
+let y =
+eval(
+equation.replace(/x/g,"("+realX+")")
+);
 
 
-        let screenY=
-        125-y*20;
+
+let screenY =
+125-(y*20);
 
 
-        ctx.lineTo(
-        x,
-        screenY
-        );
+
+ctx.lineTo(
+x,
+screenY
+);
 
 
-    }
+}
 
-    catch{
+catch{
 
-        break;
+break;
 
-    }
+}
 
 
 }
@@ -446,22 +468,20 @@ ctx.stroke();
 // ================= PROGRAMMER =================
 
 
+
 function convertBinary(){
 
-let input=
-document.getElementById("programmerInput");
+
+let number =
+Number(
+document.getElementById("programmerInput").value
+);
 
 
-let result=
-document.getElementById("binaryResult");
 
+document.getElementById("binaryResult").innerHTML =
+"Binary: "+number.toString(2);
 
-if(input && result){
-
-result.innerHTML =
-Number(input.value).toString(2);
-
-}
 
 }
 
@@ -474,28 +494,32 @@ Number(input.value).toString(2);
 // ================= DATE =================
 
 
+
 function calculateDate(){
 
-let one=
+
+let one =
 new Date(
 document.getElementById("dateOne").value
 );
 
 
-let two=
+
+let two =
 new Date(
 document.getElementById("dateTwo").value
 );
 
 
 
-let days=
-Math.abs(two-one)/86400000;
+let days =
+Math.abs(two-one)
+/86400000;
 
 
 
 document.getElementById("dateResult")
-.innerHTML=
+.innerHTML =
 days+" days";
 
 
@@ -510,25 +534,103 @@ days+" days";
 // ================= PREMIUM =================
 
 
-function togglePremium(id){
 
-let box=document.getElementById(id);
+function premiumAlert(){
 
-
-if(box.style.display==="block"){
-
-box.style.display="none";
-
-}
-
-else{
-
-box.style.display="block";
+alert(
+"💎 SITB Premium\n\n"+
+"This feature requires a subscription."
+);
 
 }
 
+
+
+
+
+function subscribe(plan){
+
+
+if(plan==="monthly"){
+
+
+alert(
+"💎 Monthly Plan\n\n"+
+"Price: $10 / Month\n\n"+
+"Payment system will be connected later."
+);
+
+
 }
 
+
+
+if(plan==="yearly"){
+
+
+alert(
+"👑 Yearly Plan\n\n"+
+"Price: $120 / Year\n\n"+
+"Payment system will be connected later."
+);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+// ================= CONVERTERS =================
+
+
+
+function convertCurrency(){
+
+alert("Currency Converter coming soon");
+
+}
+
+
+function convertLength(){
+
+alert("Length Converter coming soon");
+
+}
+
+
+function convertVolume(){
+
+alert("Volume Converter coming soon");
+
+}
+
+
+function convertWeight(){
+
+alert("Weight Converter coming soon");
+
+}
+
+
+function convertTemperature(){
+
+alert("Temperature Converter coming soon");
+
+}
+
+
+function convertEnergy(){
+
+alert("Energy Converter coming soon");
+
+}
 
 
 
@@ -537,6 +639,7 @@ box.style.display="block";
 
 
 // ================= DARK MODE =================
+
 
 
 function toggleDark(){
@@ -551,69 +654,37 @@ document.body.classList.toggle("dark");
 
 
 
-// ================= CONVERTERS =================
-
-
-function convertLength(){
-alert("Length converter coming soon");
-}
-
-
-function convertWeight(){
-alert("Weight converter coming soon");
-}
-
-
-function convertVolume(){
-alert("Volume converter coming soon");
-}
-
-
-function convertTemperature(){
-alert("Temperature converter coming soon");
-}
-
-
-function convertEnergy(){
-alert("Energy converter coming soon");
-}
-
-
-function convertCurrency(){
-alert("Currency converter coming soon");
-}
-
-
-
-
-
-
-
 // ================= SHARE =================
+
 
 
 function shareApp(){
 
+
 if(navigator.share){
+
 
 navigator.share({
 
 title:"SITB Smart Calculator",
 
-text:"Try SITB Calculator"
+text:"Try SITB Smart Calculator"
 
 });
+
 
 }
 
 else{
 
-alert("Share not supported");
+
+alert("Sharing not supported");
 
 }
 
+
 }
 
 
 
-console.log("SITB Full Updated JS Loaded 🚀");
+console.log("SITB New System Loaded 🚀");
