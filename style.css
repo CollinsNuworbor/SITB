@@ -1,33 +1,21 @@
-/* ================= SITB SMART CALCULATOR CSS ================= */
-
-
-/* RESET */
-
 *{
-
 box-sizing:border-box;
-
-font-family:Arial, sans-serif;
-
 }
-
 
 
 body{
 
 margin:0;
 
-background:#f2f4f8;
+font-family:Arial, sans-serif;
 
-color:#222;
+background:#f2f2f2;
 
-transition:0.3s;
+color:#111;
 
 }
 
 
-
-/* ================= APP LAYOUT ================= */
 
 
 .app{
@@ -37,6 +25,8 @@ display:flex;
 min-height:100vh;
 
 }
+
+
 
 
 
@@ -68,20 +58,9 @@ margin-bottom:5px;
 }
 
 
-
-.sidebar p{
-
-color:#aaa;
-
-}
-
-
-
 .sidebar h3{
 
-color:#60a5fa;
-
-font-size:14px;
+color:#ffd700;
 
 }
 
@@ -93,19 +72,17 @@ width:100%;
 
 padding:12px;
 
-margin:5px 0;
+margin:6px 0;
 
 border:none;
 
-border-radius:12px;
+border-radius:10px;
 
-background:#1f2937;
+background:#243044;
 
 color:white;
 
 cursor:pointer;
-
-text-align:left;
 
 font-size:15px;
 
@@ -115,7 +92,9 @@ font-size:15px;
 
 .sidebar button:hover{
 
-background:#374151;
+background:#ffd700;
+
+color:black;
 
 }
 
@@ -123,11 +102,12 @@ background:#374151;
 
 .sidebar hr{
 
-border:1px solid #374151;
+border:1px solid #444;
 
 margin:15px 0;
 
 }
+
 
 
 
@@ -146,6 +126,7 @@ padding:20px;
 
 
 
+
 header{
 
 display:flex;
@@ -154,19 +135,24 @@ justify-content:space-between;
 
 align-items:center;
 
+background:white;
+
+padding:15px;
+
+border-radius:15px;
+
 }
+
 
 
 
 header button{
 
-font-size:20px;
-
-border:none;
+padding:10px;
 
 border-radius:50%;
 
-padding:10px;
+border:none;
 
 cursor:pointer;
 
@@ -183,13 +169,13 @@ cursor:pointer;
 
 background:white;
 
+margin-top:20px;
+
 padding:25px;
 
 border-radius:20px;
 
-max-width:700px;
-
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+box-shadow:0 5px 15px #0002;
 
 }
 
@@ -205,6 +191,7 @@ display:none;
 
 
 
+
 /* ================= INPUTS ================= */
 
 
@@ -214,15 +201,16 @@ width:100%;
 
 padding:15px;
 
-border-radius:12px;
-
-border:1px solid #ccc;
-
 font-size:20px;
 
 margin:10px 0;
 
+border-radius:10px;
+
+border:1px solid #aaa;
+
 }
+
 
 
 
@@ -235,23 +223,15 @@ button{
 
 padding:12px;
 
+border-radius:10px;
+
 border:none;
-
-border-radius:12px;
-
-cursor:pointer;
-
-font-size:16px;
-
-}
-
-
-
-.chamber button{
 
 background:#2563eb;
 
 color:white;
+
+cursor:pointer;
 
 margin:5px;
 
@@ -259,9 +239,9 @@ margin:5px;
 
 
 
-.chamber button:hover{
+button:hover{
 
-opacity:0.8;
+opacity:.8;
 
 }
 
@@ -269,7 +249,9 @@ opacity:0.8;
 
 
 
-/* ================= KEYPAD ================= */
+
+
+/* ================= KEYPADS ================= */
 
 
 .keys{
@@ -286,31 +268,12 @@ gap:10px;
 
 .keys button{
 
-height:60px;
+font-size:20px;
 
-font-size:22px;
-
-}
-
-
-
-
-
-/* ================= SCIENTIFIC DISPLAY ================= */
-
-
-#display,
-#scientificDisplay{
-
-height:100px;
-
-font-size:45px;
-
-text-align:right;
-
-background:#eef2ff;
+height:55px;
 
 }
+
 
 
 
@@ -319,15 +282,38 @@ background:#eef2ff;
 /* ================= GRAPH ================= */
 
 
-#graphCanvas{
+canvas{
 
-border:2px solid #333;
+border:2px solid black;
 
-border-radius:15px;
+background:white;
+
+max-width:100%;
 
 margin-top:15px;
 
-max-width:100%;
+}
+
+
+
+
+
+
+/* ================= SOLVER ================= */
+
+
+#solverResult,
+#aiAnswer{
+
+background:#eee;
+
+padding:15px;
+
+border-radius:10px;
+
+margin-top:15px;
+
+font-size:18px;
 
 }
 
@@ -338,57 +324,17 @@ max-width:100%;
 /* ================= PREMIUM ================= */
 
 
-.premium-top{
+.premium-card{
 
-text-align:center;
+background:#f7f7f7;
 
-}
-
-
-
-.premium-feature{
-
-background:#fff7cc;
-
-padding:20px;
-
-border-radius:18px;
+padding:15px;
 
 margin:15px 0;
 
-}
+border-radius:15px;
 
-
-
-.premium-feature h3{
-
-margin-top:0;
-
-}
-
-
-
-.premium-feature button{
-
-background:#facc15;
-
-color:#111;
-
-font-weight:bold;
-
-width:100%;
-
-}
-
-
-
-
-
-.subscription-box{
-
-margin-top:30px;
-
-text-align:center;
+border-left:5px solid gold;
 
 }
 
@@ -396,25 +342,13 @@ text-align:center;
 
 .plan{
 
-background:#f3f4f6;
+background:#fff3b0;
 
-padding:20px;
+padding:15px;
 
 margin:15px 0;
 
-border-radius:20px;
-
-}
-
-
-
-.plan button{
-
-background:#111827;
-
-color:white;
-
-width:90%;
+border-radius:15px;
 
 }
 
@@ -435,13 +369,11 @@ right:20px;
 
 background:#16a34a;
 
-color:white;
-
-padding:15px 25px;
-
-border-radius:30px;
+font-size:18px;
 
 }
+
+
 
 
 
@@ -452,7 +384,7 @@ border-radius:30px;
 
 .dark{
 
-background:#111827;
+background:#111;
 
 color:white;
 
@@ -460,6 +392,15 @@ color:white;
 
 
 
+.dark main{
+
+background:#111;
+
+}
+
+
+
+.dark header,
 .dark .chamber{
 
 background:#1f2937;
@@ -472,20 +413,7 @@ color:white;
 
 .dark input{
 
-background:#374151;
-
-color:white;
-
-border-color:#555;
-
-}
-
-
-
-.dark #display,
-.dark #scientificDisplay{
-
-background:#374151;
+background:#333;
 
 color:white;
 
@@ -493,9 +421,18 @@ color:white;
 
 
 
-.dark .premium-feature{
+.dark #solverResult,
+.dark #aiAnswer{
 
-background:#374151;
+background:#333;
+
+}
+
+
+
+.dark .premium-card{
+
+background:#333;
 
 }
 
@@ -503,49 +440,6 @@ background:#374151;
 
 .dark .plan{
 
-background:#111827;
-
-}
-
-
-
-.dark .sidebar{
-
-background:#030712;
-
-}
-
-
-
-/* ================= MOBILE ================= */
-
-
-@media(max-width:800px){
-
-
-.app{
-
-flex-direction:column;
-
-}
-
-
-
-.sidebar{
-
-width:100%;
-
-}
-
-
-
-.keys button{
-
-font-size:18px;
-
-height:50px;
-
-}
-
+background:#5b4b00;
 
 }
