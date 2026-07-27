@@ -396,11 +396,16 @@ x!
 
 <!-- ================= GRAPH ================= -->
 
-
 <section id="graphing" class="chamber hidden">
 
 
-<h2>Graph Calculator</h2>
+<h2>📈 Graph Calculator</h2>
+
+
+<input 
+id="graphInput" 
+placeholder="Type equation e.g. x*x">
+
 
 
 <button onclick="drawGraph()">
@@ -408,12 +413,23 @@ Draw Graph
 </button>
 
 
+
 <canvas id="graphCanvas"
 width="400"
 height="250">
-
 </canvas>
 
+
+
+<p>
+Examples:
+<br>
+x*x = parabola
+<br>
+x+5 = line
+<br>
+Math.sin(x) = wave
+</p>
 
 
 </section>
