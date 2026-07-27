@@ -3,7 +3,7 @@
 
 <head>
 
-<title>SITB Smart Calculator</title>
+<title>SITB Advanced Smart Calculator</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -18,8 +18,7 @@
 <div class="app">
 
 
-<!-- ================= SIDEBAR ================= -->
-
+<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -29,8 +28,7 @@
 <p>Smart Calculator</p>
 
 
-
-<h3>CALCULATOR</h3>
+<h3>CALCULATORS</h3>
 
 
 <button onclick="openChamber('standard')">
@@ -43,8 +41,13 @@
 </button>
 
 
+<button onclick="openChamber('solver')">
+🧠 Advanced Solver
+</button>
+
+
 <button onclick="openChamber('graphing')">
-📈 Graphing
+📈 Advanced Graph
 </button>
 
 
@@ -54,10 +57,8 @@
 
 
 <button onclick="openChamber('date')">
-📅 Date Calculation
+📅 Date
 </button>
-
-
 
 
 
@@ -98,15 +99,14 @@
 
 
 
-
-
 <hr>
 
 
 <button onclick="openChamber('premium')">
-💎 SITB Premium
-</button>
 
+💎 SITB Premium
+
+</button>
 
 
 </aside>
@@ -115,8 +115,7 @@
 
 
 
-<!-- ================= MAIN ================= -->
-
+<!-- MAIN -->
 
 <main>
 
@@ -124,7 +123,7 @@
 <header>
 
 <h2 id="title">
-Standard
+Standard Calculator
 </h2>
 
 
@@ -134,7 +133,12 @@ Standard
 
 
 </header>
-<!-- ================= STANDARD ================= -->
+
+
+
+
+
+<!-- STANDARD CALCULATOR -->
 
 
 <section id="standard" class="chamber">
@@ -196,8 +200,8 @@ Standard
 
 <button onclick="calculate()">=</button>
 
-</div>
 
+</div>
 
 
 <button onclick="showExplanation()">
@@ -218,7 +222,7 @@ Standard
 
 
 
-<!-- ================= SCIENTIFIC ================= -->
+<!-- SCIENTIFIC CALCULATOR -->
 
 
 <section id="scientific" class="chamber hidden">
@@ -285,6 +289,7 @@ Standard
 
 
 
+
 <h3>Scientific Functions</h3>
 
 
@@ -309,6 +314,35 @@ Standard
 
 
 </section>
+<!-- ================= ADVANCED SOLVER ================= -->
+
+
+<section id="solver" class="chamber hidden">
+
+
+<h2>🧠 Advanced Math Solver</h2>
+
+
+<input 
+id="solverInput"
+placeholder="Example: solve 2x+5=15">
+
+
+
+<button onclick="advancedSolve()">
+
+Solve
+
+</button>
+
+
+
+<div id="solverResult">
+
+</div>
+
+
+</section>
 
 
 
@@ -316,20 +350,23 @@ Standard
 
 
 
-<!-- ================= GRAPH ================= -->
+<!-- ================= ADVANCED GRAPH ================= -->
 
 
 <section id="graphing" class="chamber hidden">
 
 
-<h2>📈 Graph Calculator</h2>
-
-
-<input id="graphInput" placeholder="Example: x*x">
+<h2>📈 Advanced Graph Calculator</h2>
 
 
 
-<button onclick="drawGraph()">
+<input 
+id="graphInput"
+placeholder="Example: x^2 or sin(x)">
+
+
+
+<button onclick="drawAdvancedGraph()">
 
 Draw Graph
 
@@ -337,44 +374,95 @@ Draw Graph
 
 
 
-<canvas id="graphCanvas"
-width="400"
-height="250">
+<br>
+
+
+<button onclick="zoomIn()">
+Zoom +
+</button>
+
+
+
+<button onclick="zoomOut()">
+Zoom -
+</button>
+
+
+
+
+<canvas 
+id="graphCanvas"
+width="600"
+height="400">
 
 </canvas>
 
 
 
 <p>
+
 Examples:
+
 <br>
-x*x
+
+x^2
+
 <br>
-x+5
+
+sin(x)
+
 <br>
-Math.sin(x)
+
+cos(x)
+
+<br>
+
+sqrt(x)
+
 </p>
 
 
 </section>
+
+
+
+
+
+
+
 <!-- ================= PROGRAMMER ================= -->
 
 
 <section id="programmer" class="chamber hidden">
 
 
-<h2>💻 Programmer Mode</h2>
+<h2>💻 Programmer Calculator</h2>
 
 
-<input id="programmerInput" placeholder="Enter number">
+
+<input 
+id="programmerInput"
+placeholder="Enter number">
+
 
 
 <button onclick="convertBinary()">
-Convert Binary
+
+Decimal → Binary
+
 </button>
 
 
-<p id="binaryResult"></p>
+
+<button onclick="convertHex()">
+
+Decimal → Hex
+
+</button>
+
+
+
+<p id="programmerResult"></p>
 
 
 </section>
@@ -394,17 +482,20 @@ Convert Binary
 <h2>📅 Date Calculator</h2>
 
 
+
 <input type="date" id="dateOne">
 
 
 <input type="date" id="dateTwo">
 
 
+
 <button onclick="calculateDate()">
 
-Calculate
+Calculate Difference
 
 </button>
+
 
 
 <p id="dateResult"></p>
@@ -418,7 +509,7 @@ Calculate
 
 
 
-<!-- ================= CONVERTERS ================= -->
+<!-- ================= CURRENCY ================= -->
 
 
 <section id="currency" class="chamber hidden">
@@ -427,7 +518,10 @@ Calculate
 <h2>💲 Currency Converter</h2>
 
 
-<input id="currencyValue" placeholder="Amount">
+<input 
+id="currencyValue"
+placeholder="Amount">
+
 
 
 <button onclick="convertCurrency()">
@@ -435,6 +529,7 @@ Calculate
 Convert
 
 </button>
+
 
 
 <p id="currencyResult"></p>
@@ -446,13 +541,21 @@ Convert
 
 
 
+
+
+<!-- ================= LENGTH ================= -->
+
+
 <section id="length" class="chamber hidden">
 
 
 <h2>📏 Length Converter</h2>
 
 
-<input id="lengthValue">
+<input 
+id="lengthValue"
+placeholder="Meters">
+
 
 
 <button onclick="convertLength()">
@@ -460,6 +563,7 @@ Convert
 Convert
 
 </button>
+
 
 
 <p id="lengthResult"></p>
@@ -471,13 +575,21 @@ Convert
 
 
 
+
+
+<!-- ================= VOLUME ================= -->
+
+
 <section id="volume" class="chamber hidden">
 
 
 <h2>📦 Volume Converter</h2>
 
 
-<input id="volumeValue">
+<input 
+id="volumeValue"
+placeholder="Liters">
+
 
 
 <button onclick="convertVolume()">
@@ -485,6 +597,7 @@ Convert
 Convert
 
 </button>
+
 
 
 <p id="volumeResult"></p>
@@ -496,13 +609,21 @@ Convert
 
 
 
+
+
+<!-- ================= WEIGHT ================= -->
+
+
 <section id="weight" class="chamber hidden">
 
 
 <h2>⚖ Weight Converter</h2>
 
 
-<input id="weightValue">
+<input 
+id="weightValue"
+placeholder="Kilograms">
+
 
 
 <button onclick="convertWeight()">
@@ -512,13 +633,12 @@ Convert
 </button>
 
 
+
 <p id="weightResult"></p>
 
 
 </section>
-
-
-
+<!-- ================= TEMPERATURE ================= -->
 
 
 <section id="temperature" class="chamber hidden">
@@ -527,7 +647,10 @@ Convert
 <h2>🌡 Temperature Converter</h2>
 
 
-<input id="temperatureValue">
+<input 
+id="temperatureValue"
+placeholder="Celsius">
+
 
 
 <button onclick="convertTemperature()">
@@ -535,6 +658,7 @@ Convert
 Convert
 
 </button>
+
 
 
 <p id="temperatureResult"></p>
@@ -546,13 +670,21 @@ Convert
 
 
 
+
+
+<!-- ================= ENERGY ================= -->
+
+
 <section id="energy" class="chamber hidden">
 
 
 <h2>🔥 Energy Converter</h2>
 
 
-<input id="energyValue">
+<input 
+id="energyValue"
+placeholder="Joules">
+
 
 
 <button onclick="convertEnergy()">
@@ -560,6 +692,7 @@ Convert
 Convert
 
 </button>
+
 
 
 <p id="energyResult"></p>
@@ -573,44 +706,40 @@ Convert
 
 
 
-
 <!-- ================= PREMIUM ================= -->
 
 
 <section id="premium" class="chamber hidden">
 
 
-<div class="premium-top">
-
-
 <h2>💎 SITB Premium</h2>
 
 
+
 <p>
-Unlock the full power of SITB Smart Calculator
+Unlock the future of mathematics.
 </p>
 
 
-</div>
 
 
 
+<div class="premium-card">
 
 
-<div class="premium-feature">
-
-
-<h3>🤖 AI Tutor</h3>
+<h3>🤖 AI Math Tutor</h3>
 
 
 <p>
-Advanced AI explanations and learning help.
+Advanced explanations,
+step-by-step solutions,
+and learning support.
 </p>
 
 
-<button onclick="premiumAlert()">
+<button onclick="subscribe('AI Tutor')">
 
-🔒 Unlock
+Unlock
 
 </button>
 
@@ -622,20 +751,22 @@ Advanced AI explanations and learning help.
 
 
 
-<div class="premium-feature">
+
+<div class="premium-card">
 
 
 <h3>📷 Camera Math</h3>
 
 
 <p>
-Scan questions and solve faster.
+Scan difficult questions
+and solve them.
 </p>
 
 
-<button onclick="premiumAlert()">
+<button onclick="subscribe('Camera Math')">
 
-🔒 Unlock
+Unlock
 
 </button>
 
@@ -648,20 +779,20 @@ Scan questions and solve faster.
 
 
 
-<div class="premium-feature">
+<div class="premium-card">
 
 
 <h3>🎤 Voice Calculator</h3>
 
 
 <p>
-Speak calculations instead of typing.
+Speak your calculations.
 </p>
 
 
-<button onclick="premiumAlert()">
+<button onclick="subscribe('Voice Calculator')">
 
-🔒 Unlock
+Unlock
 
 </button>
 
@@ -674,20 +805,21 @@ Speak calculations instead of typing.
 
 
 
-<div class="premium-feature">
+<div class="premium-card">
 
 
-<h3>☁️ Cloud Sync</h3>
+<h3>☁ Cloud Sync</h3>
 
 
 <p>
-Save your history across devices.
+Keep your history and settings
+on every device.
 </p>
 
 
-<button onclick="premiumAlert()">
+<button onclick="subscribe('Cloud Sync')">
 
-🔒 Unlock
+Unlock
 
 </button>
 
@@ -700,50 +832,19 @@ Save your history across devices.
 
 
 
-<div class="premium-feature">
-
-
-<h3>📚 Learning Mode</h3>
-
-
-<p>
-Lessons, quizzes and progress tracking.
-</p>
-
-
-<button onclick="premiumAlert()">
-
-🔒 Unlock
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="subscription-box">
-
-
-<h2>Choose Your Plan</h2>
+<h2>💰 Plans</h2>
 
 
 
 <div class="plan">
 
 
-<h3>💎 Monthly</h3>
-
+<h3>Monthly</h3>
 
 <p>$10 / Month</p>
 
 
-<button onclick="subscribe('monthly')">
+<button onclick="subscribe('Monthly Plan')">
 
 Subscribe
 
@@ -761,21 +862,16 @@ Subscribe
 <div class="plan">
 
 
-<h3>👑 Yearly</h3>
-
+<h3>Yearly</h3>
 
 <p>$120 / Year</p>
 
 
-<button onclick="subscribe('yearly')">
+<button onclick="subscribe('Yearly Plan')">
 
 Subscribe
 
 </button>
-
-
-</div>
-
 
 
 </div>
@@ -783,6 +879,7 @@ Subscribe
 
 
 </section>
+
 
 
 
@@ -808,7 +905,9 @@ Subscribe
 
 
 
+
 <script src="script.js"></script>
+
 
 
 </body>
