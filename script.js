@@ -1,4 +1,4 @@
-// ================= SITB ADVANCED CALCULATOR =================
+// ================= SITB ENGINE =================
 
 
 // ================= CHAMBERS =================
@@ -6,21 +6,19 @@
 
 function openChamber(id){
 
-    let chambers = document.querySelectorAll(".chamber");
+    document.querySelectorAll(".chamber").forEach(section=>{
 
-    chambers.forEach(function(chamber){
-
-        chamber.classList.add("hidden");
+        section.classList.add("hidden");
 
     });
 
 
-    let selected = document.getElementById(id);
+    let open = document.getElementById(id);
 
 
-    if(selected){
+    if(open){
 
-        selected.classList.remove("hidden");
+        open.classList.remove("hidden");
 
     }
 
@@ -41,8 +39,8 @@ function openChamber(id){
 
 
 
-// ================= DARK MODE =================
 
+// ================= DARK MODE =================
 
 
 function toggleDark(){
@@ -57,9 +55,7 @@ function toggleDark(){
 
 
 
-
 // ================= STANDARD CALCULATOR =================
-
 
 
 let display = document.getElementById("display");
@@ -67,7 +63,6 @@ let display = document.getElementById("display");
 
 
 function insert(value){
-
 
     if(display.value==="0"){
 
@@ -77,7 +72,6 @@ function insert(value){
 
 
     display.value += value;
-
 
 }
 
@@ -98,14 +92,13 @@ function deleteLast(){
     display.value =
     display.value.slice(0,-1);
 
-
 }
 
 
 
 
-function calculate(){
 
+function calculate(){
 
     try{
 
@@ -116,11 +109,13 @@ function calculate(){
         let answer = eval(question);
 
 
+
         display.value = answer;
 
 
-        saveHistory(
-            question + " = " + answer
+
+        addHistory(
+            question+" = "+answer
         );
 
 
@@ -144,26 +139,27 @@ function calculate(){
 
 
 
+
 // ================= HISTORY =================
 
 
-
-let history =
+let calcHistory =
 JSON.parse(localStorage.getItem("SITB_HISTORY")) || [];
 
 
 
 
-function saveHistory(text){
+
+function addHistory(text){
 
 
-    history.unshift(text);
+    calcHistory.unshift(text);
 
 
 
-    if(history.length > 20){
+    if(calcHistory.length>20){
 
-        history.pop();
+        calcHistory.pop();
 
     }
 
@@ -171,8 +167,9 @@ function saveHistory(text){
 
     localStorage.setItem(
         "SITB_HISTORY",
-        JSON.stringify(history)
+        JSON.stringify(calcHistory)
     );
+
 
 
     showHistory();
@@ -204,11 +201,10 @@ function showHistory(){
 
 
 
-    history.forEach(function(item){
+    calcHistory.forEach(item=>{
 
 
-        let li =
-        document.createElement("li");
+        let li=document.createElement("li");
 
 
         li.textContent=item;
@@ -232,7 +228,6 @@ showHistory();
 
 
 
-
 // ================= EXPLAIN =================
 
 
@@ -240,24 +235,14 @@ showHistory();
 function showExplanation(){
 
 
-    let problem =
-    display.value;
+alert(
 
+"🧠 SITB Explanation\n\n"+
+"Your calculation:\n"+
+display.value+
+"\n\nPremium AI Tutor will give step-by-step explanations."
 
-
-    alert(
-
-`🧠 SITB Explanation
-
-Question:
-${problem}
-
-Premium AI Tutor will provide:
-• Step-by-step solving
-• Multiple methods
-• Learning tips`
-
-    );
+);
 
 
 }
@@ -304,7 +289,6 @@ function sDelete(){
 
 
 
-
 function sCalculate(){
 
     try{
@@ -331,92 +315,86 @@ function sCalculate(){
 function sFunction(type){
 
 
-    let number =
+    let n =
     Number(scientificDisplay.value);
 
 
 
-    if(type==="sin"){
+    switch(type){
+
+
+        case "sin":
 
         scientificDisplay.value =
-        Math.sin(number);
+        Math.sin(n);
 
-    }
-
-
-
-    if(type==="cos"){
-
-        scientificDisplay.value =
-        Math.cos(number);
-
-    }
+        break;
 
 
 
-    if(type==="tan"){
+        case "cos":
 
         scientificDisplay.value =
-        Math.tan(number);
+        Math.cos(n);
 
-    }
-
-
-
-    if(type==="sqrt"){
-
-        scientificDisplay.value =
-        Math.sqrt(number);
-
-    }
+        break;
 
 
 
-    if(type==="log"){
+        case "tan":
 
         scientificDisplay.value =
-        Math.log10(number);
+        Math.tan(n);
 
-    }
-
-
-
-    if(type==="ln"){
-
-        scientificDisplay.value =
-        Math.log(number);
-
-    }
+        break;
 
 
 
-    if(type==="square"){
+        case "sqrt":
 
         scientificDisplay.value =
-        number * number;
+        Math.sqrt(n);
 
-    }
+        break;
 
 
 
-    if(type==="cube"){
+        case "log":
 
         scientificDisplay.value =
-        number * number * number;
+        Math.log10(n);
 
-    }
+        break;
 
 
 
-    if(type==="factorial"){
+        case "square":
+
+        scientificDisplay.value =
+        n*n;
+
+        break;
+
+
+
+        case "cube":
+
+        scientificDisplay.value =
+        n*n*n;
+
+        break;
+
+
+
+        case "factorial":
 
 
         let answer=1;
 
 
-        for(let i=1;i<=number;i++){
+        for(let i=1;i<=n;i++){
 
-            answer *= i;
+            answer*=i;
 
         }
 
@@ -424,10 +402,13 @@ function sFunction(type){
         scientificDisplay.value=answer;
 
 
+        break;
+
+
     }
 
-
 }
+
 
 
 
@@ -443,30 +424,26 @@ function sFunction(type){
 function advancedSolve(){
 
 
-let input =
-document.getElementById("solverInput").value;
+let question =
+document.getElementById("solverInput").value.toLowerCase();
 
 
-let result =
+
+let output =
 document.getElementById("solverResult");
 
 
 
-input =
-input.toLowerCase();
 
 
+// 2x+5=15
 
 
-
-// solve x+number=answer
-
-
-if(input.includes("solve") && input.includes("x+")){
+if(question.includes("solve") && question.includes("x+")){
 
 
 let equation =
-input.replace("solve","").trim();
+question.replace("solve","").trim();
 
 
 
@@ -475,52 +452,10 @@ equation.split("=");
 
 
 
-let left =
-parts[0];
-
-
-let right =
-Number(parts[1]);
-
-
-
-let number =
-Number(left.replace("x+",""));
-
-
-
-result.innerHTML =
-"x = " + (right-number);
-
-
-return;
-
-
-}
-
-
-
-
-
-
-// simple multiplication equation
-
-
-if(input.includes("solve") && input.includes("x*")){
-
-
-let equation =
-input.replace("solve","").trim();
-
-
-
-let parts =
-equation.split("=");
-
-
-
-let number =
-Number(parts[0].replace("x*",""));
+let add =
+Number(
+parts[0].replace("x+","")
+);
 
 
 
@@ -529,12 +464,20 @@ Number(parts[1]);
 
 
 
-result.innerHTML =
-"x = " + (answer/number);
+output.innerHTML =
 
+`
+Step 1:<br>
+Remove ${add} from both sides.<br><br>
+
+Step 2:<br>
+Divide by the coefficient.<br><br>
+
+Answer:<br>
+x = ${answer-add}
+`;
 
 return;
-
 
 }
 
@@ -542,44 +485,10 @@ return;
 
 
 
-
-if(input.includes("derivative")){
-
-
-result.innerHTML =
-"Basic derivative engine coming soon.";
-
-
-return;
-
-
-}
-
-
-
-
-
-if(input.includes("integral")){
-
-
-result.innerHTML =
-"Basic integral engine coming soon.";
-
-
-return;
-
-
-}
-
-
-
-
-
-result.innerHTML =
+output.innerHTML =
 "Try: solve 2x+5=15";
 
 
-
 }
 
 
@@ -590,8 +499,142 @@ result.innerHTML =
 
 
 
-// ================= ADVANCED GRAPH =================
+// ================= AI TUTOR =================
 
+
+
+function aiSolve(){
+
+
+let question =
+document.getElementById("aiQuestion")
+.value
+.toLowerCase();
+
+
+
+let answer =
+document.getElementById("aiAnswer");
+
+
+
+
+
+if(question.includes("square root")){
+
+
+let number =
+Number(question.match(/\d+/)[0]);
+
+
+
+answer.innerHTML =
+
+`
+Step 1:<br>
+Find the number that multiplies by itself.<br><br>
+
+√${number} = ${Math.sqrt(number)}
+`;
+
+return;
+
+}
+
+
+
+
+
+
+if(question.includes("percentage")){
+
+
+let numbers =
+question.match(/\d+/g);
+
+
+
+let percent =
+Number(numbers[0]);
+
+
+let total =
+Number(numbers[1]);
+
+
+
+answer.innerHTML =
+
+`
+Formula:<br>
+(percent ÷ 100) × total<br><br>
+
+(${percent} ÷ 100) × ${total}<br><br>
+
+Answer:<br>
+${percent/100*total}
+`;
+
+return;
+
+}
+
+
+
+
+
+if(question.includes("pythagoras")){
+
+
+let numbers =
+question.match(/\d+/g);
+
+
+
+let a =
+Number(numbers[0]);
+
+
+let b =
+Number(numbers[1]);
+
+
+
+let c =
+Math.sqrt(a*a+b*b);
+
+
+
+answer.innerHTML =
+
+`
+Formula:<br>
+c² = a² + b²<br><br>
+
+Answer:<br>
+c = ${c}
+`;
+
+return;
+
+}
+
+
+
+
+answer.innerHTML =
+
+`
+I need more information.<br><br>
+
+Examples:<br>
+square root of 144<br>
+percentage 20 of 500<br>
+pythagoras 3 4
+`;
+
+}
+// ================= ADVANCED GRAPH =================
 
 
 let graphZoom = 20;
@@ -629,12 +672,10 @@ canvas.height
 
 // Grid
 
-
 ctx.strokeStyle="#cccccc";
 
 
 for(let x=0;x<canvas.width;x+=20){
-
 
 ctx.beginPath();
 
@@ -644,13 +685,11 @@ ctx.lineTo(x,canvas.height);
 
 ctx.stroke();
 
-
 }
 
 
 
 for(let y=0;y<canvas.height;y+=20){
-
 
 ctx.beginPath();
 
@@ -660,15 +699,14 @@ ctx.lineTo(canvas.width,y);
 
 ctx.stroke();
 
-
 }
 
 
 
 
 
-// Axis
 
+// Axis
 
 ctx.strokeStyle="black";
 
@@ -701,7 +739,6 @@ canvas.height/2
 );
 
 
-
 ctx.stroke();
 
 
@@ -709,7 +746,7 @@ ctx.stroke();
 
 
 
-// Function
+// Function line
 
 
 ctx.beginPath();
@@ -717,7 +754,6 @@ ctx.beginPath();
 
 
 for(let px=0;px<canvas.width;px++){
-
 
 
 let x =
@@ -749,8 +785,7 @@ equation.replace(
 
 
 let py =
-canvas.height/2 -
-(y*graphZoom);
+canvas.height/2-(y*graphZoom);
 
 
 
@@ -765,12 +800,9 @@ py
 
 catch{
 
-
 return;
 
-
 }
-
 
 
 }
@@ -785,31 +817,43 @@ ctx.stroke();
 
 
 
+
+
 function zoomIn(){
 
-graphZoom +=5;
+graphZoom+=5;
 
 drawAdvancedGraph();
 
 }
+
 
 
 
 
 function zoomOut(){
 
-graphZoom -=5;
+graphZoom-=5;
 
 drawAdvancedGraph();
 
 }
+
+
+
+
+
+
+
+
 // ================= PROGRAMMER =================
+
 
 
 function convertBinary(){
 
 
-let number =
+let n =
 Number(
 document.getElementById("programmerInput").value
 );
@@ -818,8 +862,7 @@ document.getElementById("programmerInput").value
 
 document.getElementById("programmerResult")
 .innerHTML =
-"Binary: " + number.toString(2);
-
+"Binary: "+n.toString(2);
 
 
 }
@@ -830,7 +873,7 @@ document.getElementById("programmerResult")
 function convertHex(){
 
 
-let number =
+let n =
 Number(
 document.getElementById("programmerInput").value
 );
@@ -839,8 +882,7 @@ document.getElementById("programmerInput").value
 
 document.getElementById("programmerResult")
 .innerHTML =
-"Hex: " + number.toString(16).toUpperCase();
-
+"Hex: "+n.toString(16).toUpperCase();
 
 
 }
@@ -851,43 +893,38 @@ document.getElementById("programmerResult")
 
 
 
-// ================= DATE CALCULATOR =================
+
+// ================= DATE =================
 
 
 
 function calculateDate(){
 
 
-let first =
+let a =
 new Date(
 document.getElementById("dateOne").value
 );
 
 
 
-let second =
+let b =
 new Date(
 document.getElementById("dateTwo").value
 );
 
 
 
-let difference =
-Math.abs(second-first);
-
-
-
 let days =
-Math.floor(
-difference / (1000*60*60*24)
-);
+Math.abs(b-a)
+/
+(1000*60*60*24);
 
 
 
 document.getElementById("dateResult")
 .innerHTML =
-days + " days";
-
+Math.floor(days)+" days";
 
 
 }
@@ -905,27 +942,22 @@ days + " days";
 
 function convertCurrency(){
 
-
 let value =
 Number(
 document.getElementById("currencyValue").value
 );
 
 
-
 document.getElementById("currencyResult")
 .innerHTML =
-"$" + value;
-
+"$"+value;
 
 
 }
 
 
 
-
 function convertLength(){
-
 
 let value =
 Number(
@@ -933,21 +965,16 @@ document.getElementById("lengthValue").value
 );
 
 
-
 document.getElementById("lengthResult")
 .innerHTML =
-value + " meters = " + (value*100) + " cm";
-
+value+" m = "+value*100+" cm";
 
 
 }
 
 
 
-
-
 function convertVolume(){
-
 
 let value =
 Number(
@@ -955,11 +982,9 @@ document.getElementById("volumeValue").value
 );
 
 
-
 document.getElementById("volumeResult")
 .innerHTML =
-value + " liters = " + (value*1000) + " ml";
-
+value+" L = "+value*1000+" ml";
 
 
 }
@@ -967,9 +992,7 @@ value + " liters = " + (value*1000) + " ml";
 
 
 
-
 function convertWeight(){
-
 
 let value =
 Number(
@@ -977,11 +1000,9 @@ document.getElementById("weightValue").value
 );
 
 
-
 document.getElementById("weightResult")
 .innerHTML =
-value + " kg = " + (value*1000) + " g";
-
+value+" kg = "+value*1000+" g";
 
 
 }
@@ -990,9 +1011,7 @@ value + " kg = " + (value*1000) + " g";
 
 
 
-
 function convertTemperature(){
-
 
 let value =
 Number(
@@ -1001,15 +1020,14 @@ document.getElementById("temperatureValue").value
 
 
 
-let fahrenheit =
+let f =
 (value*9/5)+32;
 
 
 
 document.getElementById("temperatureResult")
 .innerHTML =
-value+"°C = "+fahrenheit+"°F";
-
+value+"°C = "+f+"°F";
 
 
 }
@@ -1017,21 +1035,15 @@ value+"°C = "+fahrenheit+"°F";
 
 
 
-
 function convertEnergy(){
 
-
 let value =
-Number(
-document.getElementById("energyValue").value
-);
-
+document.getElementById("energyValue").value;
 
 
 document.getElementById("energyResult")
 .innerHTML =
 value+" Joules";
-
 
 
 }
@@ -1054,7 +1066,7 @@ alert(
 
 "💎 SITB Premium\n\n"+
 feature+
-"\n\nPayment system can be connected here."
+"\n\nPayment connection can be added."
 
 );
 
@@ -1080,9 +1092,9 @@ if(navigator.share){
 
 navigator.share({
 
-title:"SITB Advanced Calculator",
+title:"SITB Smart Calculator",
 
-text:"Try SITB Smart Calculator"
+text:"Try SITB Advanced Calculator"
 
 });
 
@@ -1092,7 +1104,7 @@ text:"Try SITB Smart Calculator"
 else{
 
 
-alert("Sharing is not supported on this device.");
+alert("Share not supported");
 
 }
 
@@ -1103,8 +1115,4 @@ alert("Sharing is not supported on this device.");
 
 
 
-
-
-console.log(
-"SITB Advanced Calculator Loaded 🚀"
-);
+console.log("🔥 SITB COMPLETE ENGINE LOADED");
