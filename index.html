@@ -18,10 +18,7 @@
 <div class="app">
 
 
-<!-- SIDEBAR -->
-
 <aside class="sidebar">
-
 
 <h1>🧮 SITB</h1>
 
@@ -30,36 +27,19 @@
 
 <h3>CALCULATORS</h3>
 
+<button onclick="openChamber('standard')">🧮 Standard</button>
 
-<button onclick="openChamber('standard')">
-🧮 Standard
-</button>
+<button onclick="openChamber('scientific')">⚗ Scientific</button>
 
+<button onclick="openChamber('solver')">🧠 Advanced Solver</button>
 
-<button onclick="openChamber('scientific')">
-⚗ Scientific
-</button>
+<button onclick="openChamber('aiTutor')">🤖 AI Tutor</button>
 
+<button onclick="openChamber('graphing')">📈 Advanced Graph</button>
 
-<button onclick="openChamber('solver')">
-🧠 Advanced Solver
-</button>
+<button onclick="openChamber('programmer')">💻 Programmer</button>
 
-
-<button onclick="openChamber('graphing')">
-📈 Advanced Graph
-</button>
-
-
-<button onclick="openChamber('programmer')">
-💻 Programmer
-</button>
-
-
-<button onclick="openChamber('date')">
-📅 Date
-</button>
-
+<button onclick="openChamber('date')">📅 Date</button>
 
 
 <hr>
@@ -67,55 +47,30 @@
 
 <h3>CONVERTERS</h3>
 
+<button onclick="openChamber('currency')">💲 Currency</button>
 
-<button onclick="openChamber('currency')">
-💲 Currency
-</button>
+<button onclick="openChamber('length')">📏 Length</button>
 
+<button onclick="openChamber('volume')">📦 Volume</button>
 
-<button onclick="openChamber('length')">
-📏 Length
-</button>
+<button onclick="openChamber('weight')">⚖ Weight</button>
 
+<button onclick="openChamber('temperature')">🌡 Temperature</button>
 
-<button onclick="openChamber('volume')">
-📦 Volume
-</button>
-
-
-<button onclick="openChamber('weight')">
-⚖ Weight
-</button>
-
-
-<button onclick="openChamber('temperature')">
-🌡 Temperature
-</button>
-
-
-<button onclick="openChamber('energy')">
-🔥 Energy
-</button>
-
+<button onclick="openChamber('energy')">🔥 Energy</button>
 
 
 <hr>
 
 
 <button onclick="openChamber('premium')">
-
 💎 SITB Premium
-
 </button>
 
 
 </aside>
 
 
-
-
-
-<!-- MAIN -->
 
 <main>
 
@@ -126,19 +81,12 @@
 Standard Calculator
 </h2>
 
-
-<button onclick="toggleDark()">
-🌙
-</button>
-
+<button onclick="toggleDark()">🌙</button>
 
 </header>
 
 
 
-
-
-<!-- STANDARD CALCULATOR -->
 
 
 <section id="standard" class="chamber">
@@ -148,7 +96,6 @@ Standard Calculator
 
 
 <input id="display" value="0" readonly>
-
 
 
 <div class="keys">
@@ -163,7 +110,6 @@ Standard Calculator
 <button onclick="insert('/')">÷</button>
 
 
-
 <button onclick="insert('7')">7</button>
 
 <button onclick="insert('8')">8</button>
@@ -171,7 +117,6 @@ Standard Calculator
 <button onclick="insert('9')">9</button>
 
 <button onclick="insert('*')">×</button>
-
 
 
 <button onclick="insert('4')">4</button>
@@ -183,7 +128,6 @@ Standard Calculator
 <button onclick="insert('-')">−</button>
 
 
-
 <button onclick="insert('1')">1</button>
 
 <button onclick="insert('2')">2</button>
@@ -191,7 +135,6 @@ Standard Calculator
 <button onclick="insert('3')">3</button>
 
 <button onclick="insert('+')">+</button>
-
 
 
 <button onclick="insert('0')">0</button>
@@ -209,9 +152,6 @@ Standard Calculator
 </button>
 
 
-
-<h3>History</h3>
-
 <ul id="historyList"></ul>
 
 
@@ -221,10 +161,6 @@ Standard Calculator
 
 
 
-
-<!-- SCIENTIFIC CALCULATOR -->
-
-
 <section id="scientific" class="chamber hidden">
 
 
@@ -232,7 +168,6 @@ Standard Calculator
 
 
 <input id="scientificDisplay" value="0" readonly>
-
 
 
 <div class="keys">
@@ -247,7 +182,6 @@ Standard Calculator
 <button onclick="sCalculate()">=</button>
 
 
-
 <button onclick="sInsert('7')">7</button>
 
 <button onclick="sInsert('8')">8</button>
@@ -255,7 +189,6 @@ Standard Calculator
 <button onclick="sInsert('9')">9</button>
 
 <button onclick="sInsert('/')">÷</button>
-
 
 
 <button onclick="sInsert('4')">4</button>
@@ -267,7 +200,6 @@ Standard Calculator
 <button onclick="sInsert('*')">×</button>
 
 
-
 <button onclick="sInsert('1')">1</button>
 
 <button onclick="sInsert('2')">2</button>
@@ -275,7 +207,6 @@ Standard Calculator
 <button onclick="sInsert('3')">3</button>
 
 <button onclick="sInsert('-')">−</button>
-
 
 
 <button onclick="sInsert('0')">0</button>
@@ -288,11 +219,6 @@ Standard Calculator
 </div>
 
 
-
-
-<h3>Scientific Functions</h3>
-
-
 <button onclick="sFunction('sin')">sin</button>
 
 <button onclick="sFunction('cos')">cos</button>
@@ -303,8 +229,6 @@ Standard Calculator
 
 <button onclick="sFunction('log')">log</button>
 
-<button onclick="sFunction('ln')">ln</button>
-
 <button onclick="sFunction('square')">x²</button>
 
 <button onclick="sFunction('cube')">x³</button>
@@ -312,604 +236,4 @@ Standard Calculator
 <button onclick="sFunction('factorial')">x!</button>
 
 
-
 </section>
-<!-- ================= ADVANCED SOLVER ================= -->
-
-
-<section id="solver" class="chamber hidden">
-
-
-<h2>🧠 Advanced Math Solver</h2>
-
-
-<input 
-id="solverInput"
-placeholder="Example: solve 2x+5=15">
-
-
-
-<button onclick="advancedSolve()">
-
-Solve
-
-</button>
-
-
-
-<div id="solverResult">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= ADVANCED GRAPH ================= -->
-
-
-<section id="graphing" class="chamber hidden">
-
-
-<h2>📈 Advanced Graph Calculator</h2>
-
-
-
-<input 
-id="graphInput"
-placeholder="Example: x^2 or sin(x)">
-
-
-
-<button onclick="drawAdvancedGraph()">
-
-Draw Graph
-
-</button>
-
-
-
-<br>
-
-
-<button onclick="zoomIn()">
-Zoom +
-</button>
-
-
-
-<button onclick="zoomOut()">
-Zoom -
-</button>
-
-
-
-
-<canvas 
-id="graphCanvas"
-width="600"
-height="400">
-
-</canvas>
-
-
-
-<p>
-
-Examples:
-
-<br>
-
-x^2
-
-<br>
-
-sin(x)
-
-<br>
-
-cos(x)
-
-<br>
-
-sqrt(x)
-
-</p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= PROGRAMMER ================= -->
-
-
-<section id="programmer" class="chamber hidden">
-
-
-<h2>💻 Programmer Calculator</h2>
-
-
-
-<input 
-id="programmerInput"
-placeholder="Enter number">
-
-
-
-<button onclick="convertBinary()">
-
-Decimal → Binary
-
-</button>
-
-
-
-<button onclick="convertHex()">
-
-Decimal → Hex
-
-</button>
-
-
-
-<p id="programmerResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= DATE ================= -->
-
-
-<section id="date" class="chamber hidden">
-
-
-<h2>📅 Date Calculator</h2>
-
-
-
-<input type="date" id="dateOne">
-
-
-<input type="date" id="dateTwo">
-
-
-
-<button onclick="calculateDate()">
-
-Calculate Difference
-
-</button>
-
-
-
-<p id="dateResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= CURRENCY ================= -->
-
-
-<section id="currency" class="chamber hidden">
-
-
-<h2>💲 Currency Converter</h2>
-
-
-<input 
-id="currencyValue"
-placeholder="Amount">
-
-
-
-<button onclick="convertCurrency()">
-
-Convert
-
-</button>
-
-
-
-<p id="currencyResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= LENGTH ================= -->
-
-
-<section id="length" class="chamber hidden">
-
-
-<h2>📏 Length Converter</h2>
-
-
-<input 
-id="lengthValue"
-placeholder="Meters">
-
-
-
-<button onclick="convertLength()">
-
-Convert
-
-</button>
-
-
-
-<p id="lengthResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= VOLUME ================= -->
-
-
-<section id="volume" class="chamber hidden">
-
-
-<h2>📦 Volume Converter</h2>
-
-
-<input 
-id="volumeValue"
-placeholder="Liters">
-
-
-
-<button onclick="convertVolume()">
-
-Convert
-
-</button>
-
-
-
-<p id="volumeResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= WEIGHT ================= -->
-
-
-<section id="weight" class="chamber hidden">
-
-
-<h2>⚖ Weight Converter</h2>
-
-
-<input 
-id="weightValue"
-placeholder="Kilograms">
-
-
-
-<button onclick="convertWeight()">
-
-Convert
-
-</button>
-
-
-
-<p id="weightResult"></p>
-
-
-</section>
-<!-- ================= TEMPERATURE ================= -->
-
-
-<section id="temperature" class="chamber hidden">
-
-
-<h2>🌡 Temperature Converter</h2>
-
-
-<input 
-id="temperatureValue"
-placeholder="Celsius">
-
-
-
-<button onclick="convertTemperature()">
-
-Convert
-
-</button>
-
-
-
-<p id="temperatureResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= ENERGY ================= -->
-
-
-<section id="energy" class="chamber hidden">
-
-
-<h2>🔥 Energy Converter</h2>
-
-
-<input 
-id="energyValue"
-placeholder="Joules">
-
-
-
-<button onclick="convertEnergy()">
-
-Convert
-
-</button>
-
-
-
-<p id="energyResult"></p>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- ================= PREMIUM ================= -->
-
-
-<section id="premium" class="chamber hidden">
-
-
-<h2>💎 SITB Premium</h2>
-
-
-
-<p>
-Unlock the future of mathematics.
-</p>
-
-
-
-
-
-<div class="premium-card">
-
-
-<h3>🤖 AI Math Tutor</h3>
-
-
-<p>
-Advanced explanations,
-step-by-step solutions,
-and learning support.
-</p>
-
-
-<button onclick="subscribe('AI Tutor')">
-
-Unlock
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="premium-card">
-
-
-<h3>📷 Camera Math</h3>
-
-
-<p>
-Scan difficult questions
-and solve them.
-</p>
-
-
-<button onclick="subscribe('Camera Math')">
-
-Unlock
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="premium-card">
-
-
-<h3>🎤 Voice Calculator</h3>
-
-
-<p>
-Speak your calculations.
-</p>
-
-
-<button onclick="subscribe('Voice Calculator')">
-
-Unlock
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="premium-card">
-
-
-<h3>☁ Cloud Sync</h3>
-
-
-<p>
-Keep your history and settings
-on every device.
-</p>
-
-
-<button onclick="subscribe('Cloud Sync')">
-
-Unlock
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<h2>💰 Plans</h2>
-
-
-
-<div class="plan">
-
-
-<h3>Monthly</h3>
-
-<p>$10 / Month</p>
-
-
-<button onclick="subscribe('Monthly Plan')">
-
-Subscribe
-
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="plan">
-
-
-<h3>Yearly</h3>
-
-<p>$120 / Year</p>
-
-
-<button onclick="subscribe('Yearly Plan')">
-
-Subscribe
-
-</button>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-</main>
-
-
-</div>
-
-
-
-
-
-
-<button class="share" onclick="shareApp()">
-
-📤 Share SITB
-
-</button>
-
-
-
-
-
-
-<script src="script.js"></script>
-
-
-
-</body>
-
-</html>
