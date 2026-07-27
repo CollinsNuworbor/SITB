@@ -1,22 +1,40 @@
+/* ================= SITB SMART CALCULATOR CSS ================= */
+
+
+/* RESET */
+
 *{
-    box-sizing:border-box;
+
+box-sizing:border-box;
+
+font-family:Arial, sans-serif;
+
 }
+
 
 
 body{
 
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f7f8fc;
-    color:#111;
+margin:0;
+
+background:#f2f4f8;
+
+color:#222;
+
+transition:0.3s;
+
 }
 
 
 
+/* ================= APP LAYOUT ================= */
+
+
 .app{
 
-    display:flex;
-    height:100vh;
+display:flex;
+
+min-height:100vh;
 
 }
 
@@ -27,36 +45,43 @@ body{
 
 .sidebar{
 
-    width:300px;
-    background:white;
-    border-right:1px solid #ddd;
-    padding:20px;
-    overflow-y:auto;
+width:260px;
+
+background:#111827;
+
+color:white;
+
+padding:20px;
+
+overflow-y:auto;
 
 }
+
 
 
 .sidebar h1{
 
-    margin:0;
-    font-size:30px;
+font-size:32px;
+
+margin-bottom:5px;
 
 }
+
 
 
 .sidebar p{
 
-    color:#666;
-    margin-top:0;
+color:#aaa;
 
 }
 
 
+
 .sidebar h3{
 
-    font-size:14px;
-    color:#777;
-    margin-top:25px;
+color:#60a5fa;
+
+font-size:14px;
 
 }
 
@@ -64,15 +89,25 @@ body{
 
 .sidebar button{
 
-    width:100%;
-    border:none;
-    background:none;
-    padding:14px;
-    text-align:left;
-    font-size:17px;
-    border-radius:12px;
-    cursor:pointer;
-    margin:3px 0;
+width:100%;
+
+padding:12px;
+
+margin:5px 0;
+
+border:none;
+
+border-radius:12px;
+
+background:#1f2937;
+
+color:white;
+
+cursor:pointer;
+
+text-align:left;
+
+font-size:15px;
 
 }
 
@@ -80,18 +115,17 @@ body{
 
 .sidebar button:hover{
 
-    background:#e9f0ff;
-    color:#0057ff;
+background:#374151;
 
 }
 
 
 
-hr{
+.sidebar hr{
 
-    border:none;
-    border-top:1px solid #ddd;
-    margin:20px 0;
+border:1px solid #374151;
+
+margin:15px 0;
 
 }
 
@@ -104,9 +138,9 @@ hr{
 
 main{
 
-    flex:1;
-    padding:25px;
-    overflow:auto;
+flex:1;
+
+padding:20px;
 
 }
 
@@ -114,9 +148,11 @@ main{
 
 header{
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
 
 }
 
@@ -124,11 +160,15 @@ header{
 
 header button{
 
-    border:none;
-    background:#eee;
-    padding:12px;
-    border-radius:50%;
-    cursor:pointer;
+font-size:20px;
+
+border:none;
+
+border-radius:50%;
+
+padding:10px;
+
+cursor:pointer;
 
 }
 
@@ -141,10 +181,15 @@ header button{
 
 .chamber{
 
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+max-width:700px;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 
 }
 
@@ -152,97 +197,7 @@ header button{
 
 .hidden{
 
-    display:none;
-
-}
-
-
-
-
-
-/* ================= DISPLAY ================= */
-
-
-#display{
-
-    width:100%;
-    height:130px;
-    border:none;
-    background:#f1f3fa;
-    border-radius:20px;
-    font-size:65px;
-    text-align:right;
-    padding:20px;
-    margin-bottom:20px;
-
-}
-
-
-
-
-
-/* ================= KEYS ================= */
-
-
-.keys{
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-
-}
-
-
-
-.keys button{
-
-    height:75px;
-    border-radius:15px;
-    border:1px solid #ddd;
-    background:white;
-    font-size:25px;
-    cursor:pointer;
-
-}
-
-
-
-.keys button:hover{
-
-    background:#eaf1ff;
-
-}
-
-
-
-
-/* ================= OTHER BUTTONS ================= */
-
-
-button{
-
-    transition:.2s;
-
-}
-
-
-.chamber button{
-
-    padding:12px 20px;
-    border-radius:12px;
-    border:none;
-    background:#eaf1ff;
-    cursor:pointer;
-    margin:5px;
-
-}
-
-
-
-.chamber button:hover{
-
-    background:#0066ff;
-    color:white;
+display:none;
 
 }
 
@@ -253,14 +208,126 @@ button{
 /* ================= INPUTS ================= */
 
 
-input,
-select{
+input{
 
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    margin:5px;
-    font-size:16px;
+width:100%;
+
+padding:15px;
+
+border-radius:12px;
+
+border:1px solid #ccc;
+
+font-size:20px;
+
+margin:10px 0;
+
+}
+
+
+
+
+
+/* ================= BUTTONS ================= */
+
+
+button{
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+
+
+.chamber button{
+
+background:#2563eb;
+
+color:white;
+
+margin:5px;
+
+}
+
+
+
+.chamber button:hover{
+
+opacity:0.8;
+
+}
+
+
+
+
+
+/* ================= KEYPAD ================= */
+
+
+.keys{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:10px;
+
+}
+
+
+
+.keys button{
+
+height:60px;
+
+font-size:22px;
+
+}
+
+
+
+
+
+/* ================= SCIENTIFIC DISPLAY ================= */
+
+
+#display,
+#scientificDisplay{
+
+height:100px;
+
+font-size:45px;
+
+text-align:right;
+
+background:#eef2ff;
+
+}
+
+
+
+
+
+/* ================= GRAPH ================= */
+
+
+#graphCanvas{
+
+border:2px solid #333;
+
+border-radius:15px;
+
+margin-top:15px;
+
+max-width:100%;
 
 }
 
@@ -271,24 +338,86 @@ select{
 /* ================= PREMIUM ================= */
 
 
-#premium button{
+.premium-top{
 
-    width:100%;
-    background:#ffd700;
-    color:black;
-    font-weight:bold;
+text-align:center;
 
 }
 
 
 
-#premium div{
+.premium-feature{
 
-    padding:15px;
-    background:#fff6c7;
-    border-radius:10px;
-    margin:5px;
+background:#fff7cc;
+
+padding:20px;
+
+border-radius:18px;
+
+margin:15px 0;
+
 }
+
+
+
+.premium-feature h3{
+
+margin-top:0;
+
+}
+
+
+
+.premium-feature button{
+
+background:#facc15;
+
+color:#111;
+
+font-weight:bold;
+
+width:100%;
+
+}
+
+
+
+
+
+.subscription-box{
+
+margin-top:30px;
+
+text-align:center;
+
+}
+
+
+
+.plan{
+
+background:#f3f4f6;
+
+padding:20px;
+
+margin:15px 0;
+
+border-radius:20px;
+
+}
+
+
+
+.plan button{
+
+background:#111827;
+
+color:white;
+
+width:90%;
+
+}
+
 
 
 
@@ -298,21 +427,22 @@ select{
 
 .share{
 
-    position:fixed;
-    bottom:20px;
-    right:20px;
+position:fixed;
 
-    background:#0066ff;
-    color:white;
+bottom:20px;
 
-    border:none;
-    padding:15px 25px;
+right:20px;
 
-    border-radius:30px;
+background:#16a34a;
 
-    font-size:16px;
+color:white;
+
+padding:15px 25px;
+
+border-radius:30px;
 
 }
+
 
 
 
@@ -322,17 +452,9 @@ select{
 
 .dark{
 
-    background:#111;
-    color:white;
+background:#111827;
 
-}
-
-
-
-.dark .sidebar{
-
-    background:#1d1d1d;
-    color:white;
+color:white;
 
 }
 
@@ -340,46 +462,58 @@ select{
 
 .dark .chamber{
 
-    background:#222;
+background:#1f2937;
+
+color:white;
 
 }
 
 
 
-.dark #display{
+.dark input{
 
-    background:#333;
-    color:white;
+background:#374151;
 
-}
+color:white;
 
-
-
-.dark .keys button{
-
-    background:#333;
-    color:white;
-    border-color:#555;
+border-color:#555;
 
 }
 
 
 
-.dark .sidebar button{
+.dark #display,
+.dark #scientificDisplay{
 
-    color:white;
+background:#374151;
+
+color:white;
+
+}
+
+
+
+.dark .premium-feature{
+
+background:#374151;
 
 }
 
 
 
-.dark .sidebar button:hover{
+.dark .plan{
 
-    background:#333;
+background:#111827;
 
 }
 
 
+
+.dark .sidebar{
+
+background:#030712;
+
+}
 
 
 
@@ -389,73 +523,29 @@ select{
 @media(max-width:800px){
 
 
+.app{
+
+flex-direction:column;
+
+}
+
+
+
 .sidebar{
 
-    width:90px;
-
-}
-
-
-.sidebar h1,
-.sidebar p,
-.sidebar h3{
-
-    display:none;
-
-}
-
-
-.sidebar button{
-
-    font-size:0;
-    text-align:center;
-
-}
-
-
-main{
-
-    padding:10px;
+width:100%;
 
 }
 
 
 
-#display{
+.keys button{
 
-    font-size:40px;
+font-size:18px;
 
-}
-
-
-}
-/* Scientific calculator display */
-
-#scientificDisplay{
-
-    width:100%;
-    height:130px;
-
-    background:#f1f3fa;
-
-    border:none;
-    border-radius:20px;
-
-    font-size:60px;
-
-    text-align:right;
-
-    padding:20px;
-
-    margin-bottom:20px;
+height:50px;
 
 }
 
-
-
-.dark #scientificDisplay{
-
-    background:#333;
-    color:white;
 
 }
